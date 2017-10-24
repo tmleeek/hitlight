@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <action method="addCss"><name>ghoster/shop_by_project/css/style.css</name></action>
+        </reference>
+    </default>
+    <ghoster_shopbyproject_adminhtml_project_edit>
+        <reference name="head">
+            <action method="addJs"><js>lib/flex.js</js></action>
+            <action method="addJs"><js>lib/FABridge.js</js></action>
+            <action method="addJs"><js>mage/adminhtml/flexuploader.js</js></action>
+            <action method="addJs"><js>ghoster/adminhtml/browser.js</js></action>
+            <action method="addJs"><js>prototype/window.js</js></action>
+            <action method="addItem"><type>js_css</type><js>prototype/windows/themes/default.css</js></action>
+            <action method="addItem"><type>skin_css</type><js>lib/prototype/windows/themes/magento.css</js></action>
+        </reference>
+    </ghoster_shopbyproject_adminhtml_project_edit>
+    <ghoster_shopbyproject_adminhtml_project_new>
+        <reference name="head">
+            <action method="addJs"><js>lib/flex.js</js></action>
+            <action method="addJs"><js>lib/FABridge.js</js></action>
+            <action method="addJs"><js>mage/adminhtml/flexuploader.js</js></action>
+            <action method="addJs"><js>ghoster/adminhtml/browser.js</js></action>
+            <action method="addJs"><js>prototype/window.js</js></action>
+            <action method="addItem"><type>js_css</type><js>prototype/windows/themes/default.css</js></action>
+            <action method="addItem"><type>skin_css</type><js>lib/prototype/windows/themes/magento.css</js></action>
+        </reference>
+    </ghoster_shopbyproject_adminhtml_project_new>
+
+    <ghoster_shopbyproject_adminhtml_generator_index>
+        <reference name="content">
+            <block type="ghoster_shopbyproject/adminhtml_generator" name="generator" />
+        </reference>
+    </ghoster_shopbyproject_adminhtml_generator_index>
+
+    <ghoster_shopbyproject_adminhtml_generator_new>
+        <update handle="editor"/>
+    </ghoster_shopbyproject_adminhtml_generator_new>
+    <ghoster_shopbyproject_adminhtml_generator_edit>
+        <update handle="editor"/>
+    </ghoster_shopbyproject_adminhtml_generator_edit>
+
+</layout>

@@ -1,0 +1,18 @@
+#sliderContent {
+    border: 1px solid #ededed;
+    margin: auto;
+    padding:10px 20px;
+}
+.viewer {  margin:0 auto 20px; padding:1px; overflow:hidden; position:relative;}
+.content-conveyor { position:relative; }
+#sliderContent .item { width:180px; float:left;text-align:center; padding-right: 20px;}
+#sliderContent .item .product-name{min-height:50px; margin:0 0 10px;}
+#sliderContent .item .product-name a{font-size:13px; font-weight:bold; color:#1E7EC8; text-decoration:none;}
+#sliderContent .item .product-image a{display: inline-block;}
+#sliderContent .item .product-image{
+	display: block;
+}
+#sliderContent li img{
+}
+
+.price-box .old-price {display: none;}

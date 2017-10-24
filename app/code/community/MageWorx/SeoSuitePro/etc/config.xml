@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * MageWorx
+ * MageWorx SeoSuite Pro Extension
+ * 
+ * @category   MageWorx
+ * @package    MageWorx_SeoSuitePro
+ * @copyright  Copyright (c) 2015 MageWorx (http://www.mageworx.com/)
+ */
+ -->
+<config>
+    <modules>
+        <MageWorx_SeoSuitePro>
+            <version>4.2.0</version>
+        </MageWorx_SeoSuitePro>
+    </modules>   
+    <global>       
+        <blocks>
+            <mageworx_seopro>
+                <class>MageWorx_SeoSuitePro_Block</class>
+            </mageworx_seopro>            
+        </blocks>
+        <helpers>
+            <mageworx_seopro>
+                <class>MageWorx_SeoSuitePro_Helper</class>
+            </mageworx_seopro>
+        </helpers>       
+    </global>
+    <adminhtml>
+        <translate>
+            <modules>
+                <MageWorx_SeoSuitePro>
+                    <files>
+                        <default>MageWorx_SeoSuitePro.csv</default>
+                    </files>
+                </MageWorx_SeoSuitePro>
+            </modules>
+        </translate>
+    </adminhtml>    
+</config>

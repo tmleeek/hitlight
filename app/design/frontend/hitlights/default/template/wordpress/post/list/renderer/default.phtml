@@ -1,0 +1,119 @@
+<?php
+/**
+ * @category    Fishpig
+ * @package     Fishpig_Wordpress
+ * @license     http://fishpig.co.uk/license.txt
+ * @author      Ben Tideswell <help@fishpig.co.uk>
+ */
+?>
+<?php $post = $this->getPost() ?>
+
+
+<meta property="og:title" content="<?php echo $post->getPostTitle(); ?>"/>
+<meta property="og:type" content="product"/>
+<meta property="og:url" content="<?php $post->getPermalink(); ?>"/>
+<meta property="og:image"
+      content="<?php echo $post->getFeaturedImage() ?>"/>
+<meta property="og:description" content="<?php echo $post->getPostTitle() ?>"/>
+<meta property="og:site_name" content="<?php echo Mage::app()->getStore()->getName() ?>"/>
+
+<div class="post-list-item">
+    <h2><a href="<?php echo $post->getPermalink() ?>"
+           title="<?php echo $this->escapeHtml($post->getPostTitle()) ?>"><?php echo $this->escapeHtml($post->getPostTitle()) ?></a>
+    </h2>
+    <?php echo $this->getBeforePostContentHtml() ?>
+    <div class="post-entry entry<?php if ($post->getFeaturedImage()): ?> post-entry-with-image<?php endif; ?>">
+
+        <?php $socialCountConfig = Mage::helper('ghoster_socialcount')->getStoreConfig() ?>
+
+        <?php if ($socialCountConfig['active']): ?>
+            <div class="social">
+                <?php if ($socialCountConfig['facebook']['active']): ?>
+                    <div class="itemIcon iconFb">
+                        <?php if ($socialCountConfig['share_button']): ?>
+                            <a href="javascript:popWin('https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode($post->getPermalink()); ?>&t=<?php echo urlencode($post->getPostTitle()); ?>', 'facebook', 'width=640,height=480,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes');" title="<?php echo $this->__('Share on Facebook') ?>" class="value">
+                                <i class="fa fa-facebook"></i>
+                            </a>
+                        <?php endif ?>
+                    </div>
+                <?php endif; ?>
+                <?php if ($socialCountConfig['twitter']['active']): ?>
+                    <div class="itemIcon iconTwitter active">
+                        <?php if ($socialCountConfig['share_button']): ?>
+                            <a href="javascript:popWin('http://twitter.com/home/?status=<?php echo urlencode($post->getPostTitle() . ' (' . $post->getPermalink() . ')'); ?>', 'twitter', 'width=640,height=480,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes');" title="<?php echo $this->__('Tweet') ?>" class="value">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                        <?php endif ?>
+                    </div>
+                <?php endif; ?>
+                <?php if ($socialCountConfig['linkedin']['active']): ?>
+                    <div class="itemIcon iconLinkedin">
+                        <?php if ($socialCountConfig['share_button']): ?>
+                            <a href="javascript:popWin('https://www.linkedin.com/cws/share?url=<?php echo urlencode($post->getPermalink()); ?>', 'linkedin', 'width=640,height=480,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes');" title="<?php echo $this->__('Share on Linkedin') ?>" class="value">
+                                <i class="fa fa-linkedin"></i>
+                            </a>
+                        <?php endif ?>
+                    </div>
+                <?php endif; ?>
+                <?php if ($socialCountConfig['pinterest']['active']): ?>
+                    <div class="itemIcon iconPinterest">
+                        <?php if ($socialCountConfig['share_button']): ?>
+                            <a href="javascript:popWin('https://pinterest.com/pin/create/button/?url=<?php echo urlencode($post->getPermalink()); ?>&media=<?php echo urlencode($post->getFeaturedImage()); ?>&description=<?php echo urlencode($post->getPostTitle()); ?>', 'pinterest', 'width=640,height=480,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes');" title="<?php echo $this->__('Pin it') ?>" class="value">
+                                <i class="fa fa-pinterest-p"></i>
+                            </a>
+                        <?php endif ?>
+                    </div>
+                <?php endif; ?>
+                <?php if ($socialCountConfig['google']['active']): ?>
+                    <div class="itemIcon iconGoogle">
+                        <?php if ($socialCountConfig['share_button']): ?>
+                            <a href="javascript:popWin('https://plus.google.com/share?url=<?php echo urlencode($post->getPermalink()); ?>', 'google', 'width=640,height=480,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes');" title="<?php echo $this->__('Share on Google Plus') ?>" class="value">
+                                <i class="fa fa-google-plus"></i>
+                            </a>
+                        <?php endif ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+        <?php endif; ?>
+        <div class="content">
+            <div class="content-post-entry">
+                <?php if ($post->isViewableForVisitor()): ?>
+                    <?php if ($featuredImage = $post->getFeaturedImage()): ?>
+                        <div class="featured-image left">
+                            <a href="<?php echo $post->getPermalink() ?>"
+                               title="<?php echo $this->escapeHtml($post->getPostTitle()) ?>"><img
+                                    src="<?php if($featuredImage->getLargeImage()): echo $featuredImage->getLargeImage(); else: echo $featuredImage->getFullSizeImage(); endif; ?>"
+                                    alt="<?php echo $this->escapeHtml($post->getPostTitle()) ?>"/></a>
+                        </div>
+                    <?php else: ?>
+                        <?php
+                            $outputImg = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post->getPostContent(), $matchesImg);
+                            $firstImg = $matchesImg[1][0];
+
+                            if(!empty($firstImg)):
+                                ?>
+                                <div class="featured-image left">
+                                    <a href="<?php echo $post->getPermalink() ?>"
+                                       title="<?php echo $this->escapeHtml($post->getPostTitle()) ?>"><img
+                                            src="<?php echo $firstImg ?>"
+                                            alt="<?php echo $this->escapeHtml($post->getPostTitle()) ?>"/></a>
+                                </div>
+                                <?php
+                            endif;
+                        ?>
+                    <?php endif; ?>
+                    <div class="intro-post-entry">
+                        <?php echo mb_substr(strip_tags($post->getPostContent()), 0, 320, 'UTF-8') . '...'; ?>
+                    </div>
+
+                    <div class="reading-post-entry">
+                        <a href="<?php echo $post->getPermalink(); ?>">Continue Reading...</a>
+                    </div>
+                <?php else: ?>
+                    <?php echo $this->getPasswordProtectHtml($post) ?>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+    <?php echo $this->getAfterPostContentHtml() ?>
+</div>

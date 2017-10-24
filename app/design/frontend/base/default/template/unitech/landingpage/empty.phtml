@@ -1,0 +1,28 @@
+<?php
+/**
+* Unitech Corp.
+*
+* @category   Unitech
+* @package    Unitech_LandingPage
+* @version    0.0.1
+* @copyright  @copyright Copyright (c) 2015 Unitech Corp. (http://www.unitech.vn)
+*/
+?>
+<?php
+/**
+* Template for Mage_Page_Block_Html
+*/
+?>
+<!DOCTYPE html>
+<html lang="<?php echo $this->getLang() ?>">
+	<head>
+		<?php echo $this->getChildHtml('head') ?>
+	</head>
+	<body>
+		<?php echo $this->getChildHtml('after_body_start') ?>
+        <?php echo $this->getChildHtml('global_messages') ?>
+        <?php echo $this->getChildHtml('content') ?>
+        <?php echo $this->getChildHtml('before_body_end') ?>
+        <?php echo $this->getAbsoluteFooter() ?>
+	</body>
+</html>

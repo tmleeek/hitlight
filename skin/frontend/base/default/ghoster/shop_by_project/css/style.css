@@ -1,0 +1,381 @@
+/* Shop by Project */
+
+/* Home */
+.shop_by_project {padding: 60px 0 35px;background: #f4f4f4;}
+
+.shop_project_title {
+    margin: 0;
+}
+
+.shop_project_title h3 {
+    text-transform: uppercase; font-size: 30px; color: #000; margin: 0; text-align: center; line-height: 30px;
+}
+
+.shop_project_title h3 a {
+    color: #000;
+}
+
+.shop_project_wrapper {
+    position: relative;
+}
+
+.shop_project_wrapper .shop_project_col {
+    display: block;
+    top: 0;
+    margin: 60px 0 0;
+    z-index: 0;
+    position: relative;
+    transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    padding-bottom: 15px;
+}
+
+.shop_project_wrapper .shop_project_col:hover {
+    position: relative;
+    z-index: 10;
+}
+
+.shop_project_col .shop_project_col_title {
+    line-height: 70px;
+    text-align: center;
+    color: #000;
+    font-size: 18px;
+    width: 100%;
+    transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -webkit-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.shop_project_col .shop_project_col_title:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: block;
+    background: white;
+    top: -100%;
+    left: 0;
+    transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+}
+
+.shop_project_col:hover .shop_project_col_title {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    -o-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.shop_project_col:hover .shop_project_col_title:after {
+    top: 0;
+    z-index: -1;
+}
+
+.see_more_project {
+    margin: 40px 0 0;
+}
+
+.see_more_project a {
+    position: relative; overflow: hidden; z-index: 0; border: none; height: 40px; color: #FFF; line-height: 40px; text-transform: uppercase; font-size: 14px; width: 100%; max-width: 150px; margin: 0 auto; display: block; text-align: center; border-radius: 20px 0 20px 0; -moz-border-radius: 20px 0 20px 0; -o-border-radius: 20px 0 20px 0; -webkit-border-radius: 20px 0 20px 0; background: #005190; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(118deg,#005190, #7a36c9 82%); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(118deg,#005190, #7a36c9 82%); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(118deg,#005190, #7a36c9 82%); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(118deg,#005190, #7a36c9 82%); /* Standard syntax */
+}
+
+.see_more_project a:after {
+    content: ""; z-index: -1; background: transparent none; display: block; position: absolute; left: 0; top: 0; width: 100%; height: 100%; transition: all 0.3s ease; -moz-transition: all 0.3s ease; -o-transition: all 0.3s ease; -webkit-transition: all 0.3s ease;
+}
+
+.see_more_project a span {
+    z-index: 1; color: #FFF;
+}
+
+.see_more_project a:hover:after {
+    background: rgba(0, 0, 0, 0.25) none;
+}
+
+.shop_project_wrapper:after {
+    content: ""; display: table; clear: both;
+}
+
+/* End Home */
+
+.list_project_tab {
+    list-style: none; margin: 0 0 10px; padding: 0;
+}
+
+.list_project_tab li {
+    float: left; margin-right: 1%; width: 19.2%;
+}
+
+.list_project_tab li:last-child {
+    margin-right: 0;
+}
+
+.list_project_tab li a {
+    display: block; position: relative;
+}
+
+.title_shop_project_category {
+    display: block; background: #FFF none; position: absolute; bottom: 10px; left: 10px; right: 10px; text-align: center; color: #000; font-size: 20px; line-height: 22px; padding: 10px 0;
+}
+
+.title_shop_project_category span {
+    display: table; width: 100%;
+}
+
+.title_shop_project_category span span {
+    display: table-cell; vertical-align: middle;
+}
+
+.list_project_tab li:hover .title_shop_project_category {
+    left: 0; right: 0; top: 0; bottom: 0; width: 100%; height: 100%; color: #FFF;
+    background: #005190; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(118deg,#005190, #7a36c9 82%); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(118deg,#005190, #7a36c9 82%); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(118deg,#005190, #7a36c9 82%); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(118deg,#005190, #7a36c9 82%); /* Standard syntax */
+}
+
+.list_project_tab li:hover .title_shop_project_category span {
+    height: 100%!important;
+}
+
+.project_tab_menu {
+    margin: 0 0 30px; padding: 0; list-style: none;border-bottom: 1px solid #efefef;
+}
+
+.project_tab_menu li {
+    margin: 0 30px 0 0; float: left; position: relative;
+}
+
+.project_tab_menu li:last-child {
+    margin: 0;
+}
+
+.image_hover_tab_project {
+    display: none;
+}
+
+.image_hover_tab_project img {
+    width: 100%; height: 100%;
+}
+
+.project_tab_menu li a {
+    display: block; line-height: 50px; color: #999; text-transform: uppercase; font-size: 16px; position: relative;
+}
+
+.project_tab_menu li a.active, .project_tab_menu li:hover a {
+    color: #005190;
+}
+
+.project_tab_menu li a.active:after, .project_tab_menu li:hover a:after {
+    content: ""; position: absolute; display: block; width: 100%; height: 2px; left: 0; bottom: -3px; background: #005190; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(118deg,#005190, #7a36c9 82%); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(118deg,#005190, #7a36c9 82%); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(118deg,#005190, #7a36c9 82%); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(118deg,#005190, #7a36c9 82%); /* Standard syntax */
+}
+
+.project_tab_menu li:hover .image_hover_tab_project {
+    display: block; position: absolute; top: 55px; left: 0; width: 200px; height: 100px; overflow: hidden; border: 1px solid #efefef; padding: 5px; background: #FFF none;
+}
+
+.slider_tab_container {
+    margin: 0 0 40px;
+}
+
+.title_project_content {
+    font-size: 20px; color: #000; text-transform: uppercase; margin: 0 0 15px;
+}
+
+.slider_tab_container .bx-wrapper .bx-viewport {
+    box-shadow: none; -moz-box-shadow: none; -o-box-shadow: none; -webkit-box-shadow: none; left: 0;
+}
+
+.desc_project_content {
+    font-size: 16px; color: #000; line-height: 24px;
+}
+
+.desc_project_content p {
+    margin: 0 0 15px;
+}
+
+.desc_project_content p:last-child {
+    margin: 0 0 10px;
+}
+
+.list_product_project_content {
+    background: #f3f3f3 none;
+}
+
+.list-col-project-content {
+    padding: 15px 15px 0;
+}
+
+.list_product_project_content .row {
+    margin-left: -10px; margin-right: -10px;
+}
+
+.list_product_project_content .col_sbp_projects {
+    padding-left: 10px; padding-right: 10px;
+}
+
+.col_product_project {
+    padding: 0 0 15px;
+}
+
+.col_product_project:hover {
+    background: #FFF none; box-shadow: 0 0 8px rgba(0, 0, 0, 0.1); -moz-box-shadow: 0 0 8px rgba(0, 0, 0, 0.1); -o-box-shadow: 0 0 8px rgba(0, 0, 0, 0.1); -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.name_product_project {
+    margin: 0 0 15px;
+}
+
+.name_product_project a {
+    display: block; font-size: 16px; color: #000; line-height: 22px; padding: 0 10px;
+}
+
+.img_col_product_project {
+    margin: 0 0 15px;
+}
+
+.info_product_project {
+    padding: 0 10px;
+}
+
+.price_product_project {
+    line-height: 40px; float: left; font-size: 25px; color: #005190;
+}
+
+.shop_product_project.btn_gradient, .wholesaleTemplate .shop_product_project.btn_gradient {
+    width: 40px; float: right;
+}
+
+.shop_product_project.btn_gradient:hover {
+    color: #FFF;
+}
+
+.list_product_project_total {
+    background: #e0e0e0 none; padding: 18px 15px 15px; margin: 30px 0 0;
+}
+
+.total_prices_project {
+    float: left; line-height: 40px; color: #000; font-size: 30px;
+}
+
+.total_prices_project .price {
+    line-height: 40px; color: #000; font-size: 30px;
+}
+
+.total_prices_project span {
+    font-size: 16px; text-transform: uppercase;
+}
+
+.wholesaleTemplate .btn_gradient:hover {
+    color: #ffc501 !important;
+    border: 2px solid #ffc501;
+    background: white;
+    line-height: 36px;
+}
+
+.wholesaleTemplate .buy_all_product_project.btn_gradient {
+    width: auto; padding: 0 20px !important; display: inline-block; float: right;
+}
+
+.buy_all_product_project.amia-gradient {
+    width: auto; display: inline-block; float: right;
+}
+
+.buy_all_product_project.amia-gradient span {
+    padding: 0 20px;
+}
+
+.buy_all_product_project.btn_gradient:hover {
+    color: #FFF;
+}
+
+.wholesaleTemplate .buy_all_product_project.btn_gradient:hover {
+    color: black;
+}
+
+.footer_product_project {
+    margin: 30px 0 0;
+}
+
+.footer_product_project a:hover {
+    color: #FFF;
+}
+
+.common-product-section {
+    background: #F4F4F4 none; padding: 55px 0 75px; margin: 40px 0 0;
+}
+
+.common-product-section h3 {
+    margin: 0 0 35px; font-size: 30px; color: #000; text-align: center; text-transform: uppercase; line-height: 30px;
+}
+
+.content-common-product .bx-wrapper .bx-viewport {
+    left: 0; border: none; background: transparent none; box-shadow: none; -moz-box-shadow: none; -o-box-shadow: none; -webkit-box-shadow: none;
+}
+
+.col-common-product h4 {
+    padding: 0 15px; margin: 20px 0 15px; font-size: 16px; line-height: 20px; text-align: center;
+}
+
+.col-common-product h4 a {
+    color: #000;
+}
+
+.price-common-product {
+    font-size: 16px; color: #005190; line-height: 20px; text-align: center;
+}
+
+/* List */
+
+.shop_by_project_tab:after, .project_tab_menu:after, .list_project_tab:after, .info_product_project:after, .list_product_project_total:after {
+    content: ""; display: table; clear: both;
+}
+/* End List */
+
+
+.icon-arrow-left {
+    background: url("../images/btn-prev-rg.png") no-repeat;
+    height: 64px;
+    width: 32px;
+    display: block;
+}
+
+.icon-arrow-right {
+    background: url("../images/btn-next-rg.png") no-repeat;
+    height: 64px;
+    width: 32px;
+    display: block;
+}
+
+
+@media (max-width: 767px) {
+    .list_project_tab li {
+        width: 49%;
+    }
+}
+
+@media (max-width: 479px) {
+
+    .shop_by_project {
+        margin: 20px 0 0;
+    }
+
+    .shop_project_title h3 {
+        font-size: 20px;
+    }
+}

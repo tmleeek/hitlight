@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <sections>
+        <use_type_customer translate="label" module="adminhtml">
+            <label>Customer</label>
+            <tab>ghoster</tab>
+            <sort_order>60</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label comment">
+                    <label>General Settings</label>
+                    <sort_order>50</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <usetype>
+                            <label>Select Use Type</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <comment>Use type which be shown up in register page.</comment>
+                            <sort_order>2</sort_order>
+                            <source_model>ghoster_customer/group</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </usetype>
+                    </fields>
+                </general>
+                <flashlights translate="label comment">
+                    <label>Flashlight Settings</label>
+                    <sort_order>60</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <flashlight>
+                            <label>Flashlight</label>
+                            <frontend_model>ghoster_customer/flashlight</frontend_model>
+                            <backend_model>adminhtml/system_config_backend_serialized_array</backend_model>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </flashlight>
+                    </fields>
+                </flashlights>
+            </groups>
+        </use_type_customer>
+    </sections>
+</config>

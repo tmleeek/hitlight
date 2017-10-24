@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<layout version="0.2.0">
+    <default>
+		<reference name="head">
+			<action method="addCss"><stylesheet>css/imedia/quickview.css</stylesheet></action>
+		</reference>
+	</default>
+	<catalog_category_default translate="label">
+		<reference name="product_list">
+			<action method="setTemplate" ifconfig="quickview/quickview/enable">
+				<template>imedia/quickview/catalog/product/list.phtml</template>
+			</action>
+		</reference>
+	</catalog_category_default>
+	<!-- if category is anchor yes -->
+	<catalog_category_layered translate="label">
+		<reference name="product_list">
+			<action method="setTemplate" ifconfig="quickview/quickview/enable">
+				<template>imedia/quickview/catalog/product/list.phtml</template>
+			</action>
+		</reference>
+	</catalog_category_layered>
+	<!-- if category is anchor yes -->
+</layout> 

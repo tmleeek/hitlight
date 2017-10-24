@@ -1,0 +1,11 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * Magento
+ * Date: 8/17/16
+ * Time: 4:46 PM
+ */
+?>
+<?php $currentUrl = Mage::helper('core/url')->getCurrentUrl();?>
+
+<?php echo Mage::helper('ghoster_socialcount/facebook')->getFacebookShareCount($currentUrl);?>

@@ -1,0 +1,90 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     default_default
+ * @copyright   Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * @see Mage_Adminhtml_Block_Widget_Form_Container
+ */
+ ?>
+<?php echo $this->getFormInitScripts() ?>
+<div class="content-header">
+    <?php echo $this->getHeaderHtml() ?>
+    <p class="form-buttons"><?php echo $this->getButtonsHtml('header') ?></p>
+</div>
+<?php echo $this->getFormHtml() ?>
+<?php if ($this->hasFooterButtons()): ?>
+    <div class="content-footer">
+        <p class="form-buttons"><?php echo $this->getButtonsHtml('footer') ?></p>
+    </div>
+<?php endif; ?>
+<script type="text/javascript">
+    editForm = new varienForm('edit_form', '<?php echo $this->getValidationUrl() ?>');
+</script>
+<?php echo $this->getFormScripts() ?>
+
+
+
+<script type="text/javascript">
+    var imageRowTemplate = '<tr id="sliderImage_{{id}}">'+
+        '<td><span class="preview">{{preview}}</span></td>'+
+        '<td class="a-center"><input onchange="window.catalogSlider.change(this)" type="hidden" class="input-text required-entry" name="slider_images[{{catId}}][]" style="width:98%;" id="slider_image_{{id}}" value="{{value}}"/>'+
+        '<button class="button" type="button" onclick="GhoSter.MediabrowserUtility.openDialog(\'<?php echo Mage::getSingleton('adminhtml/url')->getUrl('adminhtml/cms_wysiwyg_images/index')?>static_urls_allowed/1/target_element_id/slider_image_{{id}}\')"><span><?php echo $this->__('Select')?></span></button></td>'+
+        '<td><input type="text" class="input-text required-entry" name="slider_urls[{{catId}}][]" style="width:98%;" id="slider_url_{{id}}" value="{{url}}"/></td>'+
+        '<td class="a-center"><button style="" onclick="window.catalogSlider.remove({{catId}},{{id}})" class="scalable delete" type="button" title="" ><span><span><span></span></span></span></button></td>'+
+        '</tr>';
+
+    window.catalogSlider = {
+        baseUrl: '<?php echo Mage::getBaseUrl('media')?>',
+        template: new Template(imageRowTemplate, new RegExp('(^|.|\\r|\\n)({{\\s*(\\w+)\\s*}})', "")),
+        itemsCount: 0,
+
+        add: function(catId,image,href){
+            var data = {
+                preview: image ? this.renderPreview(image) : '',
+                value: image || '',
+                url: href || '',
+                id: ++this.itemsCount,
+                catId: catId
+            };
+            $('slider_images_container_' + catId).insert({bottom: this.template.evaluate(data)});
+        },
+        remove: function(catId,id){
+            var tr = $('slider_images_container_' + catId).down('tr#sliderImage_' + id);
+            if (tr) tr.remove();
+        },
+        change: function(elm){
+            var uri = $(elm).value,
+                preview = $(elm).up('tr').down('span.preview');
+
+            if (preview){
+                $(preview).update(this.renderPreview(uri));
+            }
+        },
+        renderPreview: function(uri){
+            return '<img src="'+ uri +'" width="100px"/>';
+        }
+    };
+</script>

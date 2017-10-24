@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<widgets>
+    <activecontent_slider type="activecontent/slider" translate="name description" module="activecontent">
+        <name>Active Content: Slider</name>
+        <parameters>
+            <slider_id>
+                <label>Slider</label>
+                <type>select</type>
+                <visible>1</visible>
+                <required>1</required>
+                <source_model>activecontent/system_config_source_sliders</source_model>
+                <comments>Select a Slider from list</comments>
+            </slider_id>
+        </parameters>
+    </activecontent_slider>
+</widgets> 

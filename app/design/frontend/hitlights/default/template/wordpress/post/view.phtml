@@ -1,0 +1,92 @@
+<?php
+/**
+ * @category    Fishpig
+ * @package     Fishpig_Wordpress
+ * @license     http://fishpig.co.uk/license.txt
+ * @author      Ben Tideswell <help@fishpig.co.uk>
+ */
+?>
+
+<?php $post = $this->getPost() ?>
+<?php if ($post): ?>
+    <meta property="og:title" content="<?php echo $post->getPostTitle(); ?>"/>
+    <meta property="og:type" content="product"/>
+    <meta property="og:url" content="<?php $post->getPermalink(); ?>"/>
+    <meta property="og:image"
+          content="<?php echo $post->getFeaturedImage() ?>"/>
+    <meta property="og:description" content="<?php echo $post->getPostTitle() ?>"/>
+    <meta property="og:site_name" content="<?php echo Mage::app()->getStore()->getName() ?>"/>
+
+
+    <?php $helper = $this->helper('wordpress') ?>
+    <?php $author = $post->getAuthor() ?>
+    <div class="page-title post-title">
+        <h1><?php echo $this->escapeHtml($post->getPostTitle()) ?></h1>
+    </div>
+    <div class="post-view">
+        <?php echo $this->getBeforePostContentHtml() ?>
+        <div class="post-entry entry std<?php if ($post->getFeaturedImage()): ?> post-entry-with-image<?php endif; ?>">
+            <?php if ($post->isViewableForVisitor()): ?>
+                <div class="post-single-view">
+                    <?php echo $post->getPostContent() ?>
+                </div>
+            <?php else: ?>
+                <?php echo $this->getPasswordProtectHtml() ?>
+            <?php endif; ?>
+        </div>
+
+        <?php $socialCountConfig = Mage::helper('ghoster_socialcount')->getStoreConfig() ?>
+
+        <?php if ($socialCountConfig['active']): ?>
+            <div class="social">
+                <?php if ($socialCountConfig['facebook']['active']): ?>
+                    <div class="itemIcon iconFb">
+                        <?php if ($socialCountConfig['share_button']): ?>
+                            <a href="javascript:popWin('https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode($post->getPermalink()); ?>&t=<?php echo urlencode($post->getPostTitle()); ?>', 'facebook', 'width=640,height=480,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes');" title="<?php echo $this->__('Share on Facebook') ?>" class="value">
+                                <i class="fa fa-facebook"></i>
+                            </a>
+                        <?php endif ?>
+                    </div>
+                <?php endif; ?>
+                <?php if ($socialCountConfig['twitter']['active']): ?>
+                    <div class="itemIcon iconTwitter active">
+                        <?php if ($socialCountConfig['share_button']): ?>
+                            <a href="javascript:popWin('http://twitter.com/home/?status=<?php echo urlencode($post->getPostTitle() . ' (' . $post->getPermalink() . ')'); ?>', 'twitter', 'width=640,height=480,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes');" title="<?php echo $this->__('Tweet') ?>" class="value">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                        <?php endif ?>
+                    </div>
+                <?php endif; ?>
+                <?php if ($socialCountConfig['linkedin']['active']): ?>
+                    <div class="itemIcon iconLinkedin">
+                        <?php if ($socialCountConfig['share_button']): ?>
+                            <a href="javascript:popWin('https://www.linkedin.com/cws/share?url=<?php echo urlencode($post->getPermalink()); ?>', 'linkedin', 'width=640,height=480,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes');" title="<?php echo $this->__('Share on Linkedin') ?>" class="value">
+                                <i class="fa fa-linkedin"></i>
+                            </a>
+                        <?php endif ?>
+                    </div>
+                <?php endif; ?>
+                <?php if ($socialCountConfig['pinterest']['active']): ?>
+                    <div class="itemIcon iconPinterest">
+                        <?php if ($socialCountConfig['share_button']): ?>
+                            <a href="javascript:popWin('https://pinterest.com/pin/create/button/?url=<?php echo urlencode($post->getPermalink()); ?>&media=<?php echo urlencode($post->getFeaturedImage()); ?>&description=<?php echo urlencode($post->getPostTitle()); ?>', 'pinterest', 'width=640,height=480,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes');" title="<?php echo $this->__('Pin it') ?>" class="value">
+                                <i class="fa fa-pinterest-p"></i>
+                            </a>
+                        <?php endif ?>
+                    </div>
+                <?php endif; ?>
+                <?php if ($socialCountConfig['google']['active']): ?>
+                    <div class="itemIcon iconGoogle">
+                        <?php if ($socialCountConfig['share_button']): ?>
+                            <a href="javascript:popWin('https://plus.google.com/share?url=<?php echo urlencode($post->getPermalink()); ?>', 'google', 'width=640,height=480,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes');" title="<?php echo $this->__('Share on Google Plus') ?>" class="value">
+                                <i class="fa fa-google-plus"></i>
+                            </a>
+                        <?php endif ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+        <?php endif; ?>
+        <?php echo $this->getAfterPostContentHtml() ?>
+        <?php echo $this->getCommentsHtml() ?>
+    </div>
+<?php endif; ?>

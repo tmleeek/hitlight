@@ -1,0 +1,76 @@
+.megamenu-pc.ms-megamenu {
+    float: left; display: inline-block;
+}
+
+.ms-topmenu {
+    margin: 0; padding: 0; list-style: none;
+}
+
+.ms-topmenu .ms-level0 {
+    float: left; margin-right: 45px;
+}
+
+.ms-topmenu .ms-level0:last-child {
+    margin-right: 0;
+}
+
+.ms-topmenu .ms-level0 > a {
+    font-size: 12px; text-transform: uppercase; line-height: 79px; color: #313131;
+}
+
+.ms-topmenu .ms-submenu {
+    position: absolute; left: 0; right: 0; display: none; width: 100%!important; background: #f4f4f4 none; z-index: 0;
+}
+
+.ms-topmenu .ms-submenu .sub_menu_custom {
+    background: #000 none;
+}
+
+.megamenu-mobile.ms-megamenu {
+    display: none;
+}
+
+.ms-topmenu .ms-submenu:before {
+    content: ""; background: #f4f4f4 none; width: 100%; height: 100%; left: -10%; top: 0; position: absolute; display: block; z-index: -1;
+}
+
+.ms-topmenu .ms-submenu:after {
+    content: ""; background: #f4f4f4 none; width: 100%; height: 100%; right: -10%; top: 0; position: absolute; display: block; z-index: -1;
+}
+
+.ms-topmenu .ms-submenu .sub_menu_custom {
+    background: #f4f4f4 none; padding: 30px 0 50px;
+}
+
+.ms-topmenu .ms-submenu .sub_menu_custom .col_menu {
+    text-align: center; display: block; position: relative;
+}
+
+.ms-topmenu .ms-submenu .sub_menu_custom .col_menu .name_menu_project {
+    font-size: 14px; color: #000; margin: 0 0 10px; transition: all 0.3s ease; -moz-transition: all 0.3s ease; -o-transition: all 0.3s ease; -webkit-transition: all 0.3s ease;
+}
+
+.ms-topmenu .ms-submenu .sub_menu_custom .col_menu .image_menu_project {
+    position: relative; display: block;
+}
+
+.ms-topmenu .ms-submenu .sub_menu_custom .col_menu .image_menu_project img {
+    width: 100%;
+}
+
+.ms-topmenu .ms-submenu .sub_menu_custom .col_menu .image_menu_project:after {
+    content: ""; background: transparent none; width: 100%; height: 100%; position: absolute; left: 0; top: 0; transition: all 0.3s ease; -moz-transition: all 0.3s ease; -o-transition: all 0.3s ease; -webkit-transition: all 0.3s ease;
+}
+
+.ms-topmenu .ms-submenu .sub_menu_custom .col_menu:hover .image_menu_project:after {
+    background: rgba(255, 255, 255, 0.5) none;
+}
+
+.ms-topmenu .ms-submenu .sub_menu_custom .col_menu:hover .name_menu_project {
+    color: #005190;
+}
+
+.ms-topmenu .ms-submenu .sub_menu_custom .col_menu .a {
+    display: block;
+}
+

@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Unitech Corp.
+ *
+ * @category   Unitech
+ * @package    Unitech_LandingPage
+ * @version    0.0.1
+ * @copyright  @copyright Copyright (c) 2015 Unitech Corp. (http://www.unitech.vn)
+ */
+-->
+<layout version="0.1.0">
+    <default>
+        <reference name="footer_links">
+            <!-- <action method="addLink" translate="label title" module="unitech_landingpage" ifconfig="unitech_landingpage/general/is_enabled"><label>Best Sellers</label><url>bestsellers</url><title>Best Sellers</title><prepare>true</prepare></action> -->
+        </reference>
+    </default>
+    <landingpage_index_index translate="label">
+        <label>Landing Page List</label>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="unitech_landingpage/list" name="landingpage_list" template="unitech/landingpage/list.phtml">
+                <block type="unitech_landingpage/list_toolbar" name="landingpage_list_toolbar" template="unitech/landingpage/list/toolbar.phtml">
+                    <block type="page/html_pager" name="landingpage_list_toolbar_pager"/>
+                </block>
+                <action method="setToolbarBlockName"><name>landingpage_list_toolbar</name></action>
+            </block>
+        </reference>
+    </landingpage_index_index>
+    <landingpage_index_view translate="label">
+       <label>Landing Page View (Any)</label>
+	   <reference name="head">
+			<action method="removeItem"><type>js</type><name>iwd/all/jquery-1.10.2.min.js</name></action>
+			<action method="removeItem"><type>js</type><name>megnor/jquery-1.7.1.min.js</name></action>
+			<action method="removeItem"><type>skin_css</type><name>css/styles.css</name></action>
+			<action method="removeItem"><type>skin_css</type><name>css/megnor/responsive.css</name></action>
+			<action method="removeItem"><type>js_css</type><name>local.css</name></action>
+            <action method="addItem"><type>skin_js</type><name>unitech_landingpage/js/bootstrap.min.js</name></action>
+			<action method="addItem"><type>skin_js</type><name>unitech_landingpage/js/slick.min.js</name></action>
+			<action method="addItem"><type>skin_js</type><name>unitech_landingpage/js/owl.carousel.min.js</name></action>
+			<action method="addItem"><type>skin_js</type><name>unitech_landingpage/js/toastr.min.js</name></action>
+			<action method="addItem"><type>skin_js</type><name>unitech_landingpage/js/main.js</name></action>
+			<action method="addItem"><type>skin_css</type><name>unitech_landingpage/css/bootstrap.min.css</name></action>
+			<action method="addItem"><type>skin_css</type><name>unitech_landingpage/css/slick.css</name></action>
+			<action method="addItem"><type>skin_css</type><name>unitech_landingpage/css/owl.carousel.css</name></action>
+			<action method="addItem"><type>skin_css</type><name>unitech_landingpage/css/toastr.min.css</name></action>
+			<action method="addItem"><type>skin_css</type><name>unitech_landingpage/css/style.css</name></action>
+		</reference>
+       <reference name="root">
+            <action method="setTemplate"><template>unitech/landingpage/empty.phtml</template></action>
+            <action method="setLayoutCode"><name>empty</name></action>
+        </reference>
+        <reference name="content">
+            <block type="unitech_landingpage/view" name="landingpage_info" template="unitech/landingpage/view.phtml">
+                <block type="unitech_landingpage/view_featured" name="featured_product_list" template="unitech/landingpage/view/featured.phtml">
+                    <action method="addColumnCountLayoutDepend"><layout>empty</layout><count>6</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>one_column</layout><count>5</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>two_columns_left</layout><count>4</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>two_columns_right</layout><count>4</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>three_columns</layout><count>3</count></action>
+                </block>
+				<block type="unitech_landingpage/view_list" name="product_list" template="unitech/landingpage/view/list.phtml">
+                    <block type="catalog/product_list_toolbar" name="product_list_toolbar" template="catalog/product/list/toolbar.phtml">
+                        <block type="page/html_pager" name="product_list_toolbar_pager"/>
+                        <!-- The following code shows how to set your own pager increments -->
+                            <action method="setDefaultListPerPage"><limit>10</limit></action>
+                            <action method="addPagerLimit"><mode>list</mode><limit>10</limit></action>
+                            <action method="addPagerLimit"><mode>list</mode><limit>20</limit></action>
+                            <action method="addPagerLimit"><mode>list</mode><limit>30</limit></action>
+                            <action method="addPagerLimit"><mode>list</mode><limit>40</limit></action>
+                            <action method="addPagerLimit" translate="label"><mode>list</mode><limit>all</limit><label>All</label></action>
+                            <action method="setDefaultGridPerPage"><limit>10</limit></action>
+                            <action method="addPagerLimit"><mode>grid</mode><limit>5</limit></action>
+                            <action method="addPagerLimit"><mode>grid</mode><limit>10</limit></action>
+                            <action method="addPagerLimit"><mode>grid</mode><limit>15</limit></action>
+                            <action method="addPagerLimit" translate="label"><mode>grid</mode><limit>all</limit><label>All</label></action>
+
+                    </block>
+                    <action method="addColumnCountLayoutDepend"><layout>empty</layout><count>6</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>one_column</layout><count>5</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>two_columns_left</layout><count>4</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>two_columns_right</layout><count>4</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>three_columns</layout><count>3</count></action>
+                    <action method="setToolbarBlockName"><name>product_list_toolbar</name></action>
+                </block>
+				<block type="unitech_landingpage/send" name="sendfriend" template="unitech/landingpage/send.phtml"></block>
+            </block>
+        </reference>
+	</landingpage_index_view>
+</layout>

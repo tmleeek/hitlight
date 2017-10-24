@@ -1,0 +1,215 @@
+<div class="columns ">
+    <div id="page:left" class="side-col">
+        <h3>Import Customers</h3>
+        <ul class="tabs" id="slide_tabs">
+            <li>
+                <a class="tab-item-link active" title="Item Information" name="form_section"
+                   id="slide_tabs_form_section" href="#">
+                    <span><span title="The information in this tab has been changed." class="changed"></span><span
+                            title="This tab contains invalid data. Please solve the problem before saving."
+                            class="error"></span>Item Information</span>
+                </a>
+
+            </li>
+        </ul>
+
+    </div>
+    <div id="content" class="main-col">
+        <div class="main-col-inner">
+            <div id="messages"></div>
+            <div class="content-header">
+                <h3 class="icon-head head-adminhtml-slide">Import Customers</h3>
+            </div>
+            <div class="entry-edit">
+                <div class="entry-edit-head">
+                    <h4 class="icon-head head-edit-form fieldset-legend">Form import</h4>
+
+                    <div class="form-buttons"></div>
+                </div>
+                <div class="fieldset">
+                    <form id="form-upload-customer" method="post" enctype="multipart/form-data" action="">
+                        <table cellspacing="0" class="form-list">
+                            <tbody>
+                            <tr>
+                                <td class="label">
+                                    <input name="form_key" type="hidden" id="formkey"
+                                           value="<?php echo Mage::getSingleton('core/session')->getFormKey(); ?>"/>
+                                    <input type="hidden" id="file_data"
+                                           value=""/>
+                                    <label>Select a File</label>
+                                </td>
+                                <td class="value">
+                                    <input onchange="getDataFile();" class="input-file" type="file" name="file_import"/>
+                                    <p><strong>Note: </strong><i>Just accept csv file.</i></p>
+                                </td>
+                            </tr>
+                            <tr id="fields-mapping" style="display: none;">
+                                <td class="label">
+                                    Fields mapping
+                                </td>
+                                <td id="mapping">
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td class="value">
+                                    <button type="submit" class="button" onclick="return onImportProduct();">
+                                        <span><span>Import</span></span></button>
+                <span class="loading-data" style="display: none">
+                    <img width="30" src="<?php echo $this->getSkinUrl('images') . '/ajax-loader.gif' ?>"/>
+                </span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <div class="data-import" style="display: none">
+                <table width="500">
+                    <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Image</th>
+                        <th>SKU</th>
+                        <th>Name</th>
+                    </tr>
+                    </thead>
+                    <tbody id="table-content-upload">
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="loading-data" style="display: none">
+                <img src="<?php echo $this->getSkinUrl('images') . '/ajax-loader.gif' ?>"/>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    function getDataFile() {
+        var fd = new FormData(document.getElementById("form-upload-customer"));
+        jQuery.ajax({
+            url: '<?php echo $this->getUrl('cyberadmin/adminhtml_customer/mapping/')?>form_key/' + jQuery('#formkey').val(),
+            type: "POST",
+            data: fd,
+            dataType: 'json',
+            enctype: 'multipart/form-data',
+            processData: false,  // tell jQuery not to process the data
+            contentType: false,   // tell jQuery not to set contentType
+            beforeSend: function () {
+                jQuery('span.loading-data').show();
+            },
+            success: function (data) {
+                jQuery('span.loading-data').hide();
+                if (data.error) {
+                    jQuery('#file_data').val('');
+                    jQuery('#mapping').html('');
+                    alert('Invalid file.');
+                } else {
+                    jQuery('#file_data').val(1);
+                    jQuery('#fields-mapping').show();
+                    jQuery('#mapping').html(data.content);
+                }
+            }
+        });
+    }
+    function onImportProduct() {
+        var product = jQuery('#file_data').val();
+        if (product != '') {
+            var form = jQuery('#form-upload-customer');
+            form.submit();
+            //reindexData();
+
+        } else {
+            alert('Please Select a file import!');
+        }
+
+        return false;
+    }
+
+    function pushData(k, datafile) {
+        jQuery.ajax({
+            url: '<?php echo $this->getUrl('trophydata/import/importProduct')?>',
+            type: "POST",
+            async: false,
+            timeout: 20000,
+            data: {
+                form_key: jQuery('#formkey').val(),
+                name: datafile[0],
+                short_description: datafile[1],
+                sku: datafile[5],
+                price: datafile[7],
+                categories: datafile[14],
+                trophysize: datafile[17],
+                images: datafile[13]
+            },
+            dataType: 'json',
+            beforeSend: function () {
+                jQuery('.loading-data').show();
+            },
+            success: function (data) {
+                jQuery('.loading-data').hide();
+                if (data.name) {
+                    var row = '<tr>';
+                    row += '<td>' + k + '</td>';
+                    row += '<td><img alt="" src="' + data.image + '" width="50"/></td>';
+                    row += '<td>' + data.sku + '</td>';
+                    row += '<td>' + data.name + '</td>';
+                    row += '</tr>';
+                    jQuery('#table-content-upload').append(row);
+                }
+            }
+
+        });
+        jQuery('.loading-data').hide();
+    }
+
+    function reindexData() {
+        jQuery.ajax({
+            url: '<?php echo $this->getUrl('trophydata/import/reindex')?>',
+            type: "GET",
+            async: false,
+
+            dataType: 'json',
+            beforeSend: function () {
+                jQuery('.loading-data').show();
+            },
+            success: function (data) {
+                jQuery('.loading-data').hide();
+
+            }
+        });
+    }
+</script>
+
+<style type="text/css">
+    .data-import table {
+        border-collapse: collapse;
+    }
+
+    .data-import table td, .data-import table th {
+        border: 1px solid #d0def0;
+    }
+
+    .data-import table td {
+        padding: 5px;
+    }
+
+    .table-mapping {
+        border: 1px solid #d0cbc1;
+        border-collapse: collapse;
+    }
+
+    .table-mapping td {
+        padding: 5px 10px;
+    }
+
+    .table-mapping th {
+        padding: 10px;
+        border: 1px solid #d0cbc1;
+    }
+</style>

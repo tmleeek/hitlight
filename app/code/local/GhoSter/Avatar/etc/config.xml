@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <GhoSter_Avatar>
+            <version>1.0.1</version>
+        </GhoSter_Avatar>
+    </modules>
+    
+    <default>
+        <customer_avatar>
+            <avatar_widget>
+                <enabled>0</enabled>
+            </avatar_widget>
+        </customer_avatar>
+    </default>
+    
+    <frontend>
+        <routers>
+            <avatar>
+                <use>standard</use>
+                <args>
+                    <module>GhoSter_Avatar</module>
+                    <frontName>avatar</frontName>
+                </args>
+            </avatar>
+            <customer>
+                <args>
+                    <modules>
+                        <ghoster_avatar before="Mage_Customer">GhoSter_Avatar</ghoster_avatar>
+                    </modules>
+                </args>
+            </customer>
+        </routers>
+        
+        <events>
+        <customer_save_before>
+            <observers>
+                <prepare_avatar_upload>
+                    <class>GhoSter_Avatar_Model_Observer</class>
+                    <method>saveCustomerAvatar</method>
+                </prepare_avatar_upload>
+            </observers>
+        </customer_save_before>
+        </events>
+        
+        <layout>
+            <updates>
+                <avatar>
+                    <file>ghoster/avatar.xml</file>
+                </avatar>
+            </updates>
+        </layout>
+    </frontend>
+    <global>
+        <helpers>
+            <ghoster_avatar>
+                <class>GhoSter_Avatar_Helper</class>
+            </ghoster_avatar>
+        </helpers>
+
+        <blocks>
+            <ghoster_avatar>
+                <class>GhoSter_Avatar_Block</class>
+            </ghoster_avatar>
+            <customer>
+                <rewrite>
+                    <address_book>GhoSter_Avatar_Block_Customer_Address_Book</address_book>
+                    <account_navigation>GhoSter_Avatar_Block_Customer_Account_Navigation</account_navigation>
+                </rewrite>
+            </customer>
+        </blocks>
+       
+        <models>
+            <ghoster_avatar>
+                <class>GhoSter_Avatar_Model</class>
+            </ghoster_avatar>
+        </models>
+       
+        <resources>
+            <ghoster_avatar_setup>
+                <setup>
+                    <module>GhoSter_Avatar</module>
+                </setup>
+            </ghoster_avatar_setup>
+        </resources>
+    </global>
+</config>

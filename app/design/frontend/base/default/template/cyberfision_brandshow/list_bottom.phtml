@@ -1,0 +1,109 @@
+<div class="contact_wrappers buy_page_custom">
+    <div class="container">
+		<?php $brandCollection = $this->getBrandCollection(); ?>
+		<?php if ($brandCollection->count() > 0): ?>
+		    <ul>
+		        <?php $i=0; foreach ($brandCollection as $_brand): $i++;?>   
+		        <?php if ($i>1): ?> 
+		            <li>
+						<div style="position: relative; width: 100%">
+							<p class="buy-name"><?php echo $_brand->getName();?></p>
+							<img  class="img-banner-bg" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . $_brand->getBanner();?>" alt="<?php echo $_brand->getName();?>" title="<?php  echo $_brand->getName();?>"/>
+							<?php $imageArr = json_decode($_brand->getImage());  if (count($imageArr) > 0) :?>
+								<span eleId="<?php echo $_brand->getId();?>" class="showSlider slider_start"></span>
+							<?php endif; ?>
+						</div>
+
+		            	<div id="popUp-slider<?php echo $_brand->getId();?>" class="popUp-slider modal" role="dialog">
+							<div class="amia-modal-wrapper">
+								<div class="amia-modal-content">
+									<div class="modal-dialog">
+										<div class="modal-content modal-content-click">
+											<div class="buy-image">
+												<p class="buy-name"><?php echo $_brand->getName();?></p>
+												<div class="amia-owl-carousel owl-carousel owl-theme">
+													<?php
+													$images = $_brand->getImage();
+													if (strlen($images)> 0) {
+														$imageArr = json_decode($images);
+														foreach ($imageArr as $img) {
+															?>
+															<div class="item">
+																<p><?php echo $img;?></p>
+															</div>
+															<?php
+														}
+													}
+													?>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+		            	</div>
+						<div class="desc-buy-content desc-buy-content-u<?php echo $_brand->getId() ?>">
+							<?php //echo $_brand->getDescription();?>
+							<?php echo substr($_brand->getDescription(),0,500).' ...';?>
+						</div>
+						<div class="desc-buy-content-full desc-buy-content-full-u<?php echo $_brand->getId() ?>" style="display: none;">
+							<?php echo $_brand->getDescription();?>
+						</div>
+						<span class="more-content more-content-u<?php echo $_brand->getId() ?>">Show more...</span>
+						<span class="less-content less-content-u<?php echo $_brand->getId() ?>" style="display: none">Show less</span>
+		        	</li>
+		        	<script>
+		        		$j = jQuery.noConflict();
+		        		$j(document).ready(function($) {
+			        		$('.more-content-u<?php echo $_brand->getId() ?>, .less-content-u<?php echo $_brand->getId() ?>').click(function(){
+								$('.desc-buy-content-u<?php echo $_brand->getId() ?>, .less-content-u<?php echo $_brand->getId() ?>, .desc-buy-content-full-u<?php echo $_brand->getId() ?>, .more-content-u<?php echo $_brand->getId() ?>').slideToggle(100);
+							});
+						});
+		        	</script>
+	        	<?php endif;?>
+		        <?php endforeach; ?>
+		    </ul>
+		<?php else: ?>
+		    <?php echo $this->__('There are no items to display at this time.'); ?>
+		<?php endif; ?>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$j = jQuery.noConflict();
+
+    $j(document).ready(function() {
+	    $j('.showSlider').click(function(event){    	
+			$j('#popUp-slider' + $j(this).attr('eleId')).fadeIn(300);
+			$j('.amia-owl-carousel').owlCarousel({
+	            navigation: true,
+	            items : 1,
+				itemsDesktop : [1199,1],
+				itemsDesktopSmall : [1024,1],
+				itemsTablet: [991,1],
+				itemsMobile : [767,1],
+	            navigationText: [
+	                "<span class='icon-arrow-left'></span>",
+	                "<span class='icon-arrow-right'></span>"
+	            ],
+				autoHeight : true
+	        });
+
+			event.stopPropagation();
+	    })
+
+		$j('.buy_page_custom').click(function(){
+			$j('.popUp-slider').fadeOut(300);
+//			$j( ".popUp-slider" ).each(function( index ) {
+//			  if ( $j('#' + $j(this).attr('id')).is(':visible')) {
+//			  	//console.log($(this));
+//			  }
+//			});
+		});
+
+		$j('.modal-content-click').click(function(event){event.stopPropagation();});
+		$j('.more-content-i1, .less-content-i1').click(function(){
+			$j('.desc-buy-content-i1, .less-content-i1, .desc-buy-content-full-i1, .more-content-i1').slideToggle(100);
+		});
+	});
+</script>

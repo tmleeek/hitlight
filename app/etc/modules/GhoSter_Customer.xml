@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <GhoSter_Customer>
+            <active>true</active>
+            <codePool>local</codePool>
+    	</GhoSter_Customer>
+    </modules>
+</config>

@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+  <downloader_adminhtml_downloader_index>
+	<reference name="content">
+	  <block type="downloader/adminhtml_downloader" name="downloader" />
+	</reference>
+  </downloader_adminhtml_downloader_index>
+</layout>

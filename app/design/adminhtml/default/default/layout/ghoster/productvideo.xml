@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<layout>
+    <default>
+        <reference name="head">
+            <action method="addCss"><name>ghoster/productvideo/css/style.css</name></action>
+        </reference>
+    </default>
+    <adminhtml_catalog_product_edit>
+        <reference name="head">
+            <action method="addJs"><js>lib/flex.js</js></action>
+            <action method="addJs"><js>lib/FABridge.js</js></action>
+            <action method="addJs"><js>mage/adminhtml/flexuploader.js</js></action>
+            <action method="addJs"><js>ghoster/adminhtml/browser.js</js></action>
+            <action method="addJs"><js>prototype/window.js</js></action>
+            <action method="addItem"><type>js_css</type><js>prototype/windows/themes/default.css</js></action>
+            <action method="addItem"><type>skin_css</type><js>lib/prototype/windows/themes/magento.css</js></action>
+        </reference>
+        <reference name="product_tabs">
+            <action method="addTab">
+                <name>video_tab</name>
+                <block>ghoster_productvideo/adminhtml_catalog_product_tab</block>
+            </action>
+        </reference>
+    </adminhtml_catalog_product_edit>
+</layout>

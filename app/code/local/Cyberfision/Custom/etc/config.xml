@@ -1,0 +1,214 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Cyberfision_Custom>
+            <version>1.0.8</version>
+        </Cyberfision_Custom>
+    </modules>
+    <global>
+        <models>
+            <cyberfision_custom>
+                <class>Cyberfision_Custom_Model</class>
+                <resourceModel>cyberfision_custom_resource</resourceModel>
+            </cyberfision_custom>
+            <cyberfision_custom_resource>
+                <class>Cyberfision_Custom_Model_Resource</class>
+            </cyberfision_custom_resource>
+        </models>
+        <blocks>
+            <cyberfision_custom>
+                <class>Cyberfision_Custom_Block</class>
+            </cyberfision_custom>
+            <adminhtml>
+                <rewrite>
+                    <catalog_category_tab_product>Cyberfision_Custom_Block_Adminhtml_Catalog_Category_Tab_Product</catalog_category_tab_product>
+                    <catalog_product_edit_tab_super_group>Cyberfision_Custom_Block_Adminhtml_Catalog_Product_Edit_Tab_Super_Group</catalog_product_edit_tab_super_group>
+                    <cms_page_edit_tab_main>Cyberfision_Custom_Block_Adminhtml_Cms_Page_Edit_Tab_Main</cms_page_edit_tab_main>
+                    <cms_page_edit_form>Cyberfision_Custom_Block_Adminhtml_Cms_Page_Edit_Form</cms_page_edit_form>
+                </rewrite>
+            </adminhtml>
+            <checkout>
+                <rewrite>
+                    <cart_item_renderer_configurable>Cyberfision_Custom_Block_Checkout_Cart_Item_Renderer_Configurable</cart_item_renderer_configurable>
+                </rewrite>
+            </checkout>
+        </blocks>
+        <page>
+            <layouts>
+                <one_column_content module="cyberfision_custom" translate="label">
+                    <label>1 column with padding</label>
+                    <template>page/1column-content.phtml</template>
+                </one_column_content>
+                <one_column_banner module="cyberfision_custom" translate="label">
+                    <label>1 column with banner</label>
+                    <template>page/1column-banner.phtml</template>
+                </one_column_banner>
+                <page_about_us module="cyberfision_custom" translate="label">
+                    <label>About Us</label>
+                    <template>page/about-us.phtml</template>
+                </page_about_us>
+            </layouts>
+        </page>
+        <helpers>
+            <cyberfision_custom>
+                <class>Cyberfision_Custom_Helper</class>
+            </cyberfision_custom>
+        </helpers>
+        <resources>
+            <cyberfision_custom_setup>
+                <setup>
+                    <module>Cyberfision_Custom</module>
+                    <class>Mage_Eav_Model_Entity_Setup</class>
+                </setup>
+            </cyberfision_custom_setup>
+        </resources>
+        <template>
+            <email>
+                <cyberfision_custom_reorder_email_template translate="label" module="cyberfision_custom">
+                    <label>Email Reorder</label>
+                    <file>cyberfision/reorder.html</file>
+                    <type>html</type>
+                </cyberfision_custom_reorder_email_template>
+            </email>
+        </template>
+        <events>
+            <checkout_cart_product_add_after>
+                <observers>
+                    <cyberfision_custom_set_quote_item_price>
+                        <type>singleton</type>
+                        <class>Cyberfision_Custom_Model_Observer</class>
+                        <method>setQuoteItemPrice</method>
+                    </cyberfision_custom_set_quote_item_price>
+                </observers>
+            </checkout_cart_product_add_after>
+        </events>
+    </global>
+    <frontend>
+        <events>
+            <controller_action_postdispatch_sales_order_reorder>
+                <observers>
+                    <cyberfision_custom_reorder>
+                        <type>singleton</type>
+                        <class>cyberfision_custom/observer</class>
+                        <method>sendMailReorder</method>
+                    </cyberfision_custom_reorder>
+                </observers>
+            </controller_action_postdispatch_sales_order_reorder>
+
+            <controller_action_postdispatch_sales_guest_reorder>
+                <observers>
+                    <cyberfision_custom_guest_reorder>
+                        <type>singleton</type>
+                        <class>cyberfision_custom/observer</class>
+                        <method>sendMailReorder</method>
+                    </cyberfision_custom_guest_reorder>
+                </observers>
+            </controller_action_postdispatch_sales_guest_reorder>
+            <sales_order_save_before>
+                <observers>
+                    <cyberfision_custom_save_customer_group>
+                        <type>singleton</type>
+                        <class>cyberfision_custom/observer</class>
+                        <method>setOrderCustomerGroup</method>
+                    </cyberfision_custom_save_customer_group>
+                </observers>
+            </sales_order_save_before>
+        </events>
+        <routers>
+            <cyberfision_custom>
+                <use>standard</use>
+                <args>
+                    <module>Cyberfision_Custom</module>
+                    <frontName>cyberfision</frontName>
+                </args>
+            </cyberfision_custom>
+        </routers>
+        <layout>
+            <updates>
+                <cyberfision_custom>
+                    <file>cyberfision/custom.xml</file>
+                </cyberfision_custom>
+            </updates>
+        </layout>
+    </frontend>
+    <adminhtml>
+        <layout>
+            <updates>
+                <cyberfision_custom>
+                    <file>cyberfision/custom.xml</file>
+                </cyberfision_custom>
+            </updates>
+        </layout>
+    </adminhtml>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Cyberfision_Custom before="Mage_Adminhtml">Cyberfision_Custom_Adminhtml</Cyberfision_Custom>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <default>
+        <cyberfision_custom>
+            <notification>
+                <content><![CDATA[cyberfision demo notification messages cyberfision demo notification messages]]></content>
+            </notification>
+            <homepage>
+                <enable_banner>1</enable_banner>
+                <banner_type>2</banner_type>
+                <banner_heading_1><![CDATA[FOR RESIDENTIALS]]></banner_heading_1>
+                <banner_content_1><![CDATA[Praesent tincidunt convallis quam quis commodo. Maecenas libero quam, dapibus nec tempus vel, sodales ac sapien]]></banner_content_1>
+                <banner_link_1>#</banner_link_1>
+                <banner_buying_guide_link_1>#</banner_buying_guide_link_1>
+                <banner_heading_2><![CDATA[FOR RESIDENTIALS]]></banner_heading_2>
+                <banner_content_2><![CDATA[Praesent tincidunt convallis quam quis commodo. Maecenas libero quam, dapibus nec tempus vel, sodales ac sapien]]></banner_content_2>
+                <banner_link_2>#</banner_link_2>
+                <banner_buying_guide_link_2>#</banner_buying_guide_link_2>
+            </homepage>
+            <header>
+                <logo><![CDATA[default/logo.png]]></logo>
+                <site_desc><![CDATA[HitLights is a LED light strips and accessories solutions company. Our goal is to bring you immense knowledge and superior customer support while providing product and project solutions that meet each customer's unique, specific needs.]]></site_desc>
+            </header>
+            <footer>
+                <enable_links>1</enable_links>
+                <enable_contact>1</enable_contact>
+                <enable_social>1</enable_social>
+                <footer_heading_1>About HitLights</footer_heading_1>
+                <footer_heading_2>Press Releases</footer_heading_2>
+                <footer_heading_3>Business Solutions</footer_heading_3>
+                <footer_heading_4>Privacy Policy</footer_heading_4>
+                <footer_heading_5>Return Policy</footer_heading_5>
+                <footer_heading_6>Shipping Policies</footer_heading_6>
+                <footer_heading_7>Terms of Use</footer_heading_7>
+                <footer_heading_8>Careers</footer_heading_8>
+                <footer_link_1>about.html</footer_link_1>
+                <footer_link_2>press.html</footer_link_2>
+                <footer_link_3>business_solutions.html</footer_link_3>
+                <footer_link_4>privacy-policy.html</footer_link_4>
+                <footer_link_5>return.html</footer_link_5>
+                <footer_link_6>Shipping.html</footer_link_6>
+                <footer_link_7>termofuse.html</footer_link_7>
+                <footer_link_8>career.html</footer_link_8>
+                <facebook>https://www.facebook.com/HitLightsLedBulbs</facebook>
+                <twitter>https://twitter.com/HitLightsLED</twitter>
+                <youtube>http://www.youtube.com/user/HitLightsLED</youtube>
+                <pinterest>http://www.pinterest.com/hitlights/</pinterest>
+                <linkedin>https://www.linkedin.com/company/hitlights</linkedin>
+                <wordpress>https://www.hitlights.com/blog</wordpress>
+                <instagram>http://instagram.com/hitlightsled</instagram>
+            </footer>
+            <product_detail>
+                <enable_related>1</enable_related>
+            </product_detail>
+        </cyberfision_custom>
+        <general>
+            <store_information>
+                <name>HitLights LED</name>
+                <address><![CDATA[<span>8000 Innovation Park Dr.</span><span>Baton Rouge, LA 70820</span>]]></address>
+            </store_information>
+        </general>
+    </default>
+</config>

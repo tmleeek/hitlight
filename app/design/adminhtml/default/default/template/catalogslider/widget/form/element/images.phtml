@@ -1,0 +1,102 @@
+<?php
+/**
+ * @category    MT
+ * @package     MT_CatalogSlider
+ * @copyright   Copyright (C) 2008-2014 MagentoThemes.net. All Rights Reserved.
+ * @license     GNU General Public License version 2 or later
+ * @author      MagentoThemes.net
+ * @email       support@magentothemes.net
+ */
+?>
+<tr>
+    <td class="label"><?php echo $this->getElement()->getLabel() ?></td>
+    <td class="grid" style="">
+        <table cellspacing="0" class="data border" id="<?php echo $this->getElement()->getHtmlId() ?>">
+            <colgroup>
+                <col width="100"/>
+                <col width="350"/>
+                <col width="150"/>
+                <col width="150"/>
+                <col width="1"/>
+            </colgroup>
+            <thead>
+                <tr class="headings">
+                    <th><?php echo Mage::helper('mtcatalogslider')->__('Preview')?></th>
+                    <th><?php echo Mage::helper('mtcatalogslider')->__('Image Url')?></th>
+                    <th><?php echo Mage::helper('mtcatalogslider')->__('From Date')?><br>(Y-m-d)</th>
+                    <th><?php echo Mage::helper('mtcatalogslider')->__('End Date')?><br>(Y-m-d)</th>
+                    <th><?php echo Mage::helper('mtcatalogslider')->__('Delete')?></th>
+                </tr>
+            </thead>
+            <tbody id="<?php echo $this->getElement()->getHtmlId() ?>_container"></tbody>
+            <tfoot>
+                <td colspan="6" class="a-right"><?php echo $this->getAddButtonHtml() ?></td>
+            </tfoot>
+        </table>
+    </td>
+</tr>
+<script type="text/javascript">
+    var imageRowTemplate = '<tr id="sliderImage_{{id}}">'+
+        '<td><span class="preview">{{preview}}</span></td>'+
+        '<td><input onchange="window.catalogSlider.change(this)" type="text" class="input-text" name="slider_images[]" style="width:75%;" id="slider_image_{{id}}" value="{{value}}"/>&nbsp;&nbsp;&nbsp;'+
+        '<button class="button" type="button" onclick="MT.MediabrowserUtility.openDialog(\'<?php echo Mage::getSingleton('adminhtml/url')->getUrl('adminhtml/cms_wysiwyg_images/index')?>static_urls_allowed/1/target_element_id/slider_image_{{id}}\')"><span><?php echo $this->__('Select')?></span></button></td>'+
+        '<td><input type="text" class="input-text" name="slider_from_date[]" style="width:70%;" id="slider_from_date_{{id}}" value="{{start_date}}"/><img style="" title="Select Date" id="start_date_{{id}}" class="v-middle" alt="" src="/skin/adminhtml/default/default/images/grid-cal.gif"></td>'+
+        '<td><input type="text" class="input-text" name="slider_end_date[]" style="width:70%;" id="slider_end_date_{{id}}" value="{{end_date}}"/><img style="" title="Select Date" id="end_date_{{id}}" class="v-middle" alt="" src="/skin/adminhtml/default/default/images/grid-cal.gif"></td>'+
+        '<td class="a-center"><?php echo $this->getDeleteButtonHtml()?></td>'+
+        '</tr>';
+
+    window.catalogSlider = {
+        baseUrl: '<?php echo Mage::getBaseUrl('media')?>',
+        template: new Template(imageRowTemplate, new RegExp('(^|.|\\r|\\n)({{\\s*(\\w+)\\s*}})', "")),
+        itemsCount: 0,
+        container: $('<?php echo $this->getElement()->getHtmlId() ?>_container'),
+        add: function(image,start_d,end_d){
+            var data = {
+                preview: image ? this.renderPreview(image) : '',
+                value: image || '',
+                start_date: start_d || '',
+                end_date: end_d || '',
+                id: ++this.itemsCount
+            };
+            this.container.insert({bottom: this.template.evaluate(data)});
+            setTimeout('addDateJs('+id+')',1000);
+        },
+        remove: function(id){
+            var tr = this.container.down('tr#sliderImage_' + id);
+            if (tr) tr.remove();
+        },
+        change: function(elm){
+            var uri = $(elm).value,
+                preview = $(elm).up('tr').down('span.preview');
+
+            if (preview){
+                $(preview).update(this.renderPreview(uri));
+            }
+        },
+        renderPreview: function(uri){
+            return '<img src="'+this.baseUrl + uri +'" width="100px"/>';
+        }
+    };
+
+    <?php foreach ($this->getItems() as $item):?>
+    window.catalogSlider.add('<?php echo $item['url']?>','<?php echo $item['start_date']?>','<?php echo $item['end_date']?>');
+    <?php endforeach ?>
+    function addDateJs(id){
+        Calendar.setup({
+            inputField: "slider_from_date_" + id,
+            ifFormat: "%Y-%m-%d",
+            showsTime: true,
+            button: "start_date_" + id,
+            align: "Bl",
+            singleClick : true
+        });
+        Calendar.setup({
+            inputField: "slider_end_date_" + id,
+            ifFormat: "%Y-%m-%d",
+            showsTime: true,
+            button: "end_date_" + id,
+            align: "Bl",
+            singleClick : true
+        });
+    }
+</script>

@@ -1,0 +1,35 @@
+<section class="notification-bar">
+    <div class="container">
+        <?php echo Mage::getStoreConfig('cyberfision_custom/notification/content')?>
+        <a href="javascript: closeNotification();" id="nt-close">x</a>
+    </div>
+</section>
+
+<style>
+    .notification-bar {
+        background: #f6ca2f none;
+        padding: 10px 0;
+        line-height: 20px;
+        font-size: 14px;
+        color: #FFF;
+        text-align: center;
+    }
+    .notification-bar .container{
+        position: relative;
+
+    }
+    .notification-bar .container a#nt-close{
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: white;
+        padding: 0 5px;
+        border-radius: 10px;
+    }
+</style>
+
+<script>
+    function closeNotification() {
+        jQuery('section.notification-bar').remove();
+    }
+</script>

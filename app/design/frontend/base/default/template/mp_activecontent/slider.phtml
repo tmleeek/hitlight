@@ -1,0 +1,88 @@
+<?php
+/**
+ * MagPleasure Ltd.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE-CE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magpleasure.com/LICENSE-CE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This package designed for Magento COMMUNITY edition
+ * MagPleasure does not guarantee correct work of this extension
+ * on any other Magento edition except Magento COMMUNITY edition.
+ * Magpleasure does not provide extension support in case of
+ * incorrect edition usage.
+ * =================================================================
+ *
+ * @category   MagPleasure
+ * @package    Magpleasure_Activecontent
+ * @version    1.1.3
+ * @copyright  Copyright (c) 2011-2014 MagPleasure Ltd. (http://www.magpleasure.com)
+ * @license    http://www.magpleasure.com/LICENSE-CE.txt
+ */
+
+/** @var Magpleasure_Activecontent_Block_Slider $this */
+?>
+
+<?php if (count($this->getSlideCollection()) && $this->getIsEnabled()): ?>
+    <link rel="stylesheet" type="text/css" href="<?php echo $this->getStyleCss(); ?>"/>
+    <div class="mp-ac-clear"></div>
+    <div
+        id="wrapper-slider-random-id"
+        class="mp_activecontent <?php echo $this->getStyleName(); ?>
+    <?php if ($this->getSliderData('autohide')): ?> autohide<?php endif; ?>"
+        <?php if ($this->getUseSize()): ?>
+            style="<?php echo $this->getSizeCSS(); ?>"
+        <?php endif; ?>
+        >
+        <ul id="slider-random-id">
+            <?php foreach ($this->getSlideCollection() as $slide): ?>
+                <li
+                    <?php if ($this->getUseSize()): ?>
+                        style="<?php echo $this->getSizeCSS(); ?>"
+                    <?php endif; ?>
+                    >
+                    <?php echo $this->getContent($slide); ?>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        /* <![CDATA[ */
+        (function ($) {
+            var rnd = Math.floor( Math.random() * 1e10 ) ;
+            var wrapper = $('#wrapper-slider-random-id');
+            if (wrapper){
+                wrapper.attr("id", 'wrapper-slider-' + rnd);
+            }
+            var container = $('#slider-random-id');
+            if (container){
+                container.attr("id", 'slider-' + rnd);
+            }
+            $('#slider-' + rnd).bxSlider({
+                easing: '<?php echo $this->getSliderData('easing'); ?>',
+                timingFunction: <?php echo $this->getTimingFunction(); ?>,
+                wrapperClass: 'mp-ac-wrapper',
+                mode: '<?php echo $this->getSliderData('type') ?>',
+                auto: <?php echo $this->getSliderBoolData('slideshow'); ?>,
+                autoControls: <?php echo $this->getSliderBoolData('play_button'); ?>,
+                pause: <?php echo $this->getSliderData('slideshow_pause') ? $this->getSliderData('slideshow_pause') : 5000; ?>,
+                speed: <?php echo $this->getSliderData('duration') ? $this->getSliderData('duration') : 500; ?>,
+                autoDirection: '<?php echo $this->getSliderData('direction') ?>',
+                controls: <?php echo $this->getSliderBoolData('controls'); ?>,
+                captions: <?php echo $this->getSliderBoolData('captions'); ?>,
+                pager: <?php echo $this->getSliderBoolData('pager'); ?>,
+                ticker: <?php echo $this->getSliderBoolData('ticker'); ?>,
+                tickerSpeed: <?php echo $this->getSliderData('ticker_speed') ? $this->getSliderData('ticker_speed') : 5000; ?>,
+                tickerDirection: '<?php echo $this->getSliderData('direction') ?>',
+                tickerHover: false
+            });
+        })(jQuery);
+        /* ]]> */
+    </script>
+<?php endif; ?>

@@ -1,0 +1,141 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Unitech Corp.
+ *
+ * @category   Unitech
+ * @package    Unitech_LandingPage
+ * @version    0.0.1
+ * @copyright  @copyright Copyright (c) 2015 Unitech Corp. (http://www.unitech.vn)
+ */
+-->
+<config>
+    <tabs>
+        <zextension translate="label">
+            <label>GameDay Extensions</label>
+            <sort_order>200</sort_order>
+        </zextension>
+    </tabs>
+    <sections>
+        <unitech_landingpage translate="label" module="unitech_landingpage">
+            <label>Landing Pages</label>
+            <class>separator-top</class>
+            <tab>zextension</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>300</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label" module="unitech_landingpage">
+                    <label>General</label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <sort_order>10</sort_order>
+                    <fields>
+                        <is_enabled translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </is_enabled>
+                    </fields>
+                </general>
+                <frontend translate="label" module="unitech_landingpage">
+                    <label>Frontend</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <!-- <default_router translate="label">
+                            <label>Front Router name</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>required-entry</validate>
+                        </default_router>
+                        <column_count translate="label">
+                            <label>No. of columns</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </column_count>
+                        <grid_per_page_values translate="label comment">
+                            <label>Page items per Page on List allowed values</label>
+                            <comment>comma separated</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </grid_per_page_values>
+                        <grid_per_page translate="label comment">
+                            <label>Page items per Page on List default value</label>
+                            <comment>must be in the allowed values grid</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </grid_per_page>
+                        <default_sort_by translate="label comment">
+                            <label>Page Listing Sort by</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>unitech_landingpage/adminhtml_system_config_source_landingPage_listSort</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </default_sort_by>
+                        <image translate="label">
+                            <label>Banner Image</label>
+                            <frontend_type>image</frontend_type>
+                            <backend_model>adminhtml/system_config_backend_image</backend_model>
+                            <upload_dir config="system/filesystem/media" scope_info="1">landingpage</upload_dir>
+                            <base_url type="media" scope_info="1">landingpage</base_url>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Allowed file types: jpeg, gif, png.</comment>
+                        </image> -->
+                        <meta_title translate="label comment">
+                            <label>Default Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </meta_title>
+                        <meta_keywords translate="label comment">
+                            <label>Default Meta Keywords</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </meta_keywords>
+                        <meta_description translate="label comment">
+                            <label>Default Description</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </meta_description>
+                    </fields>
+                </frontend>
+            </groups>
+        </unitech_landingpage>
+    </sections>
+</config>

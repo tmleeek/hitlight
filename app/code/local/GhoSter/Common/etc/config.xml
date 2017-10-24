@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <GhoSter_Common>
+            <version>1.0.0</version>
+        </GhoSter_Common>
+    </modules>
+    <global>
+        <models>
+            <ghoster_common>
+                <class>GhoSter_Common_Model</class>
+                <resourceModel>ghoster_common_resource</resourceModel>
+            </ghoster_common>
+            <ghoster_common_resource>
+                <class>GhoSter_Common_Model_Resource</class>
+            </ghoster_common_resource>
+        </models>
+        <blocks>
+            <ghoster_common>
+                <class>GhoSter_Common_Block</class>
+            </ghoster_common>
+        </blocks>
+        <helpers>
+            <ghoster_common>
+                <class>GhoSter_Common_Helper</class>
+            </ghoster_common>
+        </helpers>
+    </global>
+</config>

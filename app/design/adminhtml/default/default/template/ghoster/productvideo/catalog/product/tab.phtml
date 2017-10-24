@@ -1,0 +1,87 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * Magento
+ * Date: 7/27/16
+ * Time: 11:15 AM
+ */
+?>
+
+<div id="product_tabs_productvideo_content" style="">
+    <div class="entry-edit">
+        <div class="entry-edit-head">
+            <h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->__('Product Video URLs') ?></h4>
+            <div class="form-buttons"></div>
+        </div>
+        <div class="fieldset " id="common_form">
+            <div class="hor-scroll">
+                <table class="form-list" cellspacing="0" id="">
+                    <tbody>
+
+                    <tr>
+                        <td class="label"><label for="slide"><?php echo $this->__('Product Video URLs') ?></label>
+                        </td>
+                        <td class="grid" style="">
+                            <table cellspacing="0" class="data border" id="product_video_container">
+                                <colgroup>
+                                    <col width="480"/>
+                                    <col width="1"/>
+                                </colgroup>
+                                <thead>
+                                <tr class="headings">
+                                    <th><?php echo Mage::helper('ghoster_productvideo')->__('Url') ?></th>
+                                    <th><?php echo Mage::helper('ghoster_productvideo')->__('Delete') ?></th>
+                                </tr>
+                                </thead>
+                                <tbody></tbody>
+                                <tfoot>
+                                <tr>
+                                    <td colspan="5" class="a-right">
+                                        <button style=""
+                                                onclick="window.productVideo.add()"
+                                                class="scalable add" type="button"
+                                                title="<?php echo $this->__('Add URL') ?>">
+                                            <span><span><span><?php echo $this->__('Add URL') ?></span></span></span>
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var imageRowTemplate = '<tr id="productVideo_{{id}}">' +
+        '<td><input type="text" class="input-text" name="product_video[]" style="width:75%;" id="product_video_{{id}}" value="{{value}}"/></td>' +
+        '<td class="a-center"><button style="" onclick="window.productVideo.remove({{id}})" class="scalable delete" type="button" title=""><span><span><span></span></span></span></button></td>' +
+        '</tr>';
+
+    window.productVideo = {
+        baseUrl: '<?php echo Mage::getBaseUrl('media')?>',
+        template: new Template(imageRowTemplate, new RegExp('(^|.|\\r|\\n)({{\\s*(\\w+)\\s*}})', "")),
+        itemsCount: 0,
+        container: $('product_video_container'),
+        add: function (url) {
+            var data = {
+                value: url || '',
+                id: ++this.itemsCount
+            };
+            this.container.insert({bottom: this.template.evaluate(data)});
+        },
+        remove: function (id) {
+            var tr = this.container.down('tr#productVideo_' + id);
+            if (tr) tr.remove();
+        }
+
+    };
+
+    <?php foreach ($this->getUrls() as $url):?>
+    window.productVideo.add('<?php echo $url?>');
+    <?php endforeach ?>
+</script>

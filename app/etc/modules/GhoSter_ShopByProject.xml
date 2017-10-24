@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <GhoSter_ShopByProject>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                GhoSter_Common
+            </depends>
+        </GhoSter_ShopByProject>
+    </modules>
+</config>

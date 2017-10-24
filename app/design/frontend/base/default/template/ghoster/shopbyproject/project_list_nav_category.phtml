@@ -1,0 +1,56 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * Magento
+ * Date: 7/5/16
+ * Time: 2:24 PM
+ */
+?>
+<?php //echo "<pre>"; var_dump($this->getCategoryByProject()); ?>
+<?php if (count($this->getCategoryByProject())) :?>
+<div class="block sidebar-nav-left codnitiveSidenavLeft collapse in mb-none">
+    <div class="block-title">
+        <strong><span><?php echo $this->__('Applications');?></span></strong>
+    </div>
+    <!-- Tab Project-->
+    <div class="block-content">
+
+        <?php if (count($this->getCategoryByProject())) :?>
+            <ul id="sidebar-nav-menu-project">
+                <?php foreach ($this->getCategoryByProject() as $cate): ?>
+                    <li>
+                        <?php if ( count($this->getCategoryByProjectChild($cate->getId())) ) : ?>
+                        <span class="arrow-left showSingle" target="<?php echo $cate->getId();?>"></span>
+                        <?php endif; ?>
+                        <a href="<?php echo $cate->getUrl();?>" class="link-ashopby">
+                            <span class="category_name"><?php echo $cate->getName();?></span>
+                        </a>
+                        <?php if ( count($this->getCategoryByProjectChild($cate->getId())) ) : ?>
+                            <ul id="div<?php echo $cate->getId();?>" class="targetDiv">
+                                <?php foreach ($this->getCategoryByProjectChild($cate->getId()) as $cateChild): ?>
+                                    <li>
+                                        <a href="<?php echo $cateChild->getUrl();?>" class="link-ashopby">
+                                            <span class="category_name"><?php echo $cateChild->getName();?></span>
+                                        </a>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        <?php endif; ?>
+                    </li>
+                <?php endforeach;?>
+            </ul>
+        <?php endif;?>
+    </div>
+</div>
+
+<script>
+    $j = jQuery.noConflict();
+    $j(document).ready(function () {
+        // toggle click show sidebar nav
+        $j('.showSingle').click(function(){
+            $j('.targetDiv').hide();
+            $j('#div'+$j(this).attr('target')).show();
+        });
+    });
+</script>
+<?php endif; ?>

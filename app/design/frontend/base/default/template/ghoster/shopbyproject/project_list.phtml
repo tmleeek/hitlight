@@ -1,0 +1,222 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * Magento
+ * Date: 7/5/16
+ * Time: 2:24 PM
+ */
+?>
+
+<?php $idBlocks = array(); ?>
+<section class="shop_by_project_list">
+    <div class="shop_by_project_wrapper">
+        <?php if ($this->getProjects()->getSize()): ?>
+            <div class="project_tab_content">
+                <?php foreach ($this->getProjects() as $project) : ?>
+                    <?php $sbp_category_ids = Mage::helper('ghoster_shopbyproject')->getSelectedProjectCategories($project->getId()) ?>
+                    <div class="tab_project_content" id="project_tab_<?php echo $project->getId(); ?>">
+                        <!-- Content Tab Project -->
+                        <div class="shop_by_project_tab">
+                            <?php if (count($sbp_category_ids)): ?>
+                                <div class="content_tabs">
+                                    <?php foreach ($sbp_category_ids as $sbp_category_id): ?>
+                                        <?php $sbp_category = Mage::getModel('ghoster_shopbyproject/category')->load($sbp_category_id); ?>
+                                        <?php $slides = Mage::helper('ghoster_shopbyproject/slide')->getSlides($project->getId(), $sbp_category_id) ?>
+                                        <div class="tab_wrapper targetDiv" id="div<?php echo $sbp_category_id; ?>">
+                                            <!-- add title of shopbyproject -->
+                                            <div class="head-shopbyproject-title">
+                                                <span><?php echo $project->getTitle();?> <label class="child-head"></label></span>
+                                            </div>
+
+                                            <div class="slider_tab_container">
+                                                <?php $first_slide_image_path = Mage::helper('ghoster_common/image')->getImagePath($slides->getFirstItem()->getData('slide_image')) ?>
+                                                <div class="show_slider_<?php echo $sbp_category_id; ?>">
+                                                    <img
+                                                        src="<?php echo Mage::helper('ghoster_common/resizer')->init($first_slide_image_path)->adaptiveResize(870, 380); ?>"/>
+                                                </div>
+
+                                                <?php if ($slides->getSize()): ?>
+                                                    <ul class="slider_tab_<?php echo $sbp_category_id; ?>">
+                                                        <?php foreach ($slides as $slide): ?>
+                                                            <?php $slide_image_path = (Mage::helper('ghoster_common/image')->getImagePath($slide->getData('slide_image'))) ?>
+                                                            <li data-show="show_slider_<?php echo $sbp_category_id; ?>"
+                                                                data-image="<?php echo Mage::helper('ghoster_common/resizer')->init($slide_image_path)->adaptiveResize(870, 380); ?>">
+                                                                <img
+                                                                    src="<?php echo Mage::helper('ghoster_common/resizer')->init($slide_image_path)->adaptiveResize(170, 75); ?>"
+                                                                    width="170"
+                                                                    height="75"/>
+                                                            </li>
+                                                        <?php endforeach; ?>
+                                                    </ul>
+                                                <?php endif; ?>
+                                            </div>
+
+                                            <!-- add desciription of category -->
+                                            <div class="desc_project_content box-summary">
+                                                <p><?php echo $sbp_category->getData('summary') ?></p>
+                                            </div>
+                                            <!-- end add description of category -->
+
+                                            <!--How To-->
+                                            <div class="project_content_wrapper">
+<!--                                                <div class="title_project_content">-->
+<!--                                                    <div class="left-how-to">-->
+<!--                                                        --><?php //echo $this->__('How to:') ?>
+<!--                                                    </div>-->
+<!--                                                    <div class="right-how-to">-->
+<!--                                                        --><?php //if ($sbp_category->getData('instruction_block_id')):
+//                                                            if(!in_array($sbp_category->getData('instruction_block_id'), $idBlocks)):
+//                                                                $idBlocks[] .= $sbp_category->getData('instruction_block_id');
+//                                                            endif;
+//                                                            ?>
+<!--                                                            <a href="javascript:void(0)"-->
+<!--                                                               class="amia-gradient" data-toggle="modal"-->
+<!--                                                               data-target="#instruction_block_--><?php //echo $sbp_category->getData('instruction_block_id') ?><!--"><span>--><?php //echo $this->__('View Steps') ?><!--</span></a>-->
+<!--                                                        --><?php //else: ?>
+<!--                                                            <a href="--><?php //echo $this->getUrl('downloads/instruction') ?><!--"-->
+<!--                                                               class="amia-gradient"><span>--><?php //echo $this->__('View Steps') ?><!--</span></a>-->
+<!--                                                        --><?php //endif; ?>
+<!--                                                    </div>-->
+<!---->
+<!--                                                </div>-->
+                                                <div class="desc_project_content">
+                                                    <p><?php echo $sbp_category->getData('how_to') ?>
+                                                    </p>
+                                                </div>
+                                                <p class="how-to-required"><?php echo $this->__('Suggested Items'); ?></p>
+                                            </div>
+
+                                            <!--Shop All Products-->
+                                            <?php $sbp_products = Mage::helper('ghoster_shopbyproject/shopallproducts')->getShopAllProducts($project->getId(), $sbp_category_id);
+                                            ?>
+                                            <?php if ($sbp_products->getSize()): ?>
+                                                <div class="list_product_project">
+                                                    <div class="list_product_project_content">
+                                                        <?php foreach ($sbp_products as $sbp_product): ?>
+                                                            <div class="list-col-project-content">
+                                                                <div class="row">
+                                                                    <?php $product_skus = Mage::helper('ghoster_shopbyproject/shopallproducts')->getProductSkus($sbp_product->getData('product_skus')); ?>
+                                                                    <?php $product_ids = ''; ?>
+                                                                    <?php foreach ($product_skus as $product_sku): ?>
+                                                                        <?php if($product = Mage::helper('ghoster_shopbyproject/shopallproducts')->getProduct($product_sku)): ?>
+                                                                            <?php if($product->getTypeId() == "simple"): ?>
+                                                                                <?php if ($product_ids == ''): ?>
+                                                                                    <?php $product_ids = $product->getId(); ?>
+                                                                                <?php else: ?>
+                                                                                    <?php $product_ids .= ',' . $product->getId(); ?>
+                                                                                <?php endif; ?>
+                                                                                <div class="col-md-3 col-sm-4 col_sbp_projects">
+                                                                                    <div class="col_product_project">
+                                                                                        <?php if ($product->getProductUrl()): ?>
+                                                                                            <div
+                                                                                                class="img_col_product_project">
+                                                                                                <a href="<?php echo $product->getProductUrl() ?>">
+                                                                                                    <img
+                                                                                                        src="<?php echo Mage::helper('catalog/image')->init($product, 'image')->resize(300); ?>"
+                                                                                                        alt="<?php echo $product->getName() ?>"/>
+                                                                                                </a>
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="name_product_project">
+                                                                                                <a href="<?php echo $product->getProductUrl() ?>">
+                                                                                                    <?php echo $product->getName() ?>
+                                                                                                </a>
+                                                                                            </div>
+                                                                                        <?php endif; ?>
+                                                                                        <div class="info_product_project">
+                                                                                            <div
+                                                                                                class="price_product_project"><?php echo Mage::helper('core')->currency($product->getFinalPrice(), true); ?></div>
+                                                                                            <div class="actions">
+                                                                                                <?php if ($product->isSaleable()): ?>
+                                                                                                    <button type="button"
+                                                                                                            title="<?php echo Mage::helper('core')->quoteEscape($this->__('Add to Cart')) ?>"
+                                                                                                            class="btn_gradient shop_product_project"
+                                                                                                            onclick="setLocation('<?php echo $this->helper('checkout/cart')->getAddUrl($product) ?>')">
+                                                                                                <span><span><i
+                                                                                                            class="fa fa-shopping-cart"
+                                                                                                            aria-hidden="true"></i></span></span>
+                                                                                                    </button>
+                                                                                                <?php else: ?>
+                                                                                                    <p class="availability out-of-stock">
+                                                                                                        <span></span></p>
+                                                                                                <?php endif; ?>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <script type="text/javascript">
+
+                                                                                    $j = jQuery.noConflict();
+
+                                                                                    setHeightAuto('.list-col-project-content .row', '.col_sbp_projects .name_product_project');
+
+
+                                                                                    $j(window).resize(function () {
+                                                                                        setHeightAuto('.list-col-project-content .row', '.col_sbp_projects .name_product_project');
+                                                                                    });
+
+                                                                                </script>
+
+                                                                            <?php endif; ?>
+                                                                        <?php endif; ?>
+                                                                    <?php endforeach; ?>
+                                                                </div>
+                                                            </div>
+<!--                                                            <div class="list_product_project_total">-->
+<!--                                                                <div class="total_prices_project">-->
+<!--                                                                    <span>--><?php //echo $this->__('Total: ') ?><!--</span>--><?php //echo Mage::helper('core')->currency(Mage::helper('ghoster_shopbyproject/shopallproducts')->getShopAllProductsPrice($product_skus), true); ?>
+<!--                                                                </div>-->
+<!--                                                                --><?php //if ($product_ids != ''): ?>
+<!--                                                                    <a class="buy_all_product_project amia-gradient"-->
+<!--                                                                       href="--><?php //echo Mage::getUrl('shopbyproject/project/multipleProdAdd', array('product_ids' => $product_ids)) ?><!--"><span>--><?php //echo $this->__('Buy all Items') ?><!--</span>-->
+<!--                                                                    </a>-->
+<!--                                                                --><?php //endif; ?>
+<!--                                                            </div>-->
+                                                        <?php endforeach; ?>
+                                                    </div>
+                                                </div>
+                                            <?php endif; ?>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+    </div>
+</section>
+
+<?php if($idBlocks):
+    foreach($idBlocks as $idBlock):
+    ?>
+    <!-- Modal -->
+    <div
+        id="instruction_block_<?php echo $idBlock ?>"
+        class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <?php $block = Mage::getModel('cms/block')->load($idBlock) ?>
+            <?php /* @var $block Mage_Cms_Model_Block */ ?>
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close"
+                            data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><?php echo $block->getTitle() ?></h4>
+                </div>
+                <div class="modal-body">
+                    <?php echo $block->getContent() ?>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default"
+                            data-dismiss="modal"><?php echo Mage::helper('ghoster_shopbyproject')->__('Close') ?></button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+<?php endforeach; endif; ?>
+

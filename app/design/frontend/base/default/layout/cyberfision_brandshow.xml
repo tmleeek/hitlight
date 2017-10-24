@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<layout>
+
+    <cyberfision_brandshow_index_index>
+
+        <!--<reference name="head">-->
+            <!--<action method="addItem">-->
+                <!--<type>skin_js</type>-->
+                <!--<name>js/jquery.flexslider.js</name>-->
+            <!--</action>-->
+        <!--</reference>-->
+
+        <reference name="content">
+            <block type="cyberfision_brandshow/list" name="cyberfision.brandshow.listtop" template="cyberfision_brandshow/list_top.phtml" />
+
+            <block type="ghoster_shopbyproject/projectlist" name="project_list_home"
+                   template="ghoster/shopbyproject/project_list_buyguide.phtml" after="cyberfision.brandshow.list"/>
+
+           <block type="cyberfision_brandshow/list" name="cyberfision.brandshow.listbottom" template="cyberfision_brandshow/list_bottom.phtml" />
+        </reference>
+    </cyberfision_brandshow_index_index>
+    
+    <cyberfision_brandshow_index_view>
+        <reference name="content">
+            <block type="cyberfision_brandshow/view" name="cyberfision.brandshow.view" template="cyberfision_brandshow/view.phtml" />
+        </reference>
+    </cyberfision_brandshow_index_view>
+    
+    <catalog_product_view>
+        <reference name="product.info">
+            <block type="cyberfision_brandshow/catalog_product_view_link" name="catalog.product.view.other.link" as="other" template="cyberfision_brandshow/catalog/product/view/link.phtml"/>
+        </reference>
+    </catalog_product_view>
+    
+</layout>

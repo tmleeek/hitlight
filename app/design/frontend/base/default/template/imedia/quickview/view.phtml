@@ -1,0 +1,393 @@
+<style>
+    .product-popup-right .old-price .price {
+        text-decoration: line-through;
+        color: #999;
+    }
+    .box-in-qty {
+        display: inline-flex;
+        line-height: 40px;
+        width: 100%;
+        margin-top: 20px;
+    }
+    .box-in-qty .qty-minus {
+        margin-right: 15px;
+    }
+    .box-in-qty .qty-plus {
+        margin-left: 15px;
+    }
+    .modal-quickview .product-shop .regular-price-group, .modal-quickview .special-price {
+        display: inline-block;
+        font-size: 30px;
+        line-height: 30px;
+        color: #005190;
+        padding: 10px 0;
+    }
+</style>
+<?php
+$productid = Mage::app()->getRequest()->getParam('id');
+$_product  = Mage::getModel('catalog/product')->load($productid);
+
+if ($_product->getData('type_id') == "configurable"):
+    $configurableBlock = $this->getLayout()->createBlock('catalog/product_view_type_configurable');
+    $configurableBlock->setProduct($_product);
+    $_jsonConfig = $configurableBlock->getJsonConfig();
+    $productViewBlock = $this->getLayout()->createBlock('catalog/product_view');
+endif;
+
+?>
+
+<?php
+//$oHidePriceHelper = Mage::helper('cyberhideprice');
+?>
+<?php if ($_product->getData('type_id') == "configurable"): ?>
+    <script type="text/javascript">
+        Product.Options = Class.create();
+        Product.Options.prototype = {
+            initialize : function(config) {
+                this.config = config;
+                this.reloadPrice();
+                document.observe("dom:loaded", this.reloadPrice.bind(this));
+            },
+            reloadPrice : function() {
+                var config = this.config;
+                var skipIds = [];
+                $$('body .product-custom-option').each(function(element){
+                    var optionId = 0;
+                    element.name.sub(/[0-9]+/, function(match){
+                        optionId = parseInt(match[0], 10);
+                    });
+                    if (config[optionId]) {
+                        var configOptions = config[optionId];
+                        var curConfig = {price: 0};
+                        if (element.type == 'checkbox' || element.type == 'radio') {
+                            if (element.checked) {
+                                if (typeof configOptions[element.getValue()] != 'undefined') {
+                                    curConfig = configOptions[element.getValue()];
+                                }
+                            }
+                        } else if(element.hasClassName('datetime-picker') && !skipIds.include(optionId)) {
+                            dateSelected = true;
+                            $$('.product-custom-option[id^="options_' + optionId + '"]').each(function(dt){
+                                if (dt.getValue() == '') {
+                                    dateSelected = false;
+                                }
+                            });
+                            if (dateSelected) {
+                                curConfig = configOptions;
+                                skipIds[optionId] = optionId;
+                            }
+                        } else if(element.type == 'select-one' || element.type == 'select-multiple') {
+                            if ('options' in element) {
+                                $A(element.options).each(function(selectOption){
+                                    if ('selected' in selectOption && selectOption.selected) {
+                                        if (typeof(configOptions[selectOption.value]) != 'undefined') {
+                                            curConfig = configOptions[selectOption.value];
+                                        }
+                                    }
+                                });
+                            }
+                        } else {
+                            if (element.getValue().strip() != '') {
+                                curConfig = configOptions;
+                            }
+                        }
+                        if(element.type == 'select-multiple' && ('options' in element)) {
+                            $A(element.options).each(function(selectOption) {
+                                if (('selected' in selectOption) && typeof(configOptions[selectOption.value]) != 'undefined') {
+                                    if (selectOption.selected) {
+                                        curConfig = configOptions[selectOption.value];
+                                    } else {
+                                        curConfig = {price: 0};
+                                    }
+                                    optionsPrice.addCustomPrices(optionId + '-' + selectOption.value, curConfig);
+                                    optionsPrice.reload();
+                                }
+                            });
+                        } else {
+                            optionsPrice.addCustomPrices(element.id || optionId, curConfig);
+                            optionsPrice.reload();
+                        }
+                    }
+                });
+            }
+        }
+
+        var optionsPrice = new Product.OptionsPrice(<?php echo $productViewBlock->getJsonConfig(); ?>);
+
+    </script>
+
+<?php endif; ?>
+<div class="row">
+    <div class="product-popup-left col-md-6 col-sm-6 col-xs-12">
+        <img title="<?php echo $_product->getName() ?>" alt="<?php echo $_product->getName() ?>" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(500); ?>"></p>
+    </div>
+    <div class="product-popup-right col-md-6 col-sm-6 col-xs-12">
+        <form action="<?php echo Mage::helper('checkout/cart')->getAddUrl($_product); ?>" method="post" id="product_addtocart_form_popup" <?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+            <div class="product-shop">
+                <p class="class-req"></p>
+                <div class="product-name">
+                    <h1><?php echo $_product->getName() ?></h1>
+                </div>
+
+                <?php
+                if($_product->isSaleable()){
+                    if($_product->stock_item->is_in_stock == 1){
+                        echo '<p class="availability in-stock"><span>'.$this->__('Availability: In stock.').'</span></p>';
+                    }else{
+                        echo '<p class="availability in-stock"><span>'.$this->__('Availability: Temporarily out of stock.').'</span></p>';
+                    }
+                }
+                ?>
+                <?php if ($_product->getData('type_id') == "grouped") : ?>
+                    <?php 
+                        $sum = 0; 
+                        $products = $_product->getTypeInstance()->getAssociatedProducts(); 
+                        foreach ($products as $product){ 
+                            //var_dump($product->getPrice()); echo '<hr>';
+                            $sum += $product->getPrice(); 
+                        }   
+                        $_coreHelper = $this->helper('core');              
+                    ?> 
+                    <div class="price-box">
+                        <span class="regular-price-group" id="product-price-<?php echo $_product->getId();?>">
+                            <span class="price"><?php echo $this->__('') . $_coreHelper->currency($sum, true, false); ?></span>
+                        </span>
+                    </div>
+                <?php endif; ?>
+
+                <?php //if ($oHidePriceHelper->isAllow() === true): ?>
+                    <?php if ($_product->getData('type_id') != "grouped") : ?>
+                        <div class="price-box">
+					<span  class="<?php if($_product->getFinalPrice() < $_product->getPrice()):?>old-price<?php else: ?>regular-price regular-price-group<?php endif; ?>">
+						<span id="product-price-<?php echo $_product->getId()?>_clone" class="price"><?php echo $this->helper('checkout')->formatPrice($_product->getPrice()); ?></span>
+					</span>
+                            <?php if($_product->getFinalPrice() < $_product->getPrice()):?>
+                                <span class="special-price">
+						<span class="price"><?php echo $this->helper('checkout')->formatPrice($_product->getFinalPrice()); ?></span>
+					</span>
+                            <?php endif; ?>
+                        </div>
+                    <?php endif; ?>
+                <?php //endif; ?>
+
+                <?php
+                if ($_product->getData('type_id') == "configurable"):
+                    $config = $_product->getTypeInstance(true);
+                    foreach($config->getConfigurableAttributesAsArray($_product) as $attributes):
+                        ?>
+                        <div class="product-options product-auto-check">
+                            <div><label class="required"><?php echo $attributes["label"]; ?><em>*</em></label></div>
+                            <div>
+                                <div class="input-box">
+                                    <select name="super_attribute[<?php echo $attributes['attribute_id'] ?>]" id="attribute<?php echo $attributes['attribute_id'] ?>" class="validate-quickview-select super-attribute-select">
+                                        <option value=""><?php echo $this->__('Select'); ?></option>
+                                        <?php
+                                        foreach($attributes["values"] as $values)
+                                        {
+                                            echo "<option value='".$values["value_index"]."'>".$values["label"]."</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <?php
+                    endforeach;
+                endif;
+                ?>
+
+                <?php if ( $_product->getData('type_id') != "grouped" ) :
+                    if($_product->isSaleable()) : ?>
+                        <div class="box-in-qty">
+                            <span class="qty-minus qty-button" onclick="changeQty('lt');return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                            <input type="text" name="qty" id="qty" maxlength="12"
+                                   value="1" title="<?php echo $this->__('Qty') ?>"
+                                   class="input-text qty"/>
+                            <span class="qty-plus qty-button" onclick="changeQty('gt');return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                        </div>
+
+                        <div class="actions">
+                            <button title="Add to Cart" class="btn-quickview btn_gradient button btn-cart" type="submit" >
+                                <span><span><i class="fa fa-shopping-cart" aria-hidden="true"></i></span></span>
+                            </button>
+                        </div>
+
+                        <script type="text/javascript">
+                            $j = jQuery.noConflict();
+                            function changeQty(param) {
+                                var qty = $j('#qty');
+                                var value = qty.val();
+                                var defaultQty = 1;
+                                if (param == 'lt') {
+                                    if (isNaN(value)) {
+                                        qty.val(defaultQty);
+                                    } else {
+                                        if (value > defaultQty) {
+                                            qty.val(parseInt(value) - defaultQty);
+                                        }
+                                    }
+                                }
+                                if (param == 'gt') {
+                                    if (isNaN(value)) {
+                                        qty.val(defaultQty);
+                                    } else {
+                                        qty.val(parseInt(value) + defaultQty);
+                                    }
+                                }
+                                $j("#qty").val(qty.val());
+                                $j("#qty").trigger('change');
+                                return false;
+                            }
+                        </script>
+
+                    <?php endif; ?>
+                <?php endif; ?>
+
+                <?php if ( $_product->getData('type_id') == "grouped" ) : ?>
+                    <?php
+                    $groupedBlock = $this->getLayout()->createBlock('catalog/product_view_type_grouped');
+                    $groupedBlock->setProduct($_product);
+                    ?>
+                    <?php $groupedBlock->setPreconfiguredValue(); ?>
+                    <?php $_associatedProducts = $groupedBlock->getAssociatedProducts(); ?>
+                    <?php $_hasAssociatedProducts = count($_associatedProducts) > 0; ?>
+
+                    <div class="grouped-items-table-wrapper">
+                        <div class="wrapper-table-grouped">
+                            <table class="data-table grouped-items-table table table-striped" id="super-product-table">
+                                <thead>
+                                <tr class="grouped-items-table-title">
+                                    <th class="table-grouped-name"><?php echo $this->__('Product Name'); ?></th>
+                                    <th class="table-grouped-price"><?php echo $this->__('Price'); ?></th>
+                                    <th class="table-grouped-quantity"><?php echo $this->__('Quantity'); ?></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php if ($_hasAssociatedProducts): ?>
+                                    <?php foreach ($_associatedProducts as $_item): ?>
+                                        <?php $_finalPriceInclTax = $this->helper('tax')->getPrice($_item, $_item->getFinalPrice(), true) ?>
+                                        <tr>
+                                            <td class="table-grouped-name">
+                                                <p class="name-wrapper">
+                                                    <?php
+                                                    if(strlen($this->escapeHtml($_item->getName())) > 50):
+                                                        echo mb_substr($this->escapeHtml($_item->getName()), 0, 50, 'UTF-8') . '...';
+                                                    else:
+                                                        echo $this->escapeHtml($_item->getName());
+                                                    endif;
+                                                    ?>
+                                                </p>
+                                            </td>
+                                            <?php //if ($this->getCanShowProductPrice($_product)): ?>
+                                            <td class="table-grouped-price">
+                                                <?php //if ($this->getCanShowProductPrice($_item)): ?>
+                                                <?php echo $groupedBlock->getPriceHtml($_item, true) ?>
+                                                <?php echo $groupedBlock->getTierPriceHtml($_item) ?>
+                                                <?php //endif; ?>
+                                            </td>
+                                            <td class="table-grouped-quantity">
+                                                <?php if ($_product->isSaleable()): ?>
+                                                    <div class="qty-wrapper-grouped">
+                                                        <?php if ($_item->isSaleable()) : ?>
+                                                            <span class="qty-minus qty-button"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                                                            <input id="super_group_<?php echo $_item->getId(); ?>" type="text" pattern="\d*" name="super_group[<?php echo $_item->getId() ?>]" maxlength="12" value="<?php echo $_item->getQty()*1 ?>" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Qty')) ?>" class="input-text qty" />
+                                                            <span class="qty-plus qty-button"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                                                        <?php else: ?>
+                                                            <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
+                                                        <?php endif; ?>
+                                                    </div>
+                                                <?php endif; ?>
+                                            </td>
+                                            <?php //endif; ?>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                    <tfoot>
+                                    <tr>
+                                        <td colspan="3" align="right">
+                                            <div class="actions" style="width: 100%">
+                                                <button title="Add to Cart" class="btn-quickview btn_gradient button btn-cart" type="submit" >
+                                                    <span><span><i class="fa fa-shopping-cart" aria-hidden="true"></i></span></span>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tfoot>
+                                <?php else: ?>
+                                    <tr>
+                                        <td colspan="<?php if ($_product->isSaleable()): ?>4<?php else : ?>3<?php endif; ?>"><?php echo $this->__('No options of this product are available.') ?></td>
+                                    </tr>
+                                <?php endif; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <script type="text/javascript">
+                        $j = jQuery.noConflict();
+
+                        $j(document).ready(function() {
+                            $j('.qty-wrapper-grouped span').click(function() {
+                                var input = $j(this).parent().find('input').attr('id');
+
+                                if($j(this).hasClass('qty-minus')) {
+                                    if($j('#' + input).val()  > 0) {
+                                        $j('#' + input).val(parseInt($j('#' + input).val()) - 1);
+                                    } else {
+                                        $j('#' + input).val('0');
+                                    }
+                                } else {
+                                    $j('#' + input).val(parseInt($j('#' + input).val()) + 1);
+                                }
+                            });
+                        });
+                    </script>
+
+                <?php endif; ?>
+
+
+                <div class="view_full"><a href="<?php echo $_product->getProductUrl() ?>" target="_blank"><?php echo $this->__('View More Details'); ?></a></div>
+
+            </div>
+        </form>
+    </div>
+</div>
+<?php if ($_product->getData('type_id') == "configurable"): ?>
+    <?php
+    $parts = parse_url($_SERVER['HTTP_REFERER']);
+    parse_str($parts['query'], $query);
+    $allOpt = array();
+    foreach ( $query as $key => $value ) {
+        array_push( $allOpt, $value );
+    }
+    //echo "<pre>"; var_dump($query, $allOpt);
+    ?>
+    <script type="text/javascript">
+        var spConfig = new Product.Config(<?php echo $_jsonConfig ?>);
+
+        var attributes = $$('.super-attribute-select');
+        for(var i=0; i< attributes.length; i++){ //  attributes.length
+            (function (attribute) {
+                var options = attribute.options;
+                jQuery.each(options, function(index, item) {
+                    if (index > 0) {
+                        var configs = item.config;
+                        var arr = <?php echo json_encode($allOpt);?>;
+
+                        if (configs != undefined)
+                        {
+                            //console.log(configs, i, arr);
+                            if(jQuery.inArray(configs.id, arr) != -1) {
+                                options[index].selected = true;
+                            }
+                        }
+
+                    }
+
+                });
+
+                spConfig.configureElement(attribute);
+            })(attributes[i]);
+        }
+
+    </script>
+<?php endif; ?>
+

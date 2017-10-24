@@ -1,0 +1,17 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * Magento
+ * Date: 7/20/16
+ * Time: 2:07 PM
+ */
+?>
+
+<?php foreach ($this->getItems() as $_product): ?>
+    <?php /*  @var $_product Mage_Catalog_Model_Product */ ?>
+    <div class="related-slider">
+        <div class="related-product">
+            <span><?php echo $_product->getName(); ?></span>
+        </div>
+    </div>
+<?php endforeach; ?>

@@ -1,0 +1,39 @@
+<?php
+/**
+ * MageWorx
+ * MageWorx XSitemap Extension
+ *
+ * @category   MageWorx
+ * @package    MageWorx_XSitemap
+ * @copyright  Copyright (c) 2015 MageWorx (http://www.mageworx.com/)
+ */
+?>
+<div class="title-pages">
+    <div class="container">
+        <h1><?php echo $this->__('Site Map') ?></h1>
+    </div>
+</div>
+
+<div class="xsitemap">
+    <div class="container">
+        <?php if ($this->showStores()): ?>
+            <div class="xsitemap-stores">
+                <?php echo $this->getChildHtml('store_switcher') ?>
+            </div>
+            <div class="clear"></div>
+            <?php endif ?>
+            <?php if ($this->showCategories()): ?>
+            <div class="xsitemap-categories col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <?php echo $this->getChildHtml('category_tree') ?>
+            </div>
+            <?php endif ?>
+            <?php if ($this->showPages()): ?>
+            <div class="xsitemap-pages col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <?php echo $this->getChildHtml('pages') ?>
+                <?php if ($this->showLinks()): ?>
+                <?php echo $this->getChildHtml('links') ?>
+                <?php endif ?>
+            </div>
+            <?php endif ?>
+    </div>
+</div>

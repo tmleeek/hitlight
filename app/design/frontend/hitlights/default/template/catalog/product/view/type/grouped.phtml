@@ -1,0 +1,263 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     rwd_default
+ * @copyright   Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Grouped product data template
+ *
+ * @see Mage_Catalog_Block_Product_View_Media
+ * @see Mage_Catalog_Block_Product_View_Type_Grouped
+ */
+?>
+<?php $this->setPreconfiguredValue(); ?>
+<?php $_product = $this->getProduct(); ?>
+<?php $_associatedProducts = $this->getAssociatedProducts(); ?>
+<?php $_hasAssociatedProducts = count($_associatedProducts) > 0; ?>
+<?php echo $this->getChildHtml('product_type_data_extra') ?>
+
+<?php
+    $attribute_tab = $_product->getData('attribute_group_is_tab');
+
+    $attribute_tabs = explode(',', $attribute_tab);
+
+    if($_hasAssociatedProducts && $attribute_tab) {
+?>
+    <div class="tab-attributes_show">
+<?php
+        $cTabShow = 0;
+        foreach($attribute_tabs as $attribute_show) {
+            $attributes = Mage::getModel('eav/entity_attribute')->loadByCode('catalog_product', $attribute_show);
+?>
+            <span <?php if($cTabShow == 0) echo 'class="cTab-active"'; ?> data-attribute-tabs="<?php echo $attributes->getAttributeId() ?>"><span class="attributes-effect"><?php echo $attributes->getFrontendLabel() ?></span><span class="attributes-no-effect"><?php echo $attributes->getFrontendLabel() ?></span></span>
+<?php
+            $cTabShow++;
+        }
+?>
+    </div>
+<?php
+        foreach($attribute_tabs as $attribute_item) {
+            $attributes = Mage::getModel('eav/entity_attribute')->loadByCode('catalog_product', $attribute_item);
+            $arrayTabs = array();
+
+            foreach ($_associatedProducts as $_itemTab) {
+                $labelKey = $_itemTab->getData($attribute_item) ? $_itemTab->getData($attribute_item) : 'other';
+
+                if($labelKey != 'other') {
+                    $labelValue = $_itemTab->getAttributeText($attribute_item);
+                    $arrayTabs[$labelKey] = $labelValue;
+                }
+            }
+
+            krsort($arrayTabs);
+?>
+            <div class="tab-attributes" data-attribute-tabs="<?php echo $attributes->getAttributeId() ?>">
+                    <span data-attribute-tabs="other"><?php echo $this->__('All') ?></span>
+                <?php foreach($arrayTabs as $arrayTabKey => $arrayTabValue): ?>
+                    <span data-attribute-tabs="<?php echo $arrayTabKey ?>"><?php echo $arrayTabValue; ?></span>
+                <?php endforeach; ?>
+            </div>
+<?php
+        }
+    }
+?>
+
+<div class="grouped-items-table-wrapper">
+    <div class="wrapper-table-grouped">
+        <table class="data-table grouped-items-table table table-striped" id="super-product-table">
+            <thead>
+                <tr class="grouped-items-table-title">
+                    <th class="table-grouped-name"><?php echo $this->__('Product Name'); ?></th>
+                    <th class="table-grouped-price"><?php echo $this->__('Price'); ?></th>
+                    <th class="table-grouped-quantity"><?php echo $this->__('Quantity'); ?></th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php if ($_hasAssociatedProducts): ?>
+            <?php foreach ($_associatedProducts as $_item): ?>
+                <?php $_finalPriceInclTax = $this->helper('tax')->getPrice($_item, $_item->getFinalPrice(), true) ?>
+                <?php
+                    $dataTab = '';
+                    foreach ($attribute_tabs as $dataTabs) {
+                        $attributes = Mage::getModel('eav/entity_attribute')->loadByCode('catalog_product', $dataTabs);
+
+                        if($_item->getData($dataTabs)) {
+                            $dataTabShow = $_item->getData($dataTabs);
+                            $dataTab .= 'data-attribute-tabs-'. $attributes->getAttributeId() .'="'. $dataTabShow .'" ';
+                        }
+                    }
+                ?>
+                <tr <?php echo $dataTab ?>>
+                    <td class="table-grouped-name">
+                        <p class="name-wrapper">
+                            <?php
+                                if(strlen($this->escapeHtml($_item->getName())) > 50):
+                                    echo mb_substr($this->escapeHtml($_item->getName()), 0, 50, 'UTF-8') . '...';
+                                else:
+                                    echo $this->escapeHtml($_item->getName());
+                                endif;
+                            ?>
+                        </p>
+                    </td>
+                    <?php if ($this->getCanShowProductPrice($_product)): ?>
+                    <td class="table-grouped-price">
+                        <?php if ($this->getCanShowProductPrice($_item)): ?>
+                        <?php echo $this->getPriceHtml($_item, true) ?>
+                        <?php echo $this->getTierPriceHtml($_item) ?>
+                        <?php endif; ?>
+                    </td>
+                    <td class="table-grouped-quantity">
+                        <?php if ($_product->isSaleable()): ?>
+                            <div class="qty-wrapper-grouped">
+                                <?php if ($_item->isSaleable()): ?>
+                                    <?php $gen_products_quantity = Mage::getResourceModel('catalog/product')->getAttributeRawValue($_product->getId(), 'general_product_quantity', Mage::app()->getStore()->getStoreId());
+                                    if(!$gen_products_quantity){ ?>
+                                        <input onchange="updateParentPrice();" price="<?php echo $_item->getFinalPrice() ?>" id="super_group_<?php echo $_item->getId(); ?>" type="hidden" min="1" name="super_group[<?php echo $_item->getId() ?>]" maxlength="12" value="<?php echo $_item->getQty()*1 ?>" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Qty')) ?>" class="grouped-child input-text qty" />
+                                        <div class="input-quantity-grouped"><?php echo $_item->getQty()*1 ?></div>
+                                    <?php } else{?>
+                                        <span class="qty-minus qty-button"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                                        <input onchange="updateParentPrice();" price="<?php echo $_item->getFinalPrice() ?>" id="super_group_<?php echo $_item->getId(); ?>" type="number" min="1" name="super_group[<?php echo $_item->getId() ?>]" maxlength="12" value="<?php echo $_item->getQty()*1 ?>" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Qty')) ?>" class="grouped-child input-text qty" />
+                                        <span class="qty-plus qty-button"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                                    <?php }?>
+                                <?php  else: ?>
+                                    <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
+                                <?php endif; ?>
+                            </div>
+                        <?php endif; ?>
+                    </td>
+                    <?php endif; ?>
+                </tr>
+            <?php endforeach; ?>
+            <?php else: ?>
+               <tr>
+                   <td colspan="<?php if ($_product->isSaleable()): ?>4<?php else : ?>3<?php endif; ?>"><?php echo $this->__('No options of this product are available.') ?></td>
+               </tr>
+            <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+    $j = jQuery.noConflict();
+
+    $j(document).ready(function() {
+        $j(document).on('click', '.qty-wrapper-grouped span', function() {
+            var input = $j(this).parent().find('input').attr('id');
+
+            if($j(this).hasClass('qty-minus')) {
+                if($j('#' + input).val()  > 0) {
+                    $j('#' + input).val(parseInt($j('#' + input).val()) - 1);
+                } else {
+                    $j('#' + input).val('0');
+                }
+            } else {
+                $j('#' + input).val(parseInt($j('#' + input).val()) + 1);
+            }
+            updateParentPrice();
+        });
+
+        $j(document).on('click', '.tab-attributes_show span', function() {
+            var dataClick = $j(this).attr('data-attribute-tabs');
+
+            $j('.tab-attributes_show span').each(function() {
+                $j(this).removeClass('cTab-active');
+            });
+
+            $j('.tab-attributes').each(function () {
+               if($j(this).attr('data-attribute-tabs') == dataClick) {
+                   jQuery('.tab-attributes span').each(function () {
+                       $j(this).removeClass('cTab-active');
+                   });
+
+                   $j(this).find('span:first-child').addClass('cTab-active');
+
+                   tabProuctShow(dataClick, $j(this).find('span:first-child').attr('data-attribute-tabs'));
+                   $j(this).show();
+               } else {
+                   $j(this).hide();
+               }
+            });
+
+            $j(this).addClass('cTab-active');
+        });
+
+        $j(document).on('click', '.tab-attributes span', function() {
+            $j('.tab-attributes span').each(function() {
+                $j(this).removeClass('cTab-active');
+            });
+
+            tabProuctShow($j('.tab-attributes_show span.cTab-active').attr('data-attribute-tabs'), $j(this).attr('data-attribute-tabs'));
+            $j(this).addClass('cTab-active');
+        });
+
+        if($j('.tab-attributes_show span').length) {
+            $j('.tab-attributes_show span').each(function() {
+                if($j(this).hasClass('cTab-active')) {
+                    var dataClick = $j(this).attr('data-attribute-tabs');
+
+                    $j('.tab-attributes').each(function () {
+                        if($j(this).attr('data-attribute-tabs') == dataClick) {
+                            jQuery('.tab-attributes span').each(function () {
+                                $j(this).removeClass('cTab-active');
+                            });
+
+                            $j(this).find('span:first-child').addClass('cTab-active');
+
+                            tabProuctShow(dataClick, $j(this).find('span:first-child').attr('data-attribute-tabs'));
+                            $j(this).show();
+                        } else {
+                            $j(this).hide();
+                        }
+                    });
+
+                    return false;
+                }
+            });
+        }
+    });
+
+    function updateParentPrice(){
+        var totalPrice = 0;
+        jQuery('.grouped-child').each(function () {
+            totalPrice += parseFloat(jQuery(this).attr('price')) * jQuery(this).val();
+        });
+        jQuery('#product-price-<?php echo $_product->getId()?> span.price').html('$' + totalPrice.toFixed(2));
+    }
+
+    function tabProuctShow(data1, data2) {
+        if(data2 == 'other') {
+            jQuery('#super-product-table tbody tr').each(function() {
+                jQuery(this).show().find('input').prop('disabled', false);
+            });
+        } else {
+            jQuery('#super-product-table tbody tr').each(function() {
+                if(jQuery(this).attr('data-attribute-tabs-' + data1) == data2) {
+                    jQuery(this).show().find('input').prop('disabled', false);
+                } else {
+                    jQuery(this).hide().find('input').prop('disabled', true);
+                }
+            });
+        }
+    }
+</script>

@@ -1,0 +1,65 @@
+<?php
+    $sliders = $this->getSlider();
+    if(count($sliders) > 0):
+?>
+<section class="hil-new-slider">
+    <div class="hil-slider-wrapper owl-carousel">
+        <?php foreach ($sliders as $slider): ?>
+            <div class="item">
+                <div class="item-hil-slider" style="background-image: url('<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).$slider->getBannerImage() ?>');">
+                    <div class="item-hil-table">
+                        <div class="item-hil-cell">
+                            <div class="item-hil-container">
+                                <div class="item-hil-wrapper">
+                                    <div class="hil-banner-button"><a href="<?php echo $slider->getUrlBanner() ? $slider->getUrlBanner() : 'javascript:void(0)' ?>"><?php echo $this->__('Shop now') ?></a></div>
+                                    <div class="hil-banner-content"><?php echo $slider->getDescBanner() ?></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ebook-wrapper">
+                        <div class="bg-free-ebook hidden-xs">&nbsp;</div>
+                        <div class="item-free-ebook hidden-xs">
+                            <div class="free-ebook-desc"><span><?php echo $slider->getDescEbook() ?></span></div>
+                            <div class="free-ebook-link"><a href="<?php echo $slider->getUrlEbook() ?>" target="_blank"><?php echo $this->__('Click here!') ?></a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach ?>
+    </div>
+</section>
+<script type="text/javascript">
+    $j = jQuery.noConflict();
+
+    $j(document).ready(function () {
+        $j('.hil-slider-wrapper').owlCarousel({
+            nav: true,
+            items: 1,
+            autoplay: true,
+            loop: true
+        });
+
+        $j('.bg-free-ebook').css('height', ($j('.item-free-ebook').outerHeight() - 36) + 'px');
+
+        var hdesc = $j('.free-ebook-desc span').height();
+        $j('.item-free-ebook').css('right', ((hdesc*2/17) + 9) + 'px');
+
+        if($j('.blog-home-posts').length > 0) {
+            if($j(window).width() > 1366) {
+                $j('.ebook-wrapper').css('right', ($j('.blog-home-posts').outerWidth() + 3) + 'px');
+            } else {
+                $j('.ebook-wrapper').removeAttr('style');
+            }
+
+            $j(window).resize(function() {
+                if($j(window).width() > 1366) {
+                    $j('.ebook-wrapper').css('right', ($j('.blog-home-posts').outerWidth() + 3) + 'px');
+                } else {
+                    $j('.ebook-wrapper').removeAttr('style');
+                }
+            });
+        }
+    });
+</script>
+<?php endif ?>

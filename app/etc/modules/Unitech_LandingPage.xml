@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Unitech Corp.
+ *
+ * @category   Unitech
+ * @package    Unitech_LandingPage
+ * @version    0.0.1
+ * @copyright  @copyright Copyright (c) 2015 Unitech Corp. (http://www.unitech.vn)
+ */
+-->
+<config>
+    <modules>
+        <Unitech_LandingPage>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Unitech_LandingPage>
+    </modules>
+</config>

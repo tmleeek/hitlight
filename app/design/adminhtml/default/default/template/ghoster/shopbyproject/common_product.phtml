@@ -1,0 +1,48 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * Magento
+ * Date: 7/1/16
+ * Time: 4:34 PM
+ */
+?>
+
+<?php $categories = $this->getCategories(); ?>
+
+<?php if (count($categories)): ?>
+    <div id="project_tabs_common_product_content" style="">
+        <div class="entry-edit">
+            <div class="entry-edit-head">
+                <h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->__('Common Products Selection') ?></h4>
+                <div class="form-buttons"></div>
+            </div>
+            <div class="fieldset " id="common_form">
+                <div class="hor-scroll">
+                    <table class="form-list" cellspacing="0">
+                        <tbody>
+                        <?php foreach ($categories as $category): ?>
+                            <tr>
+                                <td class="label"><label
+                                        for="common_products"><?php echo $category['category_name'] ?></label>
+                                </td>
+                                <td class="value">
+                                    <select id="common_products"
+                                            name="common_products[<?php echo $category['category_id'] ?>][]"
+                                            class="common-products select multiselect" size="10" multiple="multiple">
+                                        <?php $products = Mage::helper('ghoster_shopbyproject')->getCommonProducts($category['category_id']) ?>
+                                        <?php foreach ($products as $product): ?>
+                                            <?php /* @var $product Mage_Catalog_Model_Product */ ?>
+                                            <option
+                                                value="<?php echo $product->getId(); ?>" <?php echo (in_array($product->getId(), Mage::helper('ghoster_shopbyproject')->getSelectedCommonProducts($category['category_id'], $category['project_id']))) ? 'selected="selected"' : '' ?>><?php echo $product->getName(); ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.1.0">
+    
+    <default>
+        <reference name="head">
+            <action method="addCss"><stylesheet>ghoster/avatar/style.css</stylesheet></action>
+        </reference>
+    </default>
+    <customer_account>
+        <reference name="customer_account_navigation">
+            <action method="removeLinkByName">
+                <name>tags</name>
+            </action>
+            <action method="removeLinkByName">
+                <name>address_book</name>
+            </action>
+            <action method="removeLinkByName">
+                <name>recurring_profiles</name>
+            </action>
+            <action method="removeLinkByName">
+                <name>billing_agreements</name>
+            </action>
+            <action method="removeLinkByName">
+                <name>downloadable_products</name>
+            </action>
+            <action method="removeLinkByName">
+                <name>OAuth Customer Tokens</name>
+            </action>
+
+
+        </reference>
+    </customer_account>
+    <customer_account_edit translate="label">
+        <label>Customer Account Edit Form</label>
+        <update handle="customer_account"/>
+        <reference name="root">
+            <action method="setHeaderTitle" translate="title" module="customer"><title>Edit Account Info</title></action>
+        </reference>
+        <reference name="my.account.wrapper">
+            <block type="customer/address_edit" name="customer_address_edit" template="ghoster/avatar/customer/address/account-edit.phtml"/>
+            <block type="customer/form_edit" name="customer_edit" template="ghoster/avatar/customer/form/edit.phtml">
+                <block type="ghoster_avatar/header_avatar" name="avatar_customer_form" template="ghoster/avatar/customer/avatar.phtml"/>
+                <block type="customer/address_book" name="ghoster_address_book"/>
+            </block>
+
+        </reference>
+
+        <reference name="left">
+            <action method="unsetChild"><name>left.permanent.callout</name></action>
+        </reference>
+    </customer_account_edit>
+    
+    <avatar_customer_form>
+        <label>My Avatar</label>
+        <update handle="customer_account"/>
+        <reference name="head">
+            <action method="addJs">
+                <script>ghoster/jquery-1.11.3.min.js</script>
+            </action>
+        </reference>
+        <reference name="my.account.wrapper">
+            <block type="ghoster_avatar/header_avatar" name="avatar_customer_form" template="ghoster/avatar/customer/old-form.phtml"/>
+        </reference>
+        <reference name="root">
+            <action method="setHeaderTitle" translate="title" module="ghoster_avatar"><title>My Avatar</title></action>
+        </reference>
+    </avatar_customer_form>
+</layout>

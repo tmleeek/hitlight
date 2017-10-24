@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<layout>
+    <qsproductdesignadmin_adminhtml_frontendgroup_new>
+        <reference name="head">
+            <action method="addJs"><js>lib/flex.js</js></action>
+            <action method="addJs"><js>lib/FABridge.js</js></action>
+            <action method="addJs"><js>mage/adminhtml/flexuploader.js</js></action>
+            <action method="addJs"><js>cyberfision/extensions/browser.js</js></action>
+            <action method="addJs"><js>prototype/window.js</js></action>
+            <action method="addItem"><type>js_css</type><js>prototype/windows/themes/default.css</js></action>
+            <action method="addItem"><type>skin_css</type><js>lib/prototype/windows/themes/magento.css</js></action>
+        </reference>
+    </qsproductdesignadmin_adminhtml_frontendgroup_new>
+    <qsproductdesignadmin_adminhtml_frontendgroup_edit>
+        <reference name="head">
+            <reference name="head">
+                <action method="addJs"><js>lib/flex.js</js></action>
+                <action method="addJs"><js>lib/FABridge.js</js></action>
+                <action method="addJs"><js>mage/adminhtml/flexuploader.js</js></action>
+                <action method="addJs"><js>cyberfision/extensions/browser.js</js></action>
+                <action method="addJs"><js>prototype/window.js</js></action>
+                <action method="addItem"><type>js_css</type><js>prototype/windows/themes/default.css</js></action>
+                <action method="addItem"><type>skin_css</type><js>lib/prototype/windows/themes/magento.css</js></action>
+            </reference>
+        </reference>
+    </qsproductdesignadmin_adminhtml_frontendgroup_edit>
+</layout>

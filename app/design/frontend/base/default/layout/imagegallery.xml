@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <update handle="apply_lightbox2"/>
+        <reference name="head">
+            <action method="addCss"><script>imagegallery/css/gallery.css</script></action>
+            <action method="addItem"><type>skin_css</type><name>imagegallery/css/ie-fix.css</name><params/><if>lte IE 7</if></action>
+        </reference>
+    </default>
+</layout>

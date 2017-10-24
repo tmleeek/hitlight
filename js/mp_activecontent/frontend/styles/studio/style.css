@@ -1,0 +1,236 @@
+/**
+ * MagPleasure Ltd.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magpleasure.com/LICENSE.txt
+ *
+ * @category   Magpleasure
+ * @package    Magpleasure_Activecontent
+ * @copyright  Copyright (c) 2011-2014 MagPleasure Ltd. (http://www.magpleasure.com)
+ * @license    http://www.magpleasure.com/LICENSE.txt
+ */
+
+
+/** IMPORT FONTS
+===================================*/
+@import url("http://fonts.googleapis.com/css?family=Simonetta&subset=latin,latin-ext");
+
+/** THEME
+===================================*/
+
+.studio .bx-wrapper {
+    zoom: 1;
+    position: relative;
+    max-width:960px;
+    margin:9px auto 9px;
+    z-index:90;
+    border:9px solid #FFFFFF;
+    text-align:left; /* reset align=center */
+    font-size: 10px;
+
+    box-shadow: 0 1px 1px #FFFFFF inset, 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.studio .bx-wrapper .bx-viewport {
+
+}
+
+.studio .bx-wrapper .bx-viewport ul {
+
+}
+
+.studio .bx-wrapper .bx-viewport ul li {
+
+}
+
+/* PAGER */
+
+.studio .bx-wrapper .bx-pager .bx-pager-item {
+    left: 0;
+}
+
+.studio .bx-wrapper .bx-pager {
+    font-size: 0px;
+    float: left;
+    position:absolute;
+    z-index:70;
+    padding: 10px;
+
+    right: 0;
+    top: 0;
+}
+
+.studio .bx-wrapper .bx-pager div{
+    position:relative;
+    float:left;
+}
+
+.studio .bx-wrapper .bx-pager .bx-pager-item a {
+    margin-left:5px;
+    width:20px;
+    height:19px;
+    background: url(./bullet.png) left top;
+    float: left;
+    text-indent: -4000px;
+    position:relative;
+    color:transparent;
+}
+
+.studio .bx-wrapper .bx-controls-auto .bx-controls-auto-item {
+
+}
+
+.studio .bx-wrapper .bx-pager.bx-default-pager a:hover,
+.studio .bx-wrapper .bx-pager.bx-default-pager a.active {
+    background-position: 0 100%;
+}
+
+/* DIRECTION CONTROLS (NEXT / PREV) */
+.studio .bx-wrapper .bx-prev, .studio .bx-wrapper .bx-next {
+    background-size: 200%;
+
+    position:absolute;
+    display:block;
+    text-indent:  -10000px;
+    top:50%;
+    margin-top:-2.8em;
+    z-index:60;
+    height: 6em;
+    width: 3.4em;
+    background-image: url(./arrows.png);
+    opacity: 0.8;
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=80);
+
+    -webkit-transition: opacity 0.1s ease-in-out;
+    -moz-transition: opacity 0.1s ease-in-out;
+    -o-transition: opacity 0.1s ease-in-out;
+    transition: opacity 0.1s ease-in-out;
+}
+
+.studio .bx-wrapper .bx-prev {
+    left:1em;
+    background-position: 0 0;
+}
+
+.studio .bx-wrapper .bx-next {
+    background-position: 100% 0;
+    right:1em;
+}
+
+.studio .bx-wrapper .bx-prev:hover {
+    background-position: 0 100%;
+    opacity: 1;
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=99);
+}
+.studio .bx-wrapper .bx-next:hover {
+    background-position: 100% 100%;
+    opacity: 1;
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=99);
+}
+
+.studio .bx-wrapper .bx-controls-direction a {
+
+}
+
+.studio .bx-wrapper .bx-controls-direction a.disabled {
+    display: none;
+}
+
+/* AUTO CONTROLS (START / STOP) */
+
+.studio .bx-wrapper .bx-controls-auto {
+
+}
+
+.studio .bx-wrapper .bx-controls-auto .bx-start.active, .studio .bx-wrapper .bx-controls-auto .bx-stop.active {
+
+    display: none;
+}
+
+.studio .bx-wrapper .bx-controls-auto .bx-start, .studio .bx-wrapper .bx-controls-auto .bx-stop {
+    display:block;
+    text-indent: -10000px;
+    width: 3.4em;
+    height: 6em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -0.7em;
+    margin-top: -2.8em;
+    z-index: 59;
+    opacity: 0.8;
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=80);
+
+    -webkit-transition: opacity 0.1s ease-in-out;
+    -moz-transition: opacity 0.1s ease-in-out;
+    -o-transition: opacity 0.1s ease-in-out;
+    transition: opacity 0.1s ease-in-out;
+}
+
+.studio .bx-wrapper .bx-controls-auto .bx-start {
+    background-size: 100%;
+    background-image: url(./play.png);
+}
+
+.studio .bx-wrapper .bx-controls-auto .bx-controls-auto-item {
+
+}
+
+.studio .bx-wrapper .bx-controls-auto .bx-start:hover, .studio .bx-wrapper .bx-controls-auto .bx-stop:hover {
+    background-position: 100% 100% !important;
+    opacity: 1;
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=99);
+}
+
+.studio .bx-wrapper .bx-controls-auto .bx-stop {
+    background-size: 100%;
+    background-image: url(./pause.png);
+}
+
+/* PAGER WITH AUTO-CONTROLS HYBRID LAYOUT */
+
+.studio .bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-pager {
+
+}
+
+.studio .bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-controls-auto {
+
+}
+
+/* IMAGE CAPTIONS */
+
+.studio .bx-wrapper .bx-caption:hover {
+    opacity:0.8;
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=80);
+}
+.studio .bx-wrapper .bx-caption {
+    position: absolute;
+    bottom:0;
+    left: 0;
+    z-index: 50;
+    padding:1em 1%;
+    color: #FFFFFF;
+    text-transform:none;
+    background:#000000;
+    font-family: 'Simonetta',Comic Sans MS,cursive;
+    line-height: 2.3em;
+    text-align: center;
+    font-weight: normal;
+    width: 98%;
+    border-radius:0;
+    opacity:0.5;
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50);
+
+    -webkit-transition: opacity 0.5s ease-in-out;
+    -moz-transition: opacity 0.5s ease-in-out;
+    -o-transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.studio .bx-wrapper .bx-caption span {
+    font-size: 2.4em;
+}

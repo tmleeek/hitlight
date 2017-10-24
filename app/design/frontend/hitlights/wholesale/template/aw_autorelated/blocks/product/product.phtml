@@ -1,0 +1,107 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_Autorelated
+ * @version    2.4.4
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ */
+?>
+<?php
+//$oHidePriceHelper = Mage::helper('cyberhideprice');
+?>
+
+<?php
+$abstractBlock = $this->helper('awautorelated')->getAbstractProductBlock();
+$collection = $this->getCollection();
+
+if ($this->getPosition() == AW_Autorelated_Model_Source_Position::INSTEAD_NATIVE_RELATED_BLOCK) {
+
+    $this->iterateBlock();
+
+    if ($collection && $collection->getSize()) {
+        $this->markAsShowed();
+    } elseif ($this->showNativeBlock()) {
+        echo $this->getParent()->getChildHtml('catalog-product-related');
+    }
+}
+?>
+<?php if ($collection && $collection->getSize()) : ?>
+    <section class="common-product-section">
+        <div class="container">
+            <h3><?php echo $this->__('You may also like') ?></h3>
+            <div class="content-common-product">
+                <div class="common-product-wrapper">
+                    <?php foreach ($collection as $product): ?>
+                        <?php /* @var $product Mage_Catalog_Model_Product */ ?>
+                        <div class="item">
+                            <div class="col-common-product">
+                                <div class="image-common-product">
+                                    <a href="<?php echo $product->getProductUrl();?>"><img src="<?php echo Mage::helper('catalog/image')->init($product, 'image')->resize(300); ?>" alt="<?php echo $product->getName();?>" /></a>
+                                </div>
+                                <h4>
+                                    <a href="<?php echo $product->getProductUrl();?>">
+                                        <?php
+                                            if(strlen($product->getName()) > 40) {
+                                                echo mb_substr($product->getName(), 0, 40, 'UTF-8') . '...';
+                                            } else {
+                                                echo $product->getName();
+                                            }
+                                        ?>
+                                    </a>
+                                </h4>
+                        <?php //if ($oHidePriceHelper->isAllow() === true): ?>
+                                <div class="price-common-product"><?php echo Mage::helper('core')->currency($product->getFinalPrice(), true); ?></div>
+                        <?php //endif;?>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script type="text/javascript">
+        $j = jQuery.noConflict();
+
+        $j(document).ready(function () {
+
+            $j('.common-product-wrapper').owlCarousel({
+                navigation: true,
+                items : 4,
+                itemsDesktop : [1199,4],
+                itemsDesktopSmall : [979,3],
+                itemsTablet: [768,3],
+                itemsMobile : [479,1],
+
+                navigationText: [
+                    "<span class='icon-arrow-left'></span>",
+                    "<span class='icon-arrow-right'></span>"
+                ]
+            });
+
+            setHeightAuto('.common-product-wrapper', '.item .product-name');
+
+
+            $j(window).resize(function () {
+                setHeightAuto('.common-product-wrapper', '.item .product-name');
+            });
+        });
+    </script>
+<?php endif;?>

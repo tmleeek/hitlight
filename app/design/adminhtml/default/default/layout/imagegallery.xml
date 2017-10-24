@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <imagegallery_admin_adminhtml_gallery_index>
+        <reference name="content">
+            <block type="imagegallery/adminhtml_gallery" name="imagegallery.gallery" />
+        </reference>
+    </imagegallery_admin_adminhtml_gallery_index>
+    <imagegallery_admin_adminhtml_gallery_edit>
+        <reference name="head">
+            <action method="addJs"><script>imagegallery/backend/scripts.js</script></action>
+        </reference>
+        <update handle="apply_ajax_form"/>
+        <update handle="apply_file_image"/>
+        <update handle="apply_lightbox"/>
+        <reference name="left">
+            <block type="imagegallery/adminhtml_gallery_edit_tabs" name="imagegallery.gallery.edit.left" />
+        </reference>
+        <reference name="content">
+            <block type="imagegallery/adminhtml_gallery_edit" name="imagegallery.gallery.edit.content" />
+        </reference>
+    </imagegallery_admin_adminhtml_gallery_edit>
+    <imagegallery_admin_adminhtml_gallery_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="imagegallery/adminhtml_gallery_grid" name="imagegallery.gallery.grid"/>
+        </block>
+    </imagegallery_admin_adminhtml_gallery_grid>
+    <imagegallery_admin_adminhtml_gallery_imageGrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="imagegallery/adminhtml_gallery_edit_tab_images" name="imagegallery.gallery.images.grid"/>
+        </block>
+    </imagegallery_admin_adminhtml_gallery_imageGrid>
+</layout>

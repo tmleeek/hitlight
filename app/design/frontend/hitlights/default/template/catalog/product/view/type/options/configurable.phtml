@@ -1,0 +1,287 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     rwd_default
+ * @copyright   Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+
+<?php
+$_product    = $this->getProduct();
+$_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
+$_jsonConfig = $this->getJsonConfig();
+$_jsonProductValueConfig = $this->getProductJsonConfig();
+$_renderers = $this->getChild('attr_renderers')->getSortedChildren();
+$_jsonProductTrue = $this->getJsonProductTrue();
+?>
+
+<?php if ($_product->isSaleable() && count($_attributes)):?>
+    <dl>
+        <?php foreach($_attributes as $_attribute): ?>
+            <?php
+            $_rendered = false;
+            foreach ($_renderers as $_rendererName):
+                $_renderer = $this->getChild('attr_renderers')->getChild($_rendererName);
+                if (method_exists($_renderer, 'shouldRender') && $_renderer->shouldRender($_attribute, $_jsonConfig)):
+                    $_renderer->setProduct($_product);
+                    $_renderer->setAttributeObj($_attribute);
+                    echo $_renderer->toHtml();
+                    $_rendered = true;
+                    break;
+                endif;
+            endforeach;
+
+            if (!$_rendered):
+                ?>
+                <dt><label class="required"><?php echo $_attribute->getLabel() ?><em>*</em></label></dt>
+                <dd<?php if ($_attribute->decoratedIsLast){?> class="last"<?php }?>>
+                    <div class="input-box">
+                        <select name="super_attribute[<?php echo $_attribute->getAttributeId() ?>]" id="attribute<?php echo $_attribute->getAttributeId() ?>" class="required-entry super-attribute-select">
+                            <option><?php echo $this->__('Choose an Option...') ?></option>
+                        </select>
+                    </div>
+                </dd>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    </dl>
+    <script type="text/javascript">
+
+        var productValuesConfig = <?php echo $_jsonProductValueConfig ?>;
+        var spConfig = new Product.Config(<?php echo $_jsonConfig ?>);
+
+        var attributes = $$('.super-attribute-select');
+        for(var i=0; i < attributes.length; i++){
+            (function (attribute) {
+                var options = attribute.options;
+                options[1].selected = true;
+                spConfig.configureElement(attribute);
+            })(attributes[i]);
+        }
+    </script>
+    <?php echo $this->getChildHtml('after') ?>
+<?php endif;?>
+
+<?php
+
+if (Mage::getStoreConfig('amconf/general/show_clear'))
+{
+    $html = '<a href="#" onclick="javascript: spConfig.clearConfig(); return false;" class="reset-configuration">' . $this->__('Reset Configuration') . '</a>';
+}
+echo $html;
+
+?>
+
+<script>
+
+    document.observe('dom:loaded', function(){
+        jQuery('.super-attribute-select').change(function(){
+            //setTimeout(function () {
+                updateSuperAttributePrice();
+            //},200);
+
+        })
+    });
+
+    function updateSuperAttributePrice(){
+        var currentValues = new Array();
+        var i = 0;
+        jQuery('.super-attribute-select').each(function(){
+			currentValues[i] = jQuery(this).val();
+			i++;
+        });
+
+        for(var j in productValuesConfig){
+            if(isCorrectValue(currentValues, productValuesConfig[j]['values'])){
+                jQuery('#product-price-<?php echo $_product->getId()?>').html(productValuesConfig[j]['price']);
+                jQuery('.child-tier-price').html(productValuesConfig[j]['tierPrice']);
+                jQuery('.view-sku').html('sku: ' + productValuesConfig[j]['sku']);
+                break;
+            }
+        }
+    }
+
+    function isCorrectValue(needs, haystack){
+        var check = true;
+        for(var i=0; i<needs.length; i++){
+            if(!in_array(needs[i], haystack)){
+                check = false;
+                break;
+            }
+        }
+        return check;
+    }
+
+    function in_array(needle, haystack) {
+        for (var key = 0; key < haystack.length; key++) {
+            if (needle == haystack[key]) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    function replaceDropDowns() {
+        var dataTrue = <?php echo $_jsonProductTrue ?>;
+
+        jQuery('.product_attribute_option_link').remove();
+        jQuery('#selected_combination').text('');
+        var countDropDowns = 1;
+
+        jQuery(".super-attribute-select").each(function() {
+            var drop_down = jQuery(this);
+            drop_down.hide();
+            drop_down.find("option[value!='']").each(function() {
+                var option = jQuery(this);
+
+                jQuery("<a>", {
+                    text: option.text(),
+                    href: '#',
+                    class: 'product_attribute_option_link amia_dropdown_' + countDropDowns,
+                    'data-id': drop_down.attr('id'),
+                    'data-name': drop_down.attr('name'),
+                    'data-value': option.val(),
+                    'data-label': option.text(),
+                    'count-dropdown': countDropDowns,
+                    'data-product': dataTrue[option.val()],
+                    click: function() {
+                        if(jQuery(this).hasClass('product_attribute_disable')) {
+                            return false;
+                        }
+
+                        drop_down.val(option.val());
+                        var obj = drop_down.get();
+                        Event.observe(obj[0],'change',function(){});
+                        fireEvent(obj[0],'change');
+                        replaceDropDowns();
+                        repaceAmiaData();
+                        var selected_combination = [];
+                        var dataDropDown = jQuery(this).attr('count-dropdown');
+
+                        var a = jQuery(this).attr('data-product');
+                        a = a.split(',');
+
+                        if(jQuery('.product_attribute_option_link_selected').length > 0) {
+                            var c = '';
+                            jQuery('.product_attribute_option_link_selected').each(function() {
+                                c = jQuery(this).attr('data-product');
+                                c = c.split(',');
+                                a = getDataArray(a, c);
+                            });
+                        }
+
+                        jQuery('.amia_dropdown_' + (parseInt(dataDropDown) + 1)).each(function() {
+                            var b = jQuery(this).attr('data-product');
+                            b = b.split(',');
+
+                            if(!getValueArray(a, b)) {
+                                jQuery(this).addClass('product_attribute_disable');
+                            }
+                        });
+
+
+                        jQuery(".super-attribute-select").each(function() {
+                            if(dataDropDown == 1) {
+                                if (jQuery(this).val() == option.val()) {
+                                    jQuery(".product_attribute_option_link[data-value=" + option.val() + "]").addClass('product_attribute_option_link_selected');
+                                    selected_combination.push(jQuery(this).find("option:selected").text());
+                                }
+                            } else {
+                                if (jQuery(this).val()) {
+                                    jQuery(".product_attribute_option_link[data-value=" + jQuery(this).val() + "]").addClass('product_attribute_option_link_selected');
+                                    selected_combination.push(jQuery(this).find("option:selected").text());
+
+                                    var x = jQuery(".product_attribute_option_link[data-value=" + jQuery(this).val() + "]").attr('data-product');
+                                    x = x.split(',');
+
+                                    if(jQuery('.product_attribute_option_link_selected').length > 0) {
+                                        var z = '';
+                                        jQuery('.product_attribute_option_link_selected').each(function () {
+                                            z = jQuery(this).attr('data-product');
+                                            z = z.split(',');
+                                            x = getDataArray(x, z);
+                                        });
+                                    }
+
+                                    jQuery('.amia_dropdown_' + (parseInt(jQuery(".product_attribute_option_link[data-value=" + jQuery(this).val() + "]").attr('count-dropdown')) + 1)).each(function() {
+                                        var y = jQuery(this).attr('data-product');
+                                        y = y.split(',');
+
+                                        if(!getValueArray(x, y)) {
+                                            jQuery(this).addClass('product_attribute_disable');
+                                        }
+                                    });
+                                }
+                            }
+                        });
+
+                        jQuery.each(selected_combination, function(index, selection) {
+                            jQuery('#selected_combination').append(selection);
+                            if(index+1 < selected_combination.length)
+                                jQuery('#selected_combination').append(" - ");
+                        });
+                        setTimeout(function(){
+                            jQuery('.product-image-thumbs').bxSlider({
+                                slideWidth: 75,
+                                minSlides: 1,
+                                maxSlides: 5,
+                                slideMargin: 10,
+                                pager: false,
+                                infiniteLoop: false
+                            });
+                        }, 2000);
+                        return false;
+                    }
+                }).appendTo(drop_down.parent());
+            });
+            countDropDowns++;
+        });
+    }
+
+    jQuery(function() {
+        replaceDropDowns();
+    });
+
+    function getValueArray(a, b) {
+        var check = false;
+        jQuery.each(a, function(key, value) {
+            var index = jQuery.inArray(value, b);
+            if(index != -1) {
+                check = true;
+            }
+        });
+
+        return check;
+    }
+
+    function getDataArray(a, b) {
+        var check = [];
+        jQuery.each(a, function(key, value) {
+            var index = jQuery.inArray(value, b);
+            if(index != -1) {
+                check[key] = value;
+            }
+        });
+
+        return check;
+    }
+</script>

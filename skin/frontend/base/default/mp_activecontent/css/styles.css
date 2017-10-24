@@ -1,0 +1,79 @@
+/**
+ * MagPleasure Ltd.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magpleasure.com/LICENSE.txt
+ *
+ * @category   Magpleasure
+ * @package    Magpleasure_Activecontent
+ * @copyright  Copyright (c) 2011-2014 MagPleasure Ltd. (http://www.magpleasure.com)
+ * @license    http://www.magpleasure.com/LICENSE.txt
+ */
+
+.mp_activecontent {
+    margin-bottom: 15px;
+    margin-top: 10px;
+}
+
+.mp_activecontent ul {
+    padding-left: 0;
+}
+
+.mp-ac-clear {
+    clear: both;
+}
+
+.mp_activecontent .bx-wrapper ul li {
+    background-color: #ffffff;
+}
+
+.mp_activecontent .bx-wrapper ul li p {
+    margin-bottom: 0;
+}
+
+.mp_activecontent .bx-wrapper a{
+    text-decoration: none;
+    outline: none;
+    border: none;
+}
+
+.bx-wrapper .shadow {
+    display: none;
+}
+
+.mp_activecontent.autohide .bx-prev,
+.mp_activecontent.autohide .bx-next,
+.mp_activecontent.autohide .bx-stop,
+.mp_activecontent.autohide .bx-start,
+.mp_activecontent.autohide .bx-pager-item {
+
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0) !important;
+    -moz-opacity: 0 !important;
+    -khtml-opacity: 0 !important;
+    opacity: 0 !important;
+
+    -webkit-transition: opacity 300ms ease-out;
+    -moz-transition: opacity 300ms ease-out;
+    -ms-transition: opacity 300ms ease-out;
+    -o-transition: opacity 300ms ease-out;
+    transition: opacity 300ms ease-out;
+}
+
+
+.mp_activecontent.autohide:hover .bx-prev,
+.mp_activecontent.autohide:hover .bx-next,
+.mp_activecontent.autohide:hover .bx-stop,
+.mp_activecontent.autohide:hover .bx-start,
+.mp_activecontent.autohide:hover .bx-pager-item  {
+
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=99)";
+    filter: alpha(opacity=99) !important;
+    -moz-opacity: 1 !important;
+    -khtml-opacity: 1 !important;
+    opacity: 1 !important;
+}

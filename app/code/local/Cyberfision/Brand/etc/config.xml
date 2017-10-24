@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<config>
+
+    <modules>
+        <Cyberfision_Brand>
+            <version>0.0.3</version>
+        </Cyberfision_Brand>
+    </modules>
+
+    <global>
+
+        <blocks>
+            <cyberfision_brand_adminhtml>
+                <class>Cyberfision_Brand_Block_Adminhtml</class>
+            </cyberfision_brand_adminhtml>
+        </blocks>
+
+        <helpers>
+            <cyberfision_brand>
+                <class>Cyberfision_Brand_Helper</class>
+            </cyberfision_brand>
+        </helpers>
+
+        <models>
+            <cyberfision_brand>
+                <class>Cyberfision_Brand_Model</class>
+                <resourceModel>cyberfision_brand_resource</resourceModel>
+            </cyberfision_brand>
+            
+            <cyberfision_brand_resource>
+                <class>Cyberfision_Brand_Model_Resource</class>
+
+                <entities>
+                    <brand>
+                        <table>cyberfision_brand_brand</table>
+                    </brand>
+                </entities>
+            </cyberfision_brand_resource>
+        </models>
+
+        <resources>
+            <cyberfision_brand_setup>
+                <setup>
+                    <module>Cyberfision_Brand</module>
+                    <class>Mage_Core_Model_Resource_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </cyberfision_brand_setup>
+        </resources>
+    </global>
+
+    <admin>
+        <routers>
+            <cyberfision_brand_admin>
+                <use>admin</use>
+                <args>
+                    <module>Cyberfision_Brand_Adminhtml</module>
+                    <frontName>brand-admin</frontName>
+                </args>
+            </cyberfision_brand_admin>
+        </routers>
+    </admin>
+
+    <adminhtml>
+        <layout>
+            <updates>
+                <cyberfision_brand>
+                    <file>cyberfision/cyberfision_brand.xml</file>
+                </cyberfision_brand>
+            </updates>
+        </layout>
+    </adminhtml>
+
+</config>

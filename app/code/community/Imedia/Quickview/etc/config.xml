@@ -1,0 +1,32 @@
+<config>
+	<modules>
+        <Imedia_Quickview>
+            <version>1.0.0.4</version>
+        </Imedia_Quickview>
+    </modules>
+	<frontend>
+        <routers>
+            <quickview>
+                <use>standard</use>
+                <args>
+                    <module>Imedia_Quickview</module> 
+                    <frontName>quickview</frontName>
+                </args>
+            </quickview>
+        </routers>
+		<layout>
+		  <updates>
+			<quickview>
+			  <file>imedia/quickview.xml</file>
+			</quickview>
+		  </updates>
+		</layout>
+    </frontend>	
+	<global>
+		<helpers>
+			<quickview>
+				<class>Imedia_Quickview_Helper</class>
+			</quickview>
+		</helpers>
+	</global>	
+</config>

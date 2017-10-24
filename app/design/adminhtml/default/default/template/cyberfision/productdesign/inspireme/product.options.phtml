@@ -1,0 +1,27 @@
+<?php
+$inspireme = $this->getInspireme();
+$options = $this->getOptions();
+?>
+
+    <div class="hor-scroll">
+        <table cellspacing="0" class="form-list">
+            <tbody>
+            <?php foreach($options as $option):?>
+            <?php if($option->getType()=='radio'):?>
+                <tr>
+                <td class="label"><label><?php echo $option->getTitle()?></label></td>
+                <td class="value">
+                    <select class=" select" name="options[<?php echo $option->getId()?>]" onchange="checkRelatedGroup(this.value, <?php echo $option->getFrontendGroupId(); ?>);" id="<?php echo $option->getFrontendGroupId(); ?>">
+                        <option value="">- Please select one -</option>
+                        <?php foreach($option->getValues() as $_value):?>
+                            <option <?php if(@$inspireme[$option->getId()]==$_value->getId()):?> selected<?php endif;?> value="<?php echo $_value->getId()?>"><?php echo $_value->getTitle()?></option>
+                        <?php endforeach;?>
+                    </select>
+                </td>
+            </tr>
+            <?php endif;?>
+            <?php endforeach;?>
+
+            </tbody>
+        </table>
+    </div>

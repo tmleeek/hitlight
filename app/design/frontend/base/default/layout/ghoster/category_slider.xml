@@ -1,0 +1,56 @@
+<?xml version="1.0" ?>
+
+<layout version="0.1.0">
+    <!--Page handle -->
+    <default>
+        <reference name="head">
+            <action method="addItem" ifconfig="category_slider/general/enabled">
+                <type>skin_js</type>
+                <name>ghoster/category_slider/js/jquery-1.11.1.min.js</name>
+                <params/>
+            </action>
+            <!--<action method="addItem" ifconfig="category_slider/general/active">-->
+                <!--<type>skin_js</type>-->
+                <!--<name>ghoster/category_slider/js/jquery.bxslider.min.js</name>-->
+                <!--<params/>-->
+            <!--</action>-->
+            <action method="addItem" ifconfig="category_slider/general/active">
+                <type>skin_js</type>
+                <name>ghoster/category_slider/js/default.js</name>
+                <params/>
+            </action>
+            <!--<action method="addItem" ifconfig="category_slider/general/active">-->
+                <!--<type>skin_css</type>-->
+                <!--<script>ghoster/category_slider/css/jquery.bxslider.min.css</script>-->
+            <!--</action>-->
+            <action method="addItem" ifconfig="category_slider/general/active">
+                <type>skin_css</type>
+                <script>ghoster/category_slider/css/style.css</script>
+            </action>
+        </reference>
+    </default>
+    <catalog_category_view translate="label">
+        <reference name="content">
+            <block type="ghoster_categoryslider/catalog_slider" name="ghoster.catalog.slider" before="-"/>
+        </reference>
+    </catalog_category_view>
+    <categoryslider_index_index>
+        <!-- reference tag specifies the block where we a going to add child block -->
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>
+        </reference>
+        <reference name="content">
+            <!-- Our page content block -->
+            <block type="core/template" name="category_slider"
+                   template="ghoster/categoryslider/category_slider.phtml"/>
+        </reference>
+    </categoryslider_index_index>
+    <cms_index_index>
+        <reference name="content">
+            <!--<block type="core/template" name="category_slider"-->
+                   <!--template="ghoster/categoryslider/home_category_slider.phtml" before="testimonial_list"/>-->
+        </reference>
+    </cms_index_index>
+</layout>

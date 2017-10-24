@@ -1,0 +1,186 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * Magento
+ * Date: 8/10/16
+ * Time: 5:15 PM
+ */
+
+?>
+
+<?php $cmsId = $this->getInstructionData() ?>
+<?php $steps = $this->getStepData() ?>
+
+
+<style>
+    .instruction_popup_wrapper {
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    #step_content_<?php echo $cmsId?> .item {
+        padding: 30px;
+        margin: 0;
+        color: #000;
+        font-size: 14px;
+    }
+
+    #step_header_<?php echo $cmsId?> .item {
+        background: #f4f4f4 none;
+        padding: 0;
+        margin: 6px;
+        color: #000;
+        cursor: pointer;
+        text-align: center;
+        font-size: 18px;
+        text-transform: uppercase;
+        line-height: 76px;
+    }
+
+    #step_header_<?php echo $cmsId?> .current .item {
+        background: #000 none;
+        color: #FFF;
+    }
+
+    #step_content_<?php echo $cmsId?> .owl-prev {
+        display: none !important;
+    }
+
+    #step_content_<?php echo $cmsId?> .owl-buttons {
+        text-align: right;
+    }
+
+    #step_content_<?php echo $cmsId?> .owl-next {
+        margin: 0;
+        background: none transparent;
+        color: #005190;
+        opacity: 1;
+        font-size: 14px;
+        display: block;
+        position: relative;
+        line-height: 20px;
+        text-align: right;
+    }
+
+    #step_content_<?php echo $cmsId?> .owl-next:after {
+        content: "Next Step »";
+        position: absolute;
+        display: block;
+        background: #FFF none;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+</style>
+
+
+<section class="instruction_popup_wrapper">
+    <div id="step_header_<?php echo $cmsId ?>" class="owl-carousel">
+        <?php $i = 1 ?>
+        <?php foreach ($steps as $step): ?>
+            <div class="item"><span><?php echo $this->__('Step ') . ($i) ?> </span></div>
+            <?php $i++; ?>
+        <?php endforeach; ?>
+    </div>
+
+    <div id="step_content_<?php echo $cmsId ?>" class="owl-carousel">
+        <?php foreach ($steps as $step): ?>
+            <div class="item"><span><?php echo $step ?></span></div>
+        <?php endforeach; ?>
+    </div>
+</section>
+
+<script>
+
+    $j = jQuery.noConflict();
+
+
+    $j(document).ready(function() {
+
+        var sync1_<?php echo $cmsId?> = $j("#step_content_<?php echo $cmsId?>");
+        var sync2_<?php echo $cmsId?> = $j("#step_header_<?php echo $cmsId?>");
+
+        $j('#instruction_block_<?php echo $cmsId ?>').on('shown.bs.modal', function (event) {
+            sync1_<?php echo $cmsId?>.owlCarousel({
+                singleItem : true,
+                slideSpeed : 1000,
+                navigation: true,
+                pagination:false,
+                afterAction : syncPosition<?php echo $cmsId?>,
+                responsiveRefreshRate : 200,
+                autoHeight : true,
+            });
+
+            sync2_<?php echo $cmsId?>.owlCarousel({
+                items : 4,
+                itemsDesktop      : [1199,10],
+                itemsDesktopSmall     : [979,10],
+                itemsTablet       : [768,8],
+                itemsMobile       : [479,4],
+                pagination:false,
+                responsiveRefreshRate : 100,
+                afterInit : function(el){
+                    el.find(".owl-item").eq(0).addClass("current");
+                }
+            });
+        });
+
+        $j('#instruction_block_<?php echo $cmsId ?>').on('hidden.bs.modal', function (event) {
+            sync1_<?php echo $cmsId?>.data('owlCarousel').destroy();
+            sync2_<?php echo $cmsId?>.data('owlCarousel').destroy();
+            sync1_<?php echo $cmsId?>.find('.owl-stage-outer').children().unwrap();
+            sync2_<?php echo $cmsId?>.find('.owl-stage-outer').children().unwrap();
+        });
+
+
+
+        function syncPosition<?php echo $cmsId?>(el){
+            var current = this.currentItem;
+            $j("#step_header_<?php echo $cmsId?>")
+                .find(".owl-item")
+                .removeClass("current")
+                .eq(current)
+                .addClass("current");
+            if($j("#step_header_<?php echo $cmsId?>").data("owlCarousel") !== undefined){
+                center(current)
+            }
+        }
+
+        $j("#step_header_<?php echo $cmsId?>").on("click", ".owl-item", function(e){
+            e.preventDefault();
+            var number = $j(this).data("owlItem");
+            sync1_<?php echo $cmsId?>.trigger("owl.goTo",number);
+        });
+
+        function center(number){
+            var sync2visible = sync2_<?php echo $cmsId?>.data("owlCarousel").owl.visibleItems;
+            var num = number;
+            var found = false;
+            for(var i in sync2visible){
+                if(num === sync2visible[i]){
+                    found = true;
+                }
+            }
+
+            if(found===false){
+                if(num>sync2visible[sync2visible.length-1]){
+                    sync2_<?php echo $cmsId?>.trigger("owl.goTo", num - sync2visible.length+2)
+                }else{
+                    if(num - 1 === -1){
+                        num = 0;
+                    }
+                    sync2_<?php echo $cmsId?>.trigger("owl.goTo", num);
+                }
+            } else if(num === sync2visible[sync2visible.length-1]){
+                sync2_<?php echo $cmsId?>.trigger("owl.goTo", sync2visible[1])
+            } else if(num === sync2visible[0]){
+                sync2_<?php echo $cmsId?>.trigger("owl.goTo", num-1)
+            }
+
+        }
+
+    });
+
+</script>
+
+

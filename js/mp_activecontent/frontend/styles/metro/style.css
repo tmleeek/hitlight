@@ -1,0 +1,202 @@
+/**
+ * MagPleasure Ltd.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magpleasure.com/LICENSE.txt
+ *
+ * @category   Magpleasure
+ * @package    Magpleasure_Activecontent
+ * @copyright  Copyright (c) 2011-2014 MagPleasure Ltd. (http://www.magpleasure.com)
+ * @license    http://www.magpleasure.com/LICENSE.txt
+ */
+
+
+/** IMPORT FONTS
+===================================*/
+@import url("http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&subset=latin,latin-ext,cyrillic");
+
+/** THEME
+===================================*/
+
+.metro .bx-wrapper {
+    zoom: 1;
+    position: relative;
+
+    margin:5px auto 5px;
+    z-index:90;
+    border:5px solid #FFFFFF;
+    text-align:left; /* reset align=center */
+    font-size: 10px;
+}
+
+.metro .bx-wrapper .bx-viewport {
+
+}
+
+.metro .bx-wrapper .bx-viewport ul {
+
+}
+
+.metro .bx-wrapper .bx-viewport ul li {
+
+}
+
+/* PAGER */
+
+.metro .bx-wrapper .bx-pager .bx-pager-item {
+    left: 0;
+}
+
+.metro .bx-wrapper .bx-pager {
+    bottom: 5px;
+    float: left;
+    font-size: 0;
+    left: 50%;
+    position: absolute;
+    z-index: 90;
+}
+
+.metro .bx-wrapper .bx-pager div{
+    position:relative;
+    float:left;
+    left: -50%;
+}
+
+.metro .bx-wrapper .bx-pager .bx-pager-item a {
+    width:13px;
+    height:13px;
+    background: url(./bullet.png) left top;
+    float: left;
+    text-indent: -4000px;
+    position:relative;
+    margin-left:7px;
+    color:transparent;
+}
+
+.metro .bx-wrapper .bx-controls-auto .bx-controls-auto-item {
+
+}
+
+.metro .bx-wrapper .bx-pager.bx-default-pager a:hover,
+.metro .bx-wrapper .bx-pager.bx-default-pager a.active {
+    background-position: 0 100%;
+}
+
+/* DIRECTION CONTROLS (NEXT / PREV) */
+.metro .bx-wrapper .bx-prev, .metro .bx-wrapper .bx-next {
+    position:absolute;
+    top:50%;
+    margin-top:-2.2em;
+    z-index:60;
+    height: 4em;
+    width: 4em;
+    background-image: url(./arrows.png);
+    opacity:0.8;
+    background-size: 200%;
+    text-indent: -10000px;
+}
+
+.metro .bx-wrapper .bx-prev {
+    background-position: 0 0;
+    left:1em;
+}
+
+.metro .bx-wrapper .bx-next {
+    background-position: 100% 0;
+    right:1em;
+}
+
+.metro .bx-wrapper .bx-prev:hover {
+    opacity:1;
+}
+
+.metro .bx-wrapper .bx-next:hover {
+    opacity:1;
+}
+
+.metro .bx-wrapper .bx-controls-direction a {
+
+}
+
+.metro .bx-wrapper .bx-controls-direction a.disabled {
+    display: none;
+}
+
+/* AUTO CONTROLS (START / STOP) */
+
+.metro .bx-wrapper .bx-controls-auto {
+
+}
+
+.metro .bx-wrapper .bx-controls-auto .bx-start.active, .metro .bx-wrapper .bx-controls-auto .bx-stop.active {
+
+    display: none;
+}
+
+.metro .bx-wrapper .bx-controls-auto .bx-start, .metro .bx-wrapper .bx-controls-auto .bx-stop {
+    display: block;
+    width: 4em;
+    height: 4em;
+    position: absolute;
+    text-indent: -10000px;
+    top: 50%;
+    left: 50%;
+    margin-left: -2em;
+    margin-top: -2em;
+    z-index: 59;
+    opacity:0.8;
+    background-size: 100%;
+}
+
+.metro .bx-wrapper .bx-controls-auto .bx-start {
+    background-image: url(./play.png);
+}
+
+.metro .bx-wrapper .bx-controls-auto .bx-controls-auto-item {
+
+}
+
+.metro .bx-wrapper .bx-controls-auto .bx-start:hover, .metro .bx-wrapper .bx-controls-auto .bx-stop:hover {
+    background-position: 100% 100% !important;
+    opacity:1;
+}
+
+.metro .bx-wrapper .bx-controls-auto .bx-stop {
+    background-image: url(./pause.png);
+}
+
+/* PAGER WITH AUTO-CONTROLS HYBRID LAYOUT */
+
+.metro .bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-pager {
+
+}
+
+.metro .bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-controls-auto {
+
+}
+
+/* IMAGE CAPTIONS */
+
+.metro .bx-wrapper .bx-caption {
+    position:absolute;
+    display:block;
+    bottom: 2.5em;
+    left: 1em;
+    margin-right: 1em;
+    padding:0.7em;
+    background:none;
+    color:#FFFFFF;
+    z-index: 50;
+    font-family:Open Sans Condensed,Arial,Helvetica,sans-serif;
+    line-height: 2.5em;
+    font-weight: bold;
+    border: 0.2em solid #FFFFFF;
+}
+
+.metro .bx-wrapper .bx-caption span {
+    font-size: 2.6em;
+}

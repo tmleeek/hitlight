@@ -1,0 +1,36 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * Magento
+ * Date: 8/2/16
+ * Time: 11:06 AM
+ */
+?>
+
+<div class="mobile-account-link hidden-md hidden-lg">
+    <ul id="account-link" class="menu dropit">
+        <li class="dropit-trigger">
+            <a id="parent-link" class="parent-link" href="javascript:void(0)"><?php echo Mage::helper('cyberfision_custom')->getAccountLabel()?>
+                <span id="navigator"><i class="fa fa-angle-right"></i></span>
+            </a>
+            <ul style="display: none;" class="dropit-submenu" id="menu_link">
+                <li><a href="<?php echo Mage::getUrl('customer/account');?>"><?php echo $this->__('Account Dashboard')?></a></li>
+                <li><a href="<?php echo Mage::getUrl('customer/account/edit');?>"><?php echo $this->__('Account Information')?></a></li>
+                <li><a href="<?php echo Mage::getUrl('sales/order/history');?>"><?php echo $this->__('My Orders')?></a></li>
+                <li><a href="<?php echo Mage::getUrl('review/customer');?>"><?php echo $this->__('My Product Reviews')?></a></li>
+                <li><a href="<?php echo Mage::getUrl('monkey/customer_account/index');?>"><?php echo $this->__('Newsletter Subscriptions')?></a></li>
+            </ul>
+        </li>
+    </ul>
+    <script type="text/javascript">
+        $j = jQuery.noConflict();
+
+        $j(document).ready(function () {
+            $j('#parent-link').on('click', function() {
+                $j('#menu_link').toggle('show');
+                $j('#navigator i').toggleClass('fa-angle-down', 'fa-angle-right');
+            });
+
+        })
+    </script>
+</div>

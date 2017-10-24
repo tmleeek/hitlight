@@ -1,0 +1,57 @@
+<?xml version="1.0" ?>
+
+<layout version="0.1.0">
+    <!--Page handle -->
+    <!--<default>-->
+        <!--<reference name="head">-->
+            <!--<action method="addItem" ifconfig="shop_by_project/general/active">-->
+                <!--<type>skin_css</type>-->
+                <!--<script>ghoster/shop_by_project/css/owl.carousel.css</script>-->
+            <!--</action>-->
+            <!--<action method="addItem" ifconfig="shop_by_project/general/active">-->
+                <!--<type>skin_css</type>-->
+                <!--<script>ghoster/shop_by_project/css/style.css</script>-->
+            <!--</action>-->
+            <!--<action method="addItem" ifconfig="shop_by_project/general/active">-->
+                <!--<type>skin_js</type>-->
+                <!--<script>ghoster/shop_by_project/js/owl.carousel.min.js</script>-->
+            <!--</action>-->
+            <!--<action method="addItem" ifconfig="shop_by_project/general/active">-->
+                <!--<type>skin_js</type>-->
+                <!--<script>ghoster/shop_by_project/js/default.js</script>-->
+            <!--</action>-->
+        <!--</reference>-->
+    <!--</default>-->
+
+
+    <socialsharecount_facebook_index>
+        <reference name="content">
+            <block type="ghoster_socialcount/facebook" name="facebook_share_count"
+                   before="-"/>
+        </reference>
+    </socialsharecount_facebook_index>
+    <socialsharecount_linkedin_index>
+        <reference name="content">
+            <block type="ghoster_socialcount/linkedin" name="linkedin_share_count"
+                   before="-"/>
+        </reference>
+    </socialsharecount_linkedin_index>
+    <socialsharecount_pinterest_index>
+        <reference name="content">
+            <block type="ghoster_socialcount/pinterest" name="pinterest_share_count"
+                   before="-"/>
+        </reference>
+    </socialsharecount_pinterest_index>
+    <socialsharecount_google_index>
+        <reference name="content">
+            <block type="ghoster_socialcount/google" name="google_share_count"
+                   before="-"/>
+        </reference>
+    </socialsharecount_google_index>
+    <socialsharecount_twitter_index>
+        <reference name="content">
+            <block type="ghoster_socialcount/twitter" name="twitter_share_count"
+                   before="-"/>
+        </reference>
+    </socialsharecount_twitter_index>
+</layout>

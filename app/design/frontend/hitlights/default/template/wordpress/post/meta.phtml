@@ -1,0 +1,17 @@
+<?php
+/**
+ * @category    Fishpig
+ * @package     Fishpig_Wordpress
+ * @license     http://fishpig.co.uk/license.txt
+ * @author      Ben Tideswell <help@fishpig.co.uk>
+ */
+?>
+<?php if ($post = $this->getPost()): ?>
+
+	<?php echo Mage::helper('wordpress/social')->getButtons($post) ?>
+	<?php $commentUrl = $post->getPermalink() . '#comments'; ?>
+
+	<div class="post-meta details">
+		<?php echo stripslashes($this->__('By <a href="%s">%s</a> | %s | <a href="%s">%s comments</a>', $post->getAuthor()->getUrl(), $post->getAuthor()->getDisplayName(), $post->getPostDate(), $commentUrl, $post->getCommentCount())) ?>
+	</div>
+<?php endif; ?>

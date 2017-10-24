@@ -1,0 +1,205 @@
+/**
+ * MagPleasure Ltd.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magpleasure.com/LICENSE.txt
+ *
+ * @category   Magpleasure
+ * @package    Magpleasure_Activecontent
+ * @copyright  Copyright (c) 2011-2014 MagPleasure Ltd. (http://www.magpleasure.com)
+ * @license    http://www.magpleasure.com/LICENSE.txt
+ */
+
+
+/** IMPORT FONTS
+===================================*/
+@import url("http://fonts.googleapis.com/css?family=Cuprum&subset=latin,latin-ext");
+
+/** THEME
+===================================*/
+
+.subway .bx-wrapper {
+    zoom: 1;
+    position: relative;
+    margin:0px auto 0px;
+    z-index:90;
+    border:none;
+    text-align:left; /* reset align=center */
+    font-size: 10px;
+}
+
+.subway .bx-wrapper .bx-viewport {
+
+}
+
+.subway .bx-wrapper .bx-viewport ul {
+
+}
+
+.subway .bx-wrapper .bx-viewport ul li {
+
+}
+
+/* PAGER */
+
+.subway .bx-wrapper .bx-pager .bx-pager-item {
+    left: 0;
+}
+
+.subway .bx-wrapper .bx-pager {
+    font-size: 0px;
+    float: left;
+    position:absolute;
+    z-index:70;
+    bottom: 0;
+    left:50%;
+    padding: 5px;
+}
+
+.subway .bx-wrapper .bx-pager div{
+    position:relative;
+    float:left;
+    left: -50%;
+}
+
+.subway .bx-wrapper .bx-pager .bx-pager-item a {
+    width:13px;
+    height:13px;
+    background: url(./bullet.png) left top;
+    float: left;
+    text-indent: -1000px;
+    position:relative;
+    margin-left:5px;
+    color:transparent;
+}
+
+.subway .bx-wrapper .bx-controls-auto .bx-controls-auto-item {
+
+}
+
+.subway .bx-wrapper .bx-pager.bx-default-pager a:hover,
+.subway .bx-wrapper .bx-pager.bx-default-pager a.active {
+    background-position: 0 100%;
+}
+
+/* DIRECTION CONTROLS (NEXT / PREV) */
+.subway .bx-wrapper .bx-prev, .subway .bx-wrapper .bx-next {
+    position:absolute;
+    display:block;
+    text-indent: -10000px;
+    bottom:0;
+    margin-top:0;
+    z-index:60;
+    height: 100%;
+    width: 4em;
+    background-color:#474747;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 25% auto;
+    opacity:0.7;
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=70);
+}
+
+.subway .bx-wrapper .bx-prev {
+    background-image: url(./arrow-prev.png);
+    left:0;
+}
+
+.subway .bx-wrapper .bx-next {
+    background-image: url(./arrow-next.png);
+    right:0;
+}
+
+.subway .bx-wrapper .bx-prev:hover,
+.subway .bx-wrapper .bx-next:hover {
+    background-color:#272727;
+}
+
+.subway .bx-wrapper .bx-controls-direction a {
+
+}
+
+.subway .bx-wrapper .bx-controls-direction a.disabled {
+    display: none;
+}
+
+/* AUTO CONTROLS (START / STOP) */
+
+.subway .bx-wrapper .bx-controls-auto {
+
+}
+
+.subway .bx-wrapper .bx-controls-auto .bx-start.active, .subway .bx-wrapper .bx-controls-auto .bx-stop.active {
+
+    display: none;
+}
+
+.subway .bx-wrapper .bx-controls-auto .bx-start, .subway .bx-wrapper .bx-controls-auto .bx-stop {
+    display:block;
+    text-indent: -10000px;
+    width: 4em;
+    height: 6em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -1em;
+    margin-top: -3em;
+    z-index: 59;
+}
+
+.subway .bx-wrapper .bx-controls-auto .bx-start {
+    background-size: 100%;
+    background-image: url(./play.png);
+}
+
+.subway .bx-wrapper .bx-controls-auto .bx-controls-auto-item {
+
+}
+
+.subway .bx-wrapper .bx-controls-auto .bx-start:hover, .subway .bx-wrapper .bx-controls-auto .bx-stop:hover {
+    background-position: 100% 100% !important;
+}
+
+.subway .bx-wrapper .bx-controls-auto .bx-stop {
+    background-size: 100%;
+    background-image: url(./pause.png);
+}
+
+/* PAGER WITH AUTO-CONTROLS HYBRID LAYOUT */
+
+.subway .bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-pager {
+
+}
+
+.subway .bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-controls-auto {
+
+}
+
+/* IMAGE CAPTIONS */
+
+.subway .bx-wrapper .bx-caption {
+    position:absolute;
+    display:block;
+    bottom: 2em;
+    left: 4em;
+    margin-right:4em;
+    padding:0.7em;
+    background:none;
+    color:#FFFFFF;
+    z-index: 50;
+    font-family:'Cuprum', Impact, Charcoal, sans-serif;
+    font-weight: bold;
+    text-transform: none;
+    text-shadow: 0 0.2em 0.5em rgba(0, 0, 0, 0.5);
+    border-radius:0;
+    opacity:1;
+}
+
+.subway .bx-wrapper .bx-caption span {
+    font-size: 3.5em;
+    line-height: 1em;
+}

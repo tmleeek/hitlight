@@ -1,0 +1,15 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * Magento
+ * Date: 7/5/16
+ * Time: 2:23 PM
+ */
+?>
+<?php /* @var $project GhoSter_ShopByProject_Block_Project */?>
+<?php $project = $this->getCurrentProject() ?>
+<div class="project">
+    <span class="project-title"><?php echo $project->getData('title')?></span>
+    <?php foreach($project->getCategories() as $category):?>
+    <?php endforeach;?>
+</div>

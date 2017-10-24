@@ -1,0 +1,74 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * Magento
+ * Date: 7/11/16
+ * Time: 3:16 PM
+ */
+
+?>
+<?php $categories = $this->getCategories(); ?>
+
+<div id="project_tabs_description_content" style="">
+    <div class="entry-edit">
+        <?php foreach ($categories as $category): ?>
+            <div class="entry-edit-head">
+                <h4 class="icon-head head-edit-form fieldset-legend"><?php echo $category['category_name'] ?></h4>
+                <div class="form-buttons"></div>
+            </div>
+            <div class="fieldset " id="description_form">
+                <div class="hor-scroll">
+                    <table class="form-list" cellspacing="0">
+                        <tbody>
+
+                        <tr>
+                            <td class="label"><label
+                                    for="description"><?php echo $this->__('Description Information: ') ?></label>
+                            </td>
+                            <td class="value">
+                                <?php $data = Mage::helper('ghoster_shopbyproject')->getHowToDescriptions($category['category_id'], $category['project_id']); ?>
+                                <textarea id="how_to" name="how_to[<?php echo $category['category_id'] ?>]"
+                                          class="how_to textarea" rows="2"
+                                          cols="15"><?php echo $data['how_to']; ?></textarea>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="label"><label
+                                    for="description"><?php echo $this->__('Summary: ') ?></label>
+                            </td>
+                            <td class="value">
+                                <?php $data = Mage::helper('ghoster_shopbyproject')->getHowToDescriptions($category['category_id'], $category['project_id']); ?>
+                                <textarea id="summary" name="summary[<?php echo $category['category_id'] ?>]"
+                                          class="summary textarea" rows="2"
+                                          cols="15"><?php echo $data['summary']; ?></textarea>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="label"><label
+                                    for="instruction_block"><?php echo $this->__('Select Instruction Block:') ?></label>
+                            </td>
+                            <td class="value">
+                                <select id="instruction_block_id"
+                                        name="instruction_block_id[<?php echo $category['category_id'] ?>]" onclick=""
+                                        onchange="" readonly="" tabindex="1"
+                                        class="instruction_block select">
+                                    <option value=""><?php echo $this->__('Please Select..') ?></option>
+                                    <?php $blocks = Mage::helper('ghoster_shopbyproject')->getInstructionCMSBlocks() ?>
+                                    <?php foreach ($blocks as $block): ?>
+                                        <?php /* @var $block Mage_Cms_Model_Block */ ?>
+                                        <option
+                                            value="<?php echo $block->getId() ?>" <?php echo($block->getId() == $data['instruction_block_id'] ? 'selected' : '') ?>><?php echo $block->getTitle() ?></option>
+                                    <?php endforeach; ?>
+
+                                </select>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</div>

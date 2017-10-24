@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * MagPleasure Ltd.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magpleasure.com/LICENSE.txt
+ *
+ * @category   Magpleasure
+ * @package    Magpleasure_Activecontent
+ * @copyright  Copyright (c) 2011-2014 MagPleasure Ltd. (http://www.magpleasure.com)
+ * @license    http://www.magpleasure.com/LICENSE.txt
+ */
+ -->
+<config>
+    <menu>
+        <cms>
+            <children>
+                <activecontent module="activecontent" translate="title">
+                    <title>Active Content Slider</title>
+                    <sort_order>100</sort_order>
+                    <children>
+                        <new_block>
+                            <title>New Slider</title>
+                            <sort_order>10</sort_order>
+                            <action>activecontent_admin/admin_slider/new</action>
+                        </new_block>
+                        <blocks translate="title">
+                            <title>Manage Sliders</title>
+                            <sort_order>20</sort_order>
+                            <action>activecontent_admin/admin_slider/index</action>
+                        </blocks>
+                    </children>
+                </activecontent>
+            </children>
+        </cms>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <cms>
+                        <children>
+                            <activecontent module="activecontent" translate="title">
+                                <title>Active Content Slider</title>
+                                <sort_order>100</sort_order>
+                                <children>
+                                    <new_block>
+                                        <title>New Slider</title>
+                                        <sort_order>10</sort_order>
+                                    </new_block>
+                                    <blocks translate="title">
+                                        <title>Manage Sliders</title>
+                                        <sort_order>20</sort_order>
+                                    </blocks>
+                                </children>
+                            </activecontent>
+                        </children>
+                    </cms>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

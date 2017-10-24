@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * MagPleasure Ltd.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magpleasure.com/LICENSE.txt
+ *
+ * @category   Magpleasure
+ * @package    Magpleasure_Activecontent
+ * @copyright  Copyright (c) 2011-2014 MagPleasure Ltd. (http://www.magpleasure.com)
+ * @license    http://www.magpleasure.com/LICENSE.txt
+ */
+ -->
+<layout version="0.1.0">
+    <magpleasure_default>
+        <update handle="apply_jquery"/>
+        <update handle="apply_jquery_easing"/>
+        <update handle="apply_jquery_fitvids"/>
+
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>mp_activecontent/css/styles.css</stylesheet>
+            </action>
+            <action method="addItem">
+                <type>js_css</type>
+                <name>mp_activecontent/vendor/bxslider/jquery.bxslider.css</name>
+            </action>
+        </reference>
+        <reference name="extra_head">
+            <action method="addSafeJs">
+                <alias>jQuery.fn.bxSlider</alias>
+                <script>mp_activecontent/vendor/bxslider/jquery.bxslider.min.js</script>
+            </action>
+        </reference>
+    </magpleasure_default>
+</layout>

@@ -1,0 +1,33 @@
+<?php
+/**
+ * GhoSter Avatar Customer Template
+ *
+ * @category    GhoSter
+ * @package     GhoSter_Avatar
+ * @author      opensource
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+?>
+
+<?php if (Mage::helper('ghoster_avatar')->isShowUploadWidget()): ?>
+
+    <script type="text/javascript">
+        var avatarTemplate = '<div class="fieldset">'
+            + '<h2 class="legend"><?php echo $this->getData('title')?></h2>'
+            + '<ul class="form-list">'
+            + '<li class="wide">'
+            + '<div class="input-box">'
+            + '<input type="file" name="avatar-file" id="upload-avatar" title="<?php echo $this->__('Customer Avatar') ?>"/>'
+            + '</div>'
+            + '</li>'
+            + '</ul>'
+            + '</div>';
+
+        $j = jQuery.noConflict();
+        $j('#form-validate').attr('enctype', 'multipart/form-data');
+        if ($j('#form-validate > .fieldset:nth-child(2)')) {
+            $j('#form-validate > .fieldset:nth-child(2)').after(avatarTemplate);
+        }
+
+    </script>
+<?php endif ?>

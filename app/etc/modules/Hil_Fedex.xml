@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Hil_Fedex>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Mage_Shipping />
+            </depends>
+        </Hil_Fedex>
+    </modules>
+</config>

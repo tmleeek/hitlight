@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * MagPleasure Ltd.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magpleasure.com/LICENSE.txt
+ *
+ * @category   Magpleasure
+ * @package    Magpleasure_Activecontent
+ * @copyright  Copyright (c) 2011-2014 MagPleasure Ltd. (http://www.magpleasure.com)
+ * @license    http://www.magpleasure.com/LICENSE.txt
+ */
+ -->
+<config>
+    <modules>
+        <Magpleasure_Activecontent>
+            <version>1.1.3</version>
+        </Magpleasure_Activecontent>
+    </modules>
+    <global>
+        <blocks>
+            <activecontent>
+                <class>Magpleasure_Activecontent_Block</class>
+            </activecontent>
+        </blocks>
+        <helpers>
+            <activecontent>
+                <class>Magpleasure_Activecontent_Helper</class>
+            </activecontent>
+        </helpers>
+        <models>
+            <activecontent>
+                <class>Magpleasure_Activecontent_Model</class>
+                <resourceModel>activecontent_mysql4</resourceModel>
+            </activecontent>
+            <activecontent_mysql4>
+                <class>Magpleasure_Activecontent_Model_Mysql4</class>
+                <entities>
+                    <slider>
+                        <table>mp_ac_slider</table>
+                    </slider>
+                    <slide>
+                        <table>mp_ac_slide</table>
+                    </slide>
+                </entities>
+            </activecontent_mysql4>
+        </models>
+        <resources>
+            <activecontent_setup>
+                <setup>
+                    <module>Magpleasure_Activecontent</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </activecontent_setup>
+			<activecontent_write>
+				<connection>
+					<use>core_write</use>
+				</connection>
+			</activecontent_write>
+			<activecontent_read>
+				<connection>
+					<use>core_read</use>
+				</connection>
+			</activecontent_read>
+        </resources>
+    </global>
+	<frontend>
+		<layout>
+			<updates>
+				<activecontent>
+					<file>mp_activecontent.xml</file>
+				</activecontent>
+			</updates>
+		</layout>
+        <routers>
+            <activecontent>
+                <use>standard</use>
+                <args>
+                    <module>Magpleasure_Activecontent</module>
+                    <frontName>activecontent</frontName>
+                </args>
+            </activecontent>
+        </routers>
+		<translate>
+			<modules>
+				<Magpleasure_Activecontent>
+					<files>
+						<default>Magpleasure_Activecontent.csv</default>
+					</files>
+				</Magpleasure_Activecontent>
+			</modules>
+		</translate>
+	</frontend>
+    <adminhtml>
+		<layout>
+			<updates>
+				<activecontent>
+					<file>mp_activecontent.xml</file>
+				</activecontent>
+			</updates>
+		</layout>                
+		<translate>
+			<modules>
+				<Magpleasure_Activecontent>
+					<files>
+						<default>Magpleasure_Activecontent.csv</default>
+					</files>
+				</Magpleasure_Activecontent>
+			</modules>
+		</translate>
+        <menu>
+            <cms>
+                <children>
+                    <activecontent module="activecontent" translate="title">
+                        <title>Active Content Slider</title>
+                        <sort_order>100</sort_order>
+                        <children>
+                            <new_block>
+                                <title>New Slider</title>
+                                <sort_order>10</sort_order>
+                                <action>activecontent_admin/admin_slider/new</action>
+                            </new_block>
+                            <blocks translate="title">
+                                <title>Manage Sliders</title>
+                                <sort_order>20</sort_order>
+                                <action>activecontent_admin/admin_slider/index</action>
+                            </blocks>
+                        </children>
+                    </activecontent>
+                </children>
+            </cms>
+        </menu>
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+                        <cms>
+                            <children>
+                                <activecontent module="activecontent" translate="title">
+                                    <title>Active Content Slider</title>
+                                    <sort_order>100</sort_order>
+                                    <children>
+                                        <new_block>
+                                            <title>New Slider</title>
+                                            <sort_order>10</sort_order>
+                                        </new_block>
+                                        <blocks translate="title">
+                                            <title>Manage Sliders</title>
+                                            <sort_order>20</sort_order>
+                                        </blocks>
+                                    </children>
+                                </activecontent>
+                            </children>
+                        </cms>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+    </adminhtml>
+    <admin>
+        <routers>
+            <activecontent_admin>
+                <use>admin</use>
+                <args>
+                    <module>Magpleasure_Activecontent</module>
+                    <frontName>activecontent_admin</frontName>
+                </args>
+            </activecontent_admin>
+        </routers>
+    </admin>
+    <default>
+        <activecontent>
+            <performance>
+                <use_jquery>1</use_jquery>
+                <use_easing>1</use_easing>
+                <use_fitvids>1</use_fitvids>
+            </performance>
+        </activecontent>
+    </default>
+</config>

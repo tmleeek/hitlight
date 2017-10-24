@@ -1,0 +1,30 @@
+.testimonial-text {
+    float: none !important;
+    padding: 10px 20px 0 22px;
+}
+.testimonial-text p {
+    text-align: justify;
+    word-spacing: 0.5px;
+}
+.testimonials {
+    height: 100%;
+}
+
+.testimonial_image {
+    display: table-cell;
+    float: left;
+    width: 120px;
+}
+.testimonial_image img {
+    width: 155px;
+}
+
+.testimonial-text {
+    background: url(../images/testi.png) no-repeat scroll left top rgba(0, 0, 0, 0);
+    padding: 20px 20px 15px 40px;
+    border-bottom: 1px solid #ccc;
+    margin-top: 10px;
+}
+.testimonial-text h4 {
+    color: #43a3ac; margin-bottom: 0; margin-top: 10px;
+}

@@ -1,0 +1,200 @@
+<?php
+/**
+ * Magegiant
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magegiant.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magegiant.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magegiant
+ * @package     Magegiant_Onestepcheckout
+ * @copyright   Copyright (c) 2012 Magegiant (http://www.magegiant.com/)
+ * @license     http://www.magegiant.com/license-agreement.html
+ */
+?>
+<?php
+$banner = Mage::getStoreConfig('cyberfision_custom/banner_page_custom/banner_checkout_page');
+if($banner):
+    $banner = Mage::getBaseUrl('media') . 'banner/' . $banner;
+endif;
+?>
+
+<div class="title-onestepcheckout" <?php if($banner) echo 'style="background-image: url(\''. $banner .'\')"' ?>>
+    <div class="container">
+        <h1 class="title-checkout-page">Checkout</h1>
+    </div>
+</div>
+<?php if($messages = Mage::app()->getRequest()->getParam('message')):?>
+<?php
+    $file = Mage::getBaseDir() . DS . 'var' . DS . $messages;
+    $current = file_get_contents($file);
+    echo $current; ?>
+<?php  endif;?>
+<div id="giant-onestepcheckout-container">
+    <div class="giant-onestepcheckout-row">
+        <div class="container">
+            <?php echo $this->getChildHtml('customblock.top'); ?>
+        </div>
+    </div>
+    <div class="giant-onestepcheckout-row">
+        <div class="container">
+            <?php echo $this->getChildHtml('customblock.onestepcheckout.top'); ?>
+        </div>
+    </div>
+    <div class="giant-onestepcheckout-row wrapper3columns" id="giant-onestepcheckout-general-container">
+        <form id="giant-onestepcheckout-general-form" method="post" action="#">
+            <div class="giant-onestepchekocut-column giant-onestepchekocut-column-left">
+                <div id="giant-onestepcheckout-address-wrapper">
+                    <div id="giant-onestepcheckout-cart-items">
+                        <div id="giant-onestepcheckout-order-review-cart-wrapper">
+                            <?php echo $this->getChildHtml('cart.items'); ?>
+                        </div>
+                    </div>
+                    <div class="onestepcheckout-form-top" style="display:none;">
+                        <div class="container">
+                            <h2 class="title-step">Next Step</h2>
+                            <?php echo $this->getChildHtml('address'); ?>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div id="giant-onestepcheckout-shipping-method-wrapper">
+                                        <?php echo $this->getChildHtml('shippingmethod'); ?>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div id="giant-onestepcheckout-payment-method-wrapper">
+                                        <?php echo $this->getChildHtml('paymentmethod'); ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="onestepcheckout-form-bottom">
+                        <div class="container">
+                            <div class="giant-onestepchekocut-column giant-onestepchekocut-column-right">
+                                <?php echo $this->getChildHtml('order.review'); ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<!--                <div class="static-right-wrapper">-->
+<!--                    <div class="static-right-content">-->
+<!--                        --><?php //echo $this->getChildHtml('magegiant-osc-1column-top'); ?>
+<!--                        --><?php //echo $this->getChildHtml('magegiant-osc-1column-middle'); ?>
+<!--                        --><?php //echo $this->getChildHtml('magegiant-osc-1column-bottom'); ?>
+<!--                    </div>-->
+<!--                </div>-->
+        </form>
+        <div id="giant-onestepcheckout-popup" class="giant-onestepcheckout-popup" style="display:none">
+
+            <div id="giant-onestepcheckout-popup-close" class="giant-onestepcheckout-popup-close">
+                <a href="javascript:void(0)" title="<?php echo $this->__('Close') ?>"><?php echo $this->__('X'); ?></a>
+            </div>
+            <div id="giant-onestepcheckout-popup-content" class="giant-onestepcheckout-popup-content">
+                <div class="onestep-title">
+                    <h2></h2>
+                </div>
+            </div>
+        </div>
+        <div id="giant-onestepcheckout-overlay" class="giant-onestepcheckout-popup-overlay" style="display:none"></div>
+        <script type="text/javascript">
+            var giantOSCForm = new MagegiantOnestepcheckoutForm({
+                formId: 'giant-onestepcheckout-general-form',
+                cartContainerSelector: "#giant-onestepcheckout-order-review-cart-wrapper",
+                // validate shipping and payment
+                shippingMethodName: 'shipping_method',
+                shippingMethodAdvice: '#giant-onestepcheckout-shipping-method .validation-advice',
+                shippingValidationMessage: "<?php echo $this->__('Please specify shipping method.'); ?>",
+                shippingMethodWrapperSelector: '#giant-onestepcheckout-shipping-method .sp-methods',
+                paymentMethodName: 'payment[method]',
+                paymentMethodAdvice: '#giant-onestepcheckout-payment-method dl+.validation-advice',
+                paymentValidationMessage: "<?php echo $this->__('Please specify payment method.'); ?>",
+                paymentMethodWrapperSelector: '#giant-onestepcheckout-payment-method .sp-methods',
+                //place order functionality
+                placeOrderUrl: '<?php echo $this->getPlaceOrderUrl(); ?>',
+                successUrl: '<?php echo $this->getUrl('checkout/onepage/success'); ?>',
+                placeOrderButtonSelector: 'giant-onestepcheckout-place-order-button',
+                granTotalAmountSelector: '.giant-onestepcheckout-place-order-amount',
+                granTotalAmountProcessSelector: '.giant-onestepcheckout-place-order-process',
+                pleaseWaitNoticeSelector: '.giant-onestepcheckout-place-order-please-wait',
+                overlayId: 'giant-onestepcheckout-place-order-overlay',
+                disabledClassName: 'giant-onestepcheckout-place-order-button-disabled',
+                popup: {
+                    overlaySelector: "#giant-onestepcheckout-overlay",
+                    containerSelector: "#giant-onestepcheckout-popup",
+                    contentContainerSelector: "#giant-onestepcheckout-popup-content",
+                    acceptContainerSelector: "#giant-onestepcheckout-popup-accept",
+                    buttons: {
+                        close: {
+                            selector: "#giant-onestepcheckout-popup-close a",
+                            enabled: false
+                        }
+                    }
+                }
+            });
+        </script>
+    </div>
+    <div class="clearfix"></div>
+    <div class="giant-onestepcheckout-row">
+        <div class="container">
+            <div id="giant-onestepcheckout-related-wrapper">
+                <?php echo $this->getChildHtml('related'); ?>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="giant-onestepcheckout-row">
+        <div class="container">
+            <?php echo $this->getChildHtml('customblock.bottom'); ?>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    MagegiantOnestepcheckoutCore.updateNumbers();
+    MagegiantOnestepcheckoutCore.updater.setConfig({
+        loaderConfig: {
+            '48px': 'giant-onestepcheckout-overlay giant-onestepcheckout-overlay-48',
+            '24px': 'giant-onestepcheckout-overlay giant-onestepcheckout-overlay-24',
+            '16px': 'giant-onestepcheckout-overlay giant-onestepcheckout-overlay-16'
+        },
+        map: <?php echo Zend_Json::encode($this->getBlockMap());?>,
+        blocks: [
+            ['shipping_method', '#giant-onestepcheckout-shipping-method-wrapper'],
+            ['payment_method', '#giant-onestepcheckout-payment-method-wrapper'],
+            ['review_cart', '#giant-onestepcheckout-order-review-cart-wrapper'],
+            ['review_total', '#giant-onestepcheckout-order-review-cart-total'],
+            ['minicart_total', '#items-shopping-cart'],
+            ['minicart_total_mobile', '#items-shopping-cart-mobile'],
+            ['minicart', '#mini_cart_header'],
+            ['review_coupon', '#giant-onestepcheckout-order-review-coupon-wrapper'],
+            ['review_enterprise_giftcard', '#giant-onestepcheckout-order-review-enterprise-giftcard-wrapper'],
+            ['review_enterprise_storecredit', '#giant-onestepcheckout-order-review-enterprise-storecredit-wrapper'],
+            ['review_enterprise_points', '#giant-onestepcheckout-order-review-enterprise-points-wrapper'],
+            ['custom_block_top', '#giant-onestepcheckout-customblock-top'],
+            ['custom_block_bottom', '#giant-onestepcheckout-customblock-bottom'],
+            ['related', '#giant-onestepcheckout-related-block'],
+            ['cart_sidebar', '.header-minicart'],
+        ],
+        loaderToBlockCssClass: 'giant-onestepcheckout-add-loader-into-this-block'
+    });
+    function goToNextStep(){
+        window.giantOSCShipment = new MagegiantOnestepcheckoutShipment({
+            containerSelector: "#giant-onestepcheckout-shipping-method",
+            switchMethodInputsSelector: "input[type='radio'][name='shipping_method']",
+            saveShipmentUrl: "/onestepcheckout/ajax/saveShippingMethod/"                });
+
+        window.giantOSCShipment.switchToMethod('freeshipping_freeshipping');
+        jQuery('.go-to-next-step').hide();
+        jQuery('.onestepcheckout-form-top').fadeIn();
+        jQuery('#giant-onestepcheckout-place-order').fadeIn();
+    }
+
+    jQuery('#billing\\:telephone, #billing\\:fax, #shipping\\:telephone, #shipping\\:fax').mask('9-999-999-9999');
+</script>

@@ -1,0 +1,160 @@
+<?php
+/**
+* Unitech Corp.
+*
+* @category   Unitech
+* @package    Unitech_LandingPage
+* @version    0.0.1
+* @copyright  @copyright Copyright (c) 2015 Unitech Corp. (http://www.unitech.vn)
+*/
+?>
+<?php
+	$_landingPage = $this->getLandingPage();
+	$processor = Mage::helper('unitech_landingpage')->getBlockTemplateProcessor();
+?>
+<div id="wrapper"> 
+	<div class="lights">       
+		<div class="cart">
+			<div class="cart-bg"></div>
+			<div class="cart-item-landing">
+				<img class="cart-ic" src="<?php echo $this->getSkinUrl('unitech_landingpage/images/cart.png');?>">
+				<div class="header-bottom">
+					<div class="quick-access">
+						<div id="update-cart-header" class="header-cart">
+							<div class="cart_mini_right">
+								<?php 
+									$summaryItemCount = Mage::helper('checkout/cart')->getSummaryCount();
+									if ($summaryItemCount == "") echo "0";
+									else echo $summaryItemCount;
+								?> Item(s) - 
+								<?php 
+									//$priceTotal = Mage::helper('checkout/cart')->getQuote()->getGrandTotal();
+									echo $this->helper('checkout')->formatPrice(Mage::getSingleton('checkout/cart')->getQuote()->getGrandTotal());;
+								?>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--<a href="#">$34</a>-->
+			</div>
+		</div>
+		<div class="social">
+			<a href="http://www.facebook.com/GameDayLights" target="_blank" class="facebook"></a>
+			<a href="http://twitter.com/GameDayLights" target="_blank" class="twitter"></a>
+			<a href="http://www.youtube.com/channel/UCQr62grHbYdaZxpKx_fnW6g" target="_blank" class="googleplus"></a>
+		</div>
+		<div class="game-title">
+			<a href="#" class="logo"><img src="<?php echo $this->getSkinUrl('unitech_landingpage/images/logo.png');?>" alt="logo"></a>
+			<div class="text-title"><span class="purple">Your Team.</span><span class="yellow">Your Colors.</span></div>
+			<p>Show your team pride like never before.</p>
+			<div class="btn-buy">
+				<div class="buy-bg"></div>
+				<div class="buy-item" id="buy-now"><a href="#main-content">BUY NOW</a></div>
+			</div>
+		</div>
+		<div class="img-lights">
+			<img class="animated item1 light_hide" src="<?php echo $this->getSkinUrl('unitech_landingpage/images/color-1.png');?>">
+			<img class="animated2 item2" src="<?php echo $this->getSkinUrl('unitech_landingpage/images/color-2.png');?>">
+		</div>
+	</div>
+	<div class="content">
+		<div class="content-item">
+			<div class="product"><img src="<?php echo $this->getSkinUrl('unitech_landingpage/images/product.png');?>" alt="products"><img style="display: none" src="<?php echo $this->getSkinUrl('unitech_landingpage/images/shadow_product.png');?>" class="shadow-product" alt="products"></div>
+			<div class="text">
+				<h4>FLEXIBLE LED LIGHT <br />FOR SPORTS FANS</h4>
+				<?php echo $processor->filter($_landingPage->getDescription()) ?>				
+				
+			</div> 
+			<iframe class="videos" src="https://www.youtube.com/embed/FdHJpgW5TCE" frameborder="0" width="560" height="400"></iframe>
+			<div class="list_product">
+				<ul>
+					<li>
+						<img src="<?php echo $this->getSkinUrl('unitech_landingpage/images/weatherproof.png');?>" alt="Waterproof Design">
+						<span>Waterproof<br /> Design</span>
+					</li>
+					<li>
+						<img src="<?php echo $this->getSkinUrl('unitech_landingpage/images/display.png');?>" alt="Dual Color Display">
+						<span>Dual Color<br /> Display</span>
+					</li>
+					<li>
+						<img src="<?php echo $this->getSkinUrl('unitech_landingpage/images/tailgating.png');?>" alt="Perfect for Tailgating">
+						<span>Perfect for<br /> Tailgating</span>
+					</li>
+					<li>
+						<img src="<?php echo $this->getSkinUrl('unitech_landingpage/images/team-colors.png');?>" alt="Customize Colors For any Team">
+						<span>Customize Colors <br /> For any Team</span>
+					</li>
+				</ul>
+			</div>
+		</div>     
+	</div>
+	<?php echo $this->getChildHtml('featured_product_list') ?>
+	<div class="footer footer_landing">
+		<div class="social-footer">
+			<a href="http://www.facebook.com/GameDayLights" target="_blank" class="facebook"></a>
+			<a href="http://twitter.com/GameDayLights" target="_blank" class="twitter"></a>
+			<a href="http://www.youtube.com/channel/UCQr62grHbYdaZxpKx_fnW6g" target="_blank" class="googleplus"></a>
+		</div>
+		<div class="nav">
+			<ul>
+				<li><a href="/sales/guest/form">Orders and Returns</a></li> <span>|</span>
+				<li><a href="/contacts">Contact Us</a></li> <span>|</span>
+				<li class="grey">© 2015 HitLights LED. All Rights Reserved.</li>
+			</ul>
+		</div>
+	</div>
+	<div class="modal mymodal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">            
+				<?php echo $this->getChildHtml('sendfriend') ?>
+			</div>
+		</div>
+	</div>
+	<div class="modal product-detail fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+			<div class="modal-content">            
+				<div class="modal-body">
+					<div class="send-friend">
+						<a href="javascript:;" class="close-modal" data-dismiss="modal">X</a> 
+						<div class="form product-detail-content">
+							<div class="row">
+								<div class="tab-product-detail">
+									<ul class="nav nav-pills">
+										<li class="active"><a data-toggle="pill" href="#tag1">Product Description</a></li>
+										<li><a data-toggle="pill" href="#tag2">Additional Information</a></li>                         
+									</ul>
+									<div class="tab-content">
+										<div id="tag1" class="tab-pane fade in active">                            
+										  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+										</div>
+										<div id="tag2" class="tab-pane fade">                            
+										  <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+										</div>
+									</div>  
+								</div>  
+							</div>
+						</div>                      
+					</div>
+				</div>
+			</div>
+        </div>
+	</div>
+</div>
+<script type='text/javascript'>
+var $k =jQuery.noConflict();
+
+$k('.cart_mini_right').on( "click" , function() {
+	$k('body').addClass('active-instant-checkout');
+	$k('html').addClass('active-instant-checkout');  
+	$k('.control-overlay').show();	
+	$k('.offscreen #cart-step').show();		
+	$k('.offscreen').addClass('active');
+	$k('.offscreen').removeClass('step2 step3');
+    $k('.goto-shipping-step').show();
+	setTimeout(function () {
+		$k('.offscreen #shipping-step').show();
+		$k('.offscreen #review-step').show();  
+	}, 1000);
+	
+});
+</script>

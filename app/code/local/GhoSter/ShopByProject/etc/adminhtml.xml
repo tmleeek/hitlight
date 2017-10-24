@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <shop_by_project translate="title" module="ghoster_shopbyproject">
+            <title>Applications</title>
+            <sort_order>77</sort_order>
+            <children>
+                <manage translate="title" module="ghoster_shopbyproject">
+                    <title>Manage Applications</title>
+                    <sort_order>10</sort_order>
+                    <action>admin_shopbyproject/adminhtml_project</action>
+                </manage>
+                <generator translate="title" module="ghoster_shopbyproject">
+                    <title>Instruction CMS Generator</title>
+                    <sort_order>20</sort_order>
+                    <action>admin_shopbyproject/adminhtml_generator</action>
+                </generator>
+                <settings translate="title" module="ghoster_shopbyproject">
+                    <title>Settings</title>
+                    <sort_order>30</sort_order>
+                    <action>adminhtml/system_config/edit/section/shop_by_project</action>
+                </settings>
+            </children>
+        </shop_by_project>
+    </menu>
+
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <shop_by_project translate="title" module="ghoster_shopbyproject">
+                                        <title>Applications</title>
+                                        <sort_order>700</sort_order>
+                                    </shop_by_project>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <shop_by_project translate="title" module="ghoster_shopbyproject">
+                        <title>Applications</title>
+                        <sort_order>800</sort_order>
+                        <children>
+                            <manage translate="title" module="ghoster_shopbyproject">
+                                <title>Manage Projects</title>
+                            </manage>
+                            <generator translate="title" module="ghoster_shopbyproject">
+                                <title>Instruction CMS Generator</title>
+                            </generator>
+                            <settings translate="title" module="ghoster_shopbyproject">
+                                <title>Settings</title>
+                            </settings>
+                        </children>
+                    </shop_by_project>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

@@ -1,0 +1,49 @@
+<?php
+/**
+ * MagPleasure Ltd.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE-CE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magpleasure.com/LICENSE-CE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This package designed for Magento COMMUNITY edition
+ * MagPleasure does not guarantee correct work of this extension
+ * on any other Magento edition except Magento COMMUNITY edition.
+ * Magpleasure does not provide extension support in case of
+ * incorrect edition usage.
+ * =================================================================
+ *
+ * @category   MagPleasure
+ * @package    Magpleasure_Activecontent
+ * @version    1.1.3
+ * @copyright  Copyright (c) 2011-2014 MagPleasure Ltd. (http://www.magpleasure.com)
+ * @license    http://www.magpleasure.com/LICENSE-CE.txt
+ */
+
+
+?>
+
+<div id="<?php echo $this->getHtmlId() ?>">
+<table cellspacing="0" cellpadding="0" class="massaction">
+<tr>
+    <td><?php if ($this->getUseSelectAll()):?>
+        <a href="#" onclick="return <?php echo $this->getJsObjectName() ?>.selectAll()"><?php echo $this->__('Select All') ?></a>
+        <span class="separator">|</span>
+        <a href="#" onclick="return <?php echo $this->getJsObjectName() ?>.unselectAll()"><?php echo $this->__('Unselect All') ?></a>
+        <span class="separator">|</span>
+        <?php endif; ?>
+        <a href="#" onclick="return <?php echo $this->getJsObjectName() ?>.selectVisible()"><?php echo $this->__('Select Visible') ?></a>
+        <span class="separator">|</span>
+        <a href="#" onclick="return <?php echo $this->getJsObjectName() ?>.unselectVisible()"><?php echo $this->__('Unselect Visible') ?></a>
+        <span class="separator">|</span>
+        <strong id="<?php echo $this->getHtmlId() ?>-count">0</strong> <?php echo $this->__('items selected') ?>
+    </td>
+</tr>
+</table>
+</div>

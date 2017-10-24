@@ -1,0 +1,116 @@
+<?xml version="1.0" ?>
+
+<layout version="0.1.0">
+    <!--Page handle -->
+    <default>
+        <reference name="head">
+            <action method="addItem" ifconfig="shop_by_project/general/active">
+                <type>skin_css</type>
+                <script>ghoster/shop_by_project/css/owl.carousel.css</script>
+            </action>
+            <action method="addItem" ifconfig="shop_by_project/general/active">
+                <type>skin_css</type>
+                <script>ghoster/shop_by_project/css/style.css</script>
+            </action>
+            <action method="addItem" ifconfig="shop_by_project/general/active">
+                <type>skin_js</type>
+                <script>ghoster/shop_by_project/js/owl.carousel.min.js</script>
+            </action>
+            <action method="addItem" ifconfig="shop_by_project/general/active">
+                <type>skin_js</type>
+                <script>ghoster/shop_by_project/js/default.js</script>
+            </action>
+        </reference>
+        <reference name="root">
+            <block type="ghoster_shopbyproject/commonproduct" name="common.products" after="content"
+                   template="ghoster/shopbyproject/common_products.phtml"/>
+        </reference>
+    </default>
+    <ghoster_shopbyproject_project_index>
+        <!-- reference tag specifies the block where we a going to add child block -->
+
+        <!-- change shopbyproject layout update -->
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/2columns-left-shopbyproject.phtml</template>
+            </action>
+        </reference>
+        <reference name="left">
+            <block type="ghoster_shopbyproject/projectlist" name="project_list_nav"
+                   template="ghoster/shopbyproject/project_list_nav.phtml">
+            </block>
+        </reference>
+        <reference name="content">
+            <!-- Our page content block -->
+            <block type="ghoster_shopbyproject/projectlist" name="project_list"
+                   template="ghoster/shopbyproject/project_list.phtml">
+            </block>
+        </reference>
+        <reference name="footer">
+            <action method="append">
+                <block>common.products</block>
+            </action>
+        </reference>
+    </ghoster_shopbyproject_project_index>
+    <!--<ghoster_shopbyproject_project_view>-->
+    <!--&lt;!&ndash; reference tag specifies the block where we a going to add child block &ndash;&gt;-->
+    <!--<reference name="root">-->
+    <!--<action method="setTemplate">-->
+    <!--<template>page/2columns-left.phtml</template>-->
+    <!--</action>-->
+    <!--</reference>-->
+    <!--<reference name="content">-->
+    <!--&lt;!&ndash; Our page content block &ndash;&gt;-->
+    <!--<block type="ghoster_shopbyproject/project" name="project"-->
+    <!--template="ghoster/shopbyproject/project.phtml"/>-->
+    <!--<action method="append"><block>common.products</block></action>-->
+    <!--</reference>-->
+    <!--</ghoster_shopbyproject_project_view>-->
+    <cms_index_index>
+        <reference name="content">
+            <block type="core/template" template="hil/home-content-bottom.phtml" name="homepage-content-bottom" after="hil_slider_block">
+                <block type="ghoster_shopbyproject/projectlist" name="project_list_home"
+                       template="ghoster/shopbyproject/project_list_home.phtml" before="testimonial_list"/>
+                <block type="wordpress/homepage" name="wordpress_post_list_homepage"
+                       template="wordpress/main-homepage.phtml">
+                    <block type="wordpress/post_list" name="wordpress_post_list" as="post_list"
+                           template="wordpress/post/main-list.phtml">
+                        <block type="core/text_list" name="post.content.before" as="before_post_content"/>
+                        <block type="core/text_list" name="post.content.after" as="after_post_content">
+                            <block type="wordpress/post_meta" name="post.view.meta" as="meta" after="-"
+                                   template="wordpress/post/main-meta.phtml"/>
+                        </block>
+                    </block>
+                </block>
+            </block>
+        </reference>
+    </cms_index_index>
+
+
+    <!--<catalog_category_default translate="label">-->
+    <!--<reference name="left">-->
+    <!--<block type="ghoster_shopbyproject/projectlist" name="project_list_nav_category"-->
+    <!--template="ghoster/shopbyproject/project_list_nav_category.phtml">-->
+    <!--</block>-->
+    <!--</reference>-->
+    <!--</catalog_category_default>-->
+
+    <!--<catalog_category_layered translate="label">-->
+    <!--<reference name="left">-->
+    <!--&lt;!&ndash;<block type="catalogsearch/layer" name="catalogsearch.leftnav" after="codnitiveSidenavLeft" template="catalog/layer/view.phtml"/>&ndash;&gt;-->
+    <!--<block type="ghoster_shopbyproject/projectlist" name="project_list_nav_category_na"-->
+    <!--template="ghoster/shopbyproject/project_list_nav_category.phtml" after="catalogsearch.leftnav">-->
+    <!--</block>-->
+    <!--</reference>-->
+    <!--</catalog_category_layered>-->
+
+    <!--<catalogsearch_result_index>-->
+    <!--<reference name="left">-->
+    <!--<block type="ghoster_shopbyproject/projectlist" name="project_list_nav_category_na"-->
+    <!--template="ghoster/shopbyproject/project_list_nav_category.phtml">-->
+    <!--</block>-->
+    <!--</reference>-->
+    <!--</catalogsearch_result_index>-->
+
+
+</layout>

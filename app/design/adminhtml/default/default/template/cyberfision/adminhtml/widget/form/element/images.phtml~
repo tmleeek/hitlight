@@ -1,0 +1,78 @@
+<?php
+/**
+ * @category    GhoSter
+ * @package     GhoSter_ShopByProject
+ * @copyright   Copyright (C) 2010-2016 thinghost.info. All Rights Reserved.
+ * @license     GNU General Public License version 2 or later
+ */
+?>
+<tr>
+    <td class="label"><?php echo $this->getElement()->getLabel() ?></td>
+    <td class="grid" style="">
+        <table cellspacing="0" class="data border" id="<?php echo $this->getElement()->getHtmlId() ?>">
+            <colgroup>
+                <col width="100"/>
+                <col width="300"/>
+                <col width="1"/>
+                <col width="300"/>
+                <col width="1"/>
+            </colgroup>
+            <thead>
+            <tr class="headings">
+                <th><?php echo Mage::helper('ghoster_shopbyproject')->__('Preview') ?></th>
+                <th><?php echo Mage::helper('ghoster_shopbyproject')->__('Image Url') ?></th>
+                <th><?php echo Mage::helper('ghoster_shopbyproject')->__('Action') ?></th>
+                <th><?php echo Mage::helper('ghoster_shopbyproject')->__('Delete') ?></th>
+            </tr>
+            </thead>
+            <tbody id="<?php echo $this->getElement()->getHtmlId() ?>_container"></tbody>
+            <tfoot>
+            <tr>
+                <td colspan="5" class="a-right"><?php echo $this->getAddButtonHtml() ?></td>
+            </tr>
+            </tfoot>
+        </table>
+    </td>
+</tr>
+<script type="text/javascript">
+    var imageRowTemplate = '<tr id="sliderImage_{{id}}">' +
+        '<td><span class="preview">{{preview}}</span></td>' +
+        '<td><input onchange="window.catalogSlider.change(this)" type="text" class="input-text required-entry" name="image[]" style="width:98%;" id="slider_image_{{id}}" value="{{value}}"/></td>' +
+        '<td class="a-center"><button class="button" type="button" onclick="GhoSter.MediabrowserUtility.openDialog(\'<?php echo Mage::getSingleton('adminhtml/url')->getUrl('adminhtml/cms_wysiwyg_images/index')?>static_urls_allowed/1/target_element_id/slider_image_{{id}}\')"><span><?php echo $this->__('Browse')?></span></button></td>' +        
+        '<td class="a-center"><?php echo $this->getDeleteButtonHtml()?></td>' +
+        '</tr>';
+
+    window.catalogSlider = {
+        baseUrl: '<?php echo Mage::getBaseUrl('media')?>',
+        template: new Template(imageRowTemplate, new RegExp('(^|.|\\r|\\n)({{\\s*(\\w+)\\s*}})', "")),
+        itemsCount: 0,
+        container: $('<?php echo $this->getElement()->getHtmlId() ?>_container'),
+        add: function (image) {
+            var data = {
+                preview: image ? this.renderPreview(image) : '',
+                value: image || '',
+                id: ++this.itemsCount
+            };
+            this.container.insert({bottom: this.template.evaluate(data)});
+        },
+        remove: function (id) {
+            var tr = this.container.down('tr#sliderImage_' + id);
+            if (tr) tr.remove();
+        },
+        change: function (elm) {
+            var uri = $(elm).value,
+                preview = $(elm).up('tr').down('span.preview');
+
+            if (preview) {
+                $(preview).update(this.renderPreview(uri));
+            }
+        },
+        renderPreview: function (uri) {
+            return '<img src="' + uri + '" width="100px"/>';
+        }
+    };
+
+    <?php foreach ($this->getItems() as $item):?>
+    window.catalogSlider.add('<?php echo $item['img']?>');
+    <?php endforeach ?>
+</script>

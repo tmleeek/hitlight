@@ -1,0 +1,94 @@
+.page .main {
+	width: 1170px;
+	margin: auto;
+}
+#details-table {
+	width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    border: 1px solid #eceeef;
+}
+#details-table thead th, #details-table tbody td, #details-table tfoot td {
+    vertical-align: bottom;
+    border-bottom: 1px solid #eceeef;
+    padding: 8px;
+    border-top: 1px solid #eceeef;
+}
+#details-table thead th {
+    color: #fff;
+    background-color: #292b2c;
+    font-size: 15px;
+    font-weight: normal;
+}
+#details-table thead th.a-center {
+    text-align: center;
+}
+#details-table th:first-child, #details-table td:first-child {
+    padding-left: 15px;
+}
+.product-name {
+	font-size: 14px;
+	margin: 0;
+}
+dt, dd, p, span {
+	font-size: 13px;
+}
+h1,h2,h3 {
+	font-weight: bold;
+}
+h2 {
+	font-size: 18px;	
+}
+h3 {
+	font-size: 16px;	
+}
+.info-set {
+	padding: 0 0 20px;
+	border-bottom: 1px solid #dedede;
+}
+.info-set:nth-of-type(4) {
+	border-bottom: none;
+}
+#review_button {
+    border: none;
+    height: 40px;
+    text-transform: uppercase;
+    font-size: 14px;
+    display: block;
+    text-align: center;
+    border-radius: 20px 0 20px 0;
+    -moz-border-radius: 20px 0 20px 0;
+    -o-border-radius: 20px 0 20px 0;
+    -webkit-border-radius: 20px 0 20px 0;
+    background: #005190;
+    background: -webkit-linear-gradient(118deg,#005190, #7a36c9 82%);
+    background: -o-linear-gradient(118deg,#005190, #7a36c9 82%);
+    background: -moz-linear-gradient(118deg,#005190, #7a36c9 82%);
+    background: linear-gradient(118deg,#005190, #7a36c9 82%);
+    position: relative;
+    color: white;
+    padding: 0;
+}
+#review_button span {
+	display: block;
+	width: 100%;
+	border: 2px solid transparent;
+	line-height: 36px;
+	border-radius: 19px 0 19px 0;
+	-moz-border-radius: 19px 0 19px 0;
+	-o-border-radius: 19px 0 19px 0;
+	-webkit-border-radius: 19px 0 19px 0;
+}
+#review_button > span span {
+    padding: 0 30px;
+    line-height: 32px;
+}
+#review_button:hover > span span {
+	background: white;
+	color: black;
+	line-height: 32px;
+}
+select {
+	padding: 0 10px;
+	height: 36px;
+}

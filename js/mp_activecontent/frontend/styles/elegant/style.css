@@ -1,0 +1,218 @@
+/**
+ * MagPleasure Ltd.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magpleasure.com/LICENSE.txt
+ *
+ * @category Magpleasure
+ * @package Magpleasure_Activecontent
+ * @copyright Copyright (c) 2011-2014 MagPleasure Ltd. (http://www.magpleasure.com)
+ * @license http://www.magpleasure.com/LICENSE.txt
+ */
+
+/** IMPORT FONTS
+===================================*/
+@import url("http://fonts.googleapis.com/css?family=Source+Sans+Pro&subset=latin,latin-ext");
+
+/** THEME
+===================================*/
+
+.elegant .bx-wrapper {
+    zoom: 1;
+    position: relative;
+    margin:0px auto 0px;
+    z-index:90;
+    border:1px solid #3399FF;
+    text-align:left; /* reset align=center */
+    font-size: 10px;
+}
+
+.elegant .bx-wrapper .bx-viewport {
+
+}
+
+.elegant .bx-wrapper .bx-viewport ul {
+
+}
+
+.elegant .bx-wrapper .bx-viewport ul li {
+
+}
+
+/* PAGER */
+
+.elegant .bx-wrapper .bx-pager {
+    font-size: 0px;
+    float: left;
+    position:absolute;
+    z-index:70;
+
+    bottom: -5px;
+    left: 50%;
+
+    padding:  10px;
+}
+
+
+.elegant .bx-wrapper .bx-pager div {
+    float: left;
+    left: -50%;
+    position: relative;
+}
+
+.elegant .bx-wrapper .bx-pager .bx-pager-item {
+    left: 0;
+}
+
+.elegant .bx-wrapper .bx-pager .bx-pager-item a {
+    margin-left:6px;
+    width:13px;
+    height:13px;
+    background: url(./bullet.png) left top;
+    float: left;
+    text-indent: -4000px;
+    position:relative;
+    color:transparent;
+}
+
+.elegant .bx-wrapper .bx-controls-auto .bx-controls-auto-item {
+
+}
+
+.elegant .bx-wrapper .bx-pager.bx-default-pager a {
+
+}
+
+.elegant .bx-wrapper .bx-pager.bx-default-pager a:hover,
+.elegant .bx-wrapper .bx-pager.bx-default-pager a.active {
+    background-position: 0 100%;
+}
+
+/* DIRECTION CONTROLS (NEXT / PREV) */
+.elegant .bx-wrapper .bx-prev, .elegant .bx-wrapper .bx-next {
+    position:absolute;
+    display:block;
+    top:50%;
+    margin-top:-2.1em;
+    z-index:60;
+    text-indent: -10000px;
+    height: 3.2em;
+    width: 3.2em;
+    background-image: url(./arrows.png);
+    background-size: 200%;
+}
+
+.elegant .bx-wrapper .bx-prev {
+    left:5px;
+    background-position: 0 0;
+}
+
+.elegant .bx-wrapper .bx-next {
+    background-position: 100% 0;
+    right:5px;
+}
+
+.elegant .bx-wrapper .bx-prev:hover, .elegant .bx-wrapper .bx-next:hover {
+
+}
+
+.elegant .bx-wrapper .bx-prev:hover {
+    background-position: 0 100%;
+}
+
+.elegant .bx-wrapper .bx-next:hover {
+    background-position: 100% 100%;
+}
+
+.elegant .bx-wrapper .bx-controls-direction a {
+    
+}
+
+.elegant .bx-wrapper .bx-controls-direction a.disabled {
+    display: none;
+}
+
+/* AUTO CONTROLS (START / STOP) */
+
+.elegant .bx-wrapper .bx-controls-auto {
+
+}
+
+.elegant .bx-wrapper .bx-controls-auto .bx-start.active, .elegant .bx-wrapper .bx-controls-auto .bx-stop.active {
+
+    display: none;
+}
+
+.elegant .bx-wrapper .bx-controls-auto .bx-start, .elegant .bx-wrapper .bx-controls-auto .bx-stop {
+    display: block;
+    text-indent: -10000px;
+    width: 3.2em;
+    height: 3.2em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -0.6em;
+    margin-top: -2.1em;
+    z-index: 59;
+    background-size: 100%;
+}
+
+.elegant .bx-wrapper .bx-controls-auto .bx-start {
+    background-image: url(./play.png);
+}
+
+
+
+.elegant .bx-wrapper .bx-controls-auto .bx-start.active {
+
+}
+
+.elegant .bx-wrapper .bx-controls-auto .bx-stop {
+    background-image: url(./pause.png);
+}
+
+.elegant .bx-wrapper .bx-controls-auto .bx-start:hover,
+.elegant .bx-wrapper .bx-controls-auto .bx-stop:hover {
+    background-position: 100% 100% !important;
+}
+
+.elegant .bx-wrapper .bx-controls-auto .bx-stop.active {
+
+}
+
+/* PAGER WITH AUTO-CONTROLS HYBRID LAYOUT */
+
+.elegant .bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-pager {
+
+}
+
+.elegant .bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-controls-auto {
+
+}
+
+/* IMAGE CAPTIONS */
+
+.elegant .bx-wrapper .bx-caption {
+    position: absolute;
+    bottom:2.5em;
+    left: 0;
+    margin-right:0.5em;
+    z-index: 50;
+    padding:1.2em;
+    color: #3399FF;
+    background:#FFFFFF;
+    font-family: 'Source Sans Pro',Arial,sans-serif;
+    line-height: 2.3em;
+    font-weight: normal;
+    border-radius:0;
+    opacity:0.8;
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=90);
+}
+
+.elegant .bx-wrapper .bx-caption span {
+    font-size: 2.5em;
+}

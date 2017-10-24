@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <cms_index_index>
+        <reference name="header">
+            <block type="cyberfision_custom/homepage_banner" name="homepage_banner"
+                   template="cyberfision/homepage/banner.phtml"/>
+        </reference>
+    </cms_index_index>
+    <default>
+        <reference name="header">
+            <block name="notification_section" type="core/template" template="cyberfision/custom/notification.phtml"/>
+        </reference>
+    </default>
+</layout>

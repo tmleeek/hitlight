@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Hil_Fedex>
+            <version>1.0</version>
+        </Hil_Fedex>
+    </modules>
+    <global>
+        <models>
+            <hil_fedex>
+                <class>Hil_Fedex_Model</class>
+            </hil_fedex>
+        </models>
+        <helpers>
+            <hil_fedex>
+                <class>Hil_Fedex_Helper</class>
+            </hil_fedex>
+        </helpers>
+    </global>
+    <default>
+        <carriers>
+            <hil_fedex>
+                <active>1</active>
+                <model>hil_fedex/fedex</model>
+                <title>Carrier Title</title>
+                <name>Method Name</name>
+                <price>5.00</price>
+                <specificerrmsg>This shipping method is currently unavailable. If you would like to ship using this shipping method, please contact us.</specificerrmsg>
+            </hil_fedex>
+        </carriers>
+    </default>
+</config>

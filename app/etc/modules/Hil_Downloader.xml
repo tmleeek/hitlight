@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Hil_Downloader>
+      <active>true</active>
+      <codePool>local</codePool>
+      <version>0.1.0</version>
+    </Hil_Downloader>
+  </modules>
+</config>

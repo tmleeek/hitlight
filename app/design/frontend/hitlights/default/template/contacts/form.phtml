@@ -1,0 +1,166 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+
+<div class="contact_page_custom">
+    <?php
+    $banner = Mage::getStoreConfig('cyberfision_custom/banner_page_custom/banner_contact_page');
+    if($banner):
+        $banner = Mage::getBaseUrl('media') . 'banner/' . $banner;
+    endif;
+    ?>
+
+    <div class="title-pages" <?php if($banner) echo 'style="background-image: url(\''. $banner .'\')"' ?>>
+        <div class="container">
+            <h1><?php echo Mage::helper('contacts')->__('Contact Us') ?></h1>
+        </div>
+    </div>
+
+    <div class="contact_wrappers">
+        <div class="container">
+            <div id="messages_product_view"><?php echo $this->getMessagesBlock()->toHtml() ?></div>
+            <div class="row">
+                <div class="col-md-5 col-contact">
+                    <div class="contact-left">
+                        <form action="<?php echo $this->getFormAction(); ?>" id="contactForm" method="post">
+                            <h2 class="legend"><?php echo Mage::helper('contacts')->__('Contact us about anything related to our company or services') ?></h2>
+                            <p class="note-contacts"><?php echo Mage::helper('contacts')->__('We’ll do our best to get back to you as soon as possible!') ?></p>
+                            <ul class="form-list">
+                                <li>
+                                    <div class="input-box">
+                                        <input name="name" id="name"
+                                               title="<?php echo Mage::helper('core')->quoteEscape(Mage::helper('contacts')->__('Name')) ?>"
+                                               value="<?php echo $this->escapeHtml($this->helper('contacts')->getUserName()) ?>"
+                                               class="input-text required-entry" type="text"
+                                               placeholder="<?php echo Mage::helper('contacts')->__('Name') ?>"/>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="input-box">
+                                        <input name="email" id="email"
+                                               title="<?php echo Mage::helper('core')->quoteEscape(Mage::helper('contacts')->__('Email Address')) ?>"
+                                               value="<?php echo $this->escapeHtml($this->helper('contacts')->getUserEmail()) ?>"
+                                               class="input-text required-entry validate-email" type="text"
+                                               placeholder="<?php echo Mage::helper('contacts')->__('Email Address') ?>"/>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="input-box">
+                                        <input name="telephone" id="telephone"
+                                               title="<?php echo Mage::helper('core')->quoteEscape(Mage::helper('contacts')->__('Phone number')) ?>"
+                                               value="" class="input-text validate-phoneStrict" type="text"
+                                               placeholder="<?php echo Mage::helper('contacts')->__('Phone number') ?>"/>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="input-box">
+                                        <div class="border_select">
+                                            <?php
+                                                $topicsString = Mage::getStoreConfig('selectoptions/general/textarea_topics');
+                                                $topicsArray = array_filter(explode(',',trim(strip_tags($topicsString))));
+                                                ?>
+                                            <select id="option-contact" name="option-contact">
+                                                <option><?php echo $this->__('What do you need') ?></option>
+                                                <?php foreach ($topicsArray as $topic) :?>
+                                                    <option value="<?php echo $topic; ?>"><?php echo $topic; ?></option>
+                                                <?php endforeach;?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="input-box">
+                                        <textarea name="comment" id="comment"
+                                                  title="<?php echo Mage::helper('core')->quoteEscape(Mage::helper('contacts')->__('Comment')) ?>"
+                                                  class="required-entry input-text" cols="5" rows="3"
+                                                  placeholder="<?php echo Mage::helper('contacts')->__('Comment') ?>"></textarea>
+                                    </div>
+                                    <p class="required"><?php echo Mage::helper('contacts')->__('* Required Fields') ?></p>
+                                </li>
+                            </ul>
+                            <div class="buttons-set">
+                                <input type="text" name="hideit" id="hideit" value="" style="display:none !important;"/>
+                                <button type="submit"
+                                        title="<?php echo Mage::helper('core')->quoteEscape(Mage::helper('contacts')->__('Submit')) ?>"
+                                        class="button">
+                                    <span><span><?php echo Mage::helper('contacts')->__('Submit') ?></span></span>
+                                </button>
+                            </div>
+                        </form>
+                        <script type="text/javascript">
+                            //<![CDATA[
+                            var contactForm = new VarienForm('contactForm', true);
+                            //]]>
+                        </script>
+                    </div>
+                </div>
+                <div class="col-sm-2 col-contact line-contacts hidden-sm hidden-xs"></div>
+                <div class="col-md-5 col-contact">
+                    <div class="contact-right">
+                        <h3><?php echo Mage::getStoreConfig('general/store_information/name')?></h3>
+                        <p class="note-contacts"><?php echo $this->__('We love hearing from our clients. If you have any queries or feedback
+                            please contact us via phone or email. We are generally online however in case we´re away
+                            from the desk we´ll get back to you within 12 hours of your initial enquiry.') ?></p>
+                        <ul class="list_contact_us">
+                            <li class="address_contact"><?php echo Mage::getStoreConfig('general/store_information/address')?></li>
+                            <li class="phone_contact"><a href="tel:<?php echo str_replace('-', '', Mage::getStoreConfig('general/store_information/phone')); ?>"><?php echo Mage::getStoreConfig('general/store_information/phone')?></a><br /><?php echo $this->__('8-5 CST Mon-Fri') ?></li>
+                            <li class="email_contact"><a href="mailto:<?php echo Mage::getStoreConfig('trans_email/ident_support/email')?>"><?php echo Mage::getStoreConfig('trans_email/ident_support/email')?></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $j = jQuery.noConflict();
+    $j(document).ready(function () {
+        if ($j(window).width() > 768) {
+            var maxHeight = 0;
+            $j('.col-contact').each(function () {
+                jQuery(this).removeAttr('style');
+                var height = jQuery(this).height();
+                maxHeight = (height > maxHeight) ? height : maxHeight;
+            });
+
+            jQuery('.line-contacts').removeAttr('style').css('height', maxHeight + 'px');
+        }
+
+        $j(window).resize(function () {
+            if ($j(window).width() > 768) {
+                var maxHeight = 0;
+                $j('.col-contact').each(function () {
+                    jQuery(this).removeAttr('style');
+                    var height = jQuery(this).height();
+                    maxHeight = (height > maxHeight) ? height : maxHeight;
+                });
+
+                jQuery('.line-contacts').removeAttr('style').css('height', maxHeight + 'px');
+            }
+        });
+    });
+</script>

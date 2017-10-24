@@ -1,0 +1,44 @@
+<?php
+$groups = Mage::getResourceModel('customer/group_collection')
+    ->addFieldToFilter('customer_group_id', array('gt'=> 0))
+    ->load()
+    ->toOptionHash();
+?>
+
+<div class="col2-set">
+    <div class="col-1">
+        <div class="box">
+            <div class="box-title">
+                <h3><?php echo $this->__('Account Information') ?> <a href="<?php echo $this->getUrl('customer/account/edit') ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a></h3>
+            </div>
+            <div class="box-content account-info">
+                <p>
+                    <?php echo $this->escapeHtml($this->getCustomer()->getName()) ?><br />
+                    <?php echo $this->escapeHtml($this->getCustomer()->getEmail()) ?><br />
+                    <strong>User type: <font style="color: red"><?php echo $groups[$this->getCustomer()->getGroupId()] ?></font></strong><br />
+                    <a href="<?php echo $this->getChangePasswordUrl() ?>"><?php echo $this->__('Change Password') ?></a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <?php if( $this->isNewsletterEnabled() ): ?>
+    <div class="col-2">
+        <div class="box">
+            <div class="box-title">
+                <h3><?php echo $this->__('Newsletters') ?> <a href="<?php echo $this->getUrl('newsletter/manage') ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a></h3>
+            </div>
+            <div class="box-content">
+                <p>
+                    <?php if( $this->getIsSubscribed() ): ?>
+                        <?php echo $this->__("You are currently subscribed to 'General Subscription'.") ?>
+                    <?php else: ?>
+                        <?php echo $this->__('You are currently not subscribed to any newsletter.') ?>
+                    <?php endif; ?>
+                </p>
+            </div>
+        </div>
+        <?php /* Extensions placeholder */ ?>
+        <?php echo $this->getChildHtml('customer.account.dashboard.info.extra')?>
+    </div>
+    <?php endif; ?>
+</div>

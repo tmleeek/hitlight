@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<config>
+
+    <menu>
+        <cyberfision_brand translate="title" module="cyberfision_brand">
+            <title>Buying guide</title>
+            <sort_order>75</sort_order>
+
+            <depends>
+                <module>Cyberfision_Brand</module>
+            </depends>
+
+            <children>
+                <brand translate="title" module="cyberfision_brand">
+                    <title>Manage items</title>
+                    <sort_order>10</sort_order>
+                    <action>cyberfision_brand_admin/brand</action>
+                </brand>
+
+                <settings translate="title" module="cyberfision_brand">
+                    <title>Settings Labels</title>
+                    <sort_order>30</sort_order>
+                    <action>adminhtml/system_config/edit/section/tbuys</action>
+                </settings>
+            </children>
+        </cyberfision_brand>
+    </menu>
+
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <tbuys translate="title" module="cyberfision_brand">
+                                        <title>Buy guide</title>
+                                        <sort_order>700</sort_order>
+                                    </tbuys>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+
+                    <cyberfision_brand translate="title" module="cyberfision_brand">
+                        <title>Manager buy guide</title>
+                        <sort_order>75</sort_order>
+                        <children>
+                            <brand translate="title" module="cyberfision_brand">
+                                <title>Buying guide</title>
+                            </brand>
+                            <settings translate="title" module="cyberfision_brand">
+                                <title>Settings</title>
+                            </settings>
+                        </children>
+                    </cyberfision_brand>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

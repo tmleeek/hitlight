@@ -1,0 +1,76 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * Magento
+ * Date: 7/11/16
+ * Time: 2:26 PM
+ */
+?>
+
+<?php $categories = $this->getCategories(); ?>
+<?php $slides = $this->getSlides(); ?>
+    <div id="project_tabs_slide_content" style="">
+        <div class="entry-edit">
+            <div class="entry-edit-head">
+                <h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->__('Applications Banner') ?></h4>
+                <div class="form-buttons"></div>
+            </div>
+            <div class="fieldset " id="common_form">
+                <div class="hor-scroll">
+                    <table class="form-list" cellspacing="0">
+                        <tbody>
+                        <?php foreach ($categories as $category): ?>
+                            <tr>
+                                <td class="label"><label for="slide"><?php echo $category['category_name'] ?></label>
+                                </td>
+                                <td class="grid" style="">
+                                    <table cellspacing="0" class="data border"
+                                           id="slider_images_<?php echo $category['category_id'] ?>">
+                                        <colgroup>
+                                            <col width="100"/>
+                                            <col width="1"/>
+                                            <col width="480"/>
+                                            <col width="1"/>
+                                        </colgroup>
+                                        <thead>
+                                        <tr class="headings">
+                                            <th><?php echo Mage::helper('ghoster_shopbyproject')->__('Preview') ?></th>
+                                            <th><?php echo Mage::helper('ghoster_shopbyproject')->__('Action') ?></th>
+                                            <th><?php echo Mage::helper('ghoster_shopbyproject')->__('Url') ?></th>
+                                            <th><?php echo Mage::helper('ghoster_shopbyproject')->__('Delete') ?></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody
+                                            id="slider_images_container_<?php echo $category['category_id'] ?>"></tbody>
+                                        <tfoot>
+                                        <tr>
+                                            <td colspan="5" class="a-right">
+                                                <button style=""
+                                                        onclick="window.catalogSlider.add(<?php echo $category['category_id'] ?>)"
+                                                        class="scalable add" type="button"
+                                                        title="<?php echo $this->__('Add Image') ?>"
+                                                        id="id_<?php echo $this->getRandomString() ?>">
+                                                    <span><span><span><?php echo $this->__('Add Image') ?></span></span></span>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php if (count($slides)): ?>
+    <script type="text/javascript">
+        <?php foreach($slides as $category_id=>$items):?>
+            <?php foreach($items as $item):?>
+                window.catalogSlider.add(<?php echo $category_id?>,'<?php echo $item->getData('slide_image')?>', '<?php echo $item->getData('slide_url')?>');
+            <?php endforeach;?>
+        <?php endforeach;?>
+    </script>
+<?php endif; ?>

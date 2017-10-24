@@ -1,0 +1,84 @@
+<?php
+/**
+ * @category    Fishpig
+ * @package     Fishpig_Wordpress
+ * @license     http://fishpig.co.uk/license.txt
+ * @author      Ben Tideswell <help@fishpig.co.uk>
+ */
+?>
+<?php if (($posts = $this->getPostCollection()) !== false): ?>
+<?php if (count($posts) > 0): ?>
+	<div class="box-collateral box-related-posts">
+		<?php if ($title = $this->getTitle()): ?>
+			<h2><?php echo $this->__($title) ?></h2>
+		<?php endif; ?>
+		<div class="related-posts-wrapper">
+			<div class="amia-related-posts">
+				<ul>
+					<?php foreach($posts as $post): ?>
+					<li><a href="<?php echo $post->getPermalink() ?>"><?php echo $post->getPostTitle() ?></a></li>
+					<?php endforeach; ?>
+				</ul>
+			</div>
+
+<!--			<div class="related-posts-silder">-->
+<!--			--><?php //foreach($posts as $post): ?>
+<!--				<div class="item">-->
+<!--					<div class="col_related_posts">-->
+<!--						<div class="img_related_posts">-->
+<!--							--><?php //if ($post->getFeaturedImage()): ?>
+<!--								<img src="--><?php //echo $post->getFeaturedImage()->getMediumImage() ?><!--" alt="--><?php //echo $post->getPostTitle() ?><!--"/>.-->
+<!--							--><?php //else: ?>
+<!--								<img src="--><?php //echo $this->getSkinUrl('images/bg_instruction.jpg') ?><!--" alt="--><?php //echo $post->getPostTitle() ?><!--" />-->
+<!--							--><?php //endif; ?>
+<!--						</div>-->
+<!--						<div class="info_related_posts">-->
+<!---->
+<!--							--><?php
+//							if(strlen($post->getPostTitle()) > 30):
+//								$titles = mb_substr($post->getPostTitle(), 0, 30, 'UTF-8') . '...';
+//							else:
+//								$titles = $post->getPostTitle();
+//							endif;
+//							?>
+<!---->
+<!--							<h3><a href="--><?php //echo $post->getPermalink() ?><!--">--><?php //echo $titles ?><!--</a></h3>-->
+<!--							<div class="date_related_posts">--><?php //echo $post->getPostDate() ?><!--</div>-->
+<!--							<div class="content_related_posts">--><?php //echo mb_substr(strip_tags($post->getPostContent()), 0, 100, 'UTF-8') ?><!--...</div>-->
+<!--							<div class="read_related_posts"><a href="--><?php //echo $post->getPermalink() ?><!--">--><?php //echo $this->__('Continue reading...') ?><!--</a></div>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--				</div>-->
+<!--			--><?php //endforeach; ?>
+<!--			</div>-->
+		</div>
+<!--		<script type="text/javascript">-->
+<!--			$j = jQuery.noConflict();-->
+<!---->
+<!--			$j(document).ready(function () {-->
+<!---->
+<!--				$j('.related-posts-silder').owlCarousel({-->
+<!--					navigation: true,-->
+<!--					items : 4,-->
+<!--					itemsDesktop : [1199,4],-->
+<!--					itemsDesktopSmall : [979,3],-->
+<!--					itemsTablet: [768,3],-->
+<!--					itemsMobile : [479,1],-->
+<!---->
+<!--					navigationText: [-->
+<!--						"<span class='icon-arrow-left'></span>",-->
+<!--						"<span class='icon-arrow-right'></span>"-->
+<!--					]-->
+<!--				});-->
+<!---->
+<!--				setHeightAuto('.related-posts-silder', '.item .content_related_posts');-->
+<!---->
+<!---->
+<!--				$j(window).resize(function () {-->
+<!--					setHeightAuto('.related-posts-silder', '.item .content_related_posts');-->
+<!--				});-->
+<!--			});-->
+<!--		</script>-->
+	</div>
+<?php endif; ?>
+<?php endif; ?>

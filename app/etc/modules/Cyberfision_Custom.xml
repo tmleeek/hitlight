@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Cyberfision_Custom>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Cyberfision_Custom>
+    </modules>
+</config>

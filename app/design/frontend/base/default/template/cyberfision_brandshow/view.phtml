@@ -1,0 +1,28 @@
+<?php $brand = $this->getCurrentBrand(); ?>
+<?php if ($brand): ?>
+    
+    <h1><?php echo $brand->getName(); ?></h1>
+    
+    <p><a href="<?php echo $this->helper('cyberfision_brandshow/brand')->getBrandUrl($brand); ?>" title="<?php echo $this->escapeHtml($brand->getName()); ?>"><?php echo $brand->getName(); ?></a></p>
+    
+    <p><?php echo $brand->getDescription(); ?></p>
+    
+    <?php if ( strlen($brand->getImage()) > 0 )  :?>
+    <p><img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . $brand->getImage();?>" alt="<?php echo $brand->getName(); ?>" title="<?php echo $brand->getName(); ?>" width="200px" height="80px"/></p> 
+    <?php endif; ?>
+      
+    <p><a href="<?php echo $this->getUrl('cyberfision_brandshow/index/index') ?>" title="<?php echo $this->__('Back to Brand Directory'); ?>"><?php echo $this->__('&laquo; Back to Brand Directory'); ?></a></p>
+    
+    <?php $productCollection = $this->getProductCollection(); ?>
+    <?php if ($productCollection->count() > 0): ?>
+        
+        <h2>Products</h2>
+        <ul>
+            <?php foreach ($productCollection as $_product): ?>
+                <li><a href="<?php echo $this->getUrl('catalog/product/view', array('id' => $_product->getId())); ?>" title="<?php echo $this->escapeHtml($_product->getName()); ?>"><?php echo $_product->getName(); ?></a></li>
+            <?php endforeach; ?>
+        </ul>
+        
+    <?php endif; ?>
+    
+<?php endif; ?>

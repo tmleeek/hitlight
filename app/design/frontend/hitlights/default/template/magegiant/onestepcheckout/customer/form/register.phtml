@@ -1,0 +1,261 @@
+<?php
+?>
+<?php
+/**
+ * Create account form template
+ *
+ * @var $this Mage_Customer_Block_Form_Register
+ * @see app/design/frontend/enterprise/default/template/customer/form/register.phtml
+ */
+?>
+
+<div class="account-create">
+    <?php
+    $banner = Mage::getStoreConfig('cyberfision_custom/banner_page_custom/banner_register_page');
+    if($banner):
+        $banner = Mage::getBaseUrl('media') . 'banner/' . $banner;
+    endif;
+    ?>
+
+    <div class="title-pages" <?php if($banner) echo 'style="background-image: url(\''. $banner .'\')"' ?>>
+        <div class="container">
+            <h1><?php echo $this->__('Create an Account') ?></h1>
+        </div>
+    </div>
+    <div class="account-create-wrapper">
+        <div class="container">
+            <div class="account-create-content">
+                <h2><?php echo $this->__('Welcome to be our member!') ?></h2>
+                <p class="note-creates"><?php echo $this->__('Join us now!') ?></p>
+                <?php echo $this->getChildHtml('form_fields_before') ?>
+                <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+                <div class="col-sm-12 margin-create-account">
+                    <form action="<?php echo $this->getPostActionUrl() ?>" method="post" id="form-validate" enctype="multipart/form-data">
+                        <input type="hidden" name="success_url" value="<?php echo $this->getSuccessUrl() ?>" />
+                        <input type="hidden" name="error_url" value="<?php echo $this->getErrorUrl() ?>" />
+                        <input type="hidden" name="form_key" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
+                        <ul class="form-list">
+                            <li><?php echo $this->getLayout()->createBlock('customer/widget_name')->setObject($this->getFormData())->setForceUseCustomerAttributes(true)->toHtml() ?></li>
+                            <li>
+                                <div class="input-box">
+                                    <input type="text" name="email" id="email_address"
+                                           value="<?php echo $this->htmlEscape($this->getFormData()->getEmail()) ?>"
+                                           title="<?php echo $this->__('Email Address') ?>"
+                                           class="input-text validate-email required-entry" placeholder="<?php echo $this->__('Email Address') ?>"/>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="input-box">
+                                    <input type="password" name="password" id="password"
+                                           title="<?php echo $this->__('Password') ?>"
+                                           class="input-text required-entry validate-password" placeholder="<?php echo $this->__('Password') ?>" />
+                                </div>
+                            </li>
+                            <li>
+                                <div class="input-box">
+                                    <input type="password" name="confirmation"
+                                           title="<?php echo $this->__('Confirm Password') ?>" id="confirmation"
+                                           class="input-text required-entry validate-cpassword" placeholder="<?php echo $this->__('Confirm Password') ?>" />
+                                </div>
+                            </li>
+                            <li>
+                                <div class="input-box">
+                                    <input type="text" name="postcode"
+                                           value="<?php echo $this->htmlEscape($this->getFormData()->getPostcode()) ?>"
+                                           title="<?php echo $this->__('Zip/Postal Code') ?>" id="zip"
+                                           class="input-text validate-zip-international required-entry validate-number" placeholder="<?php echo $this->__('Zip Code') ?>" />
+                                </div>
+                            </li>
+
+                            <li>
+                                <?php echo $this->getChildHtml('customer_attributes_addon');?>
+                            </li>
+
+                            <!-- get all store -->
+                            <!--<li>
+                                <select id="customer_store_create" name="customer_store_create" class="" autocomplete="off">
+                                    <option value="" selected="selected" ><?php //echo $this->__('Choose Store');?></option>
+
+                            <?php
+                            /*foreach (Mage::app()->getWebsites() as $website) {
+                                foreach ($website->getGroups() as $group) {
+                                    $stores = $group->getStores();
+                                    foreach ($stores as $store) {
+                                        ?>
+                                        <option value="<?php echo $store->getId(); ?>"><?php echo $store->getName(); ?></option>
+                                    <?php
+                                    }
+                                }
+                            }*/
+                            ?>
+                                    </select>
+                            </li>
+                            <!-- end store -->
+
+                            <!-- get all customer group -->
+                            <li>
+                                <div class="amia-select-custom">
+                                    <div class="amia-select-show"><?php echo $this->__('User Type') ?></div>
+                                    <div class="amia-slelect-option">
+                                        <div class="amia-select-value" data-value=""><?php echo $this->__('User Type');?></div>
+                                        <?php
+                                        $amia_groups = Mage::getModel('customer/group')->getCollection();
+                                        $use_type_group = explode(',', Mage::getStoreConfig('use_type_customer/general/usetype'));
+
+                                        foreach ($amia_groups as $amia_group):
+                                            if (in_array($amia_group->getCustomerGroupId(), $use_type_group)):
+                                                ?>
+                                                <div class="amia-select-value" data-value="<?php echo $amia_group->getCustomerGroupId(); ?>"><?php echo $amia_group->getCustomerGroupCode(); ?></div>
+                                                <?php
+                                            endif;
+                                        endforeach;
+                                        ?>
+                                    </div>
+                                </div>
+                                <div class="input-box-user-type">
+                                <select id="customer_user_type_create" name="customer_user_type" class="validate-select" autocomplete="off">
+                                    <option value="" selected="selected" ><?php echo $this->__('User Type');?></option>
+                            <?php
+                            $groups = Mage::getModel('customer/group')->getCollection();
+                            foreach ($groups as $group):
+                                if (in_array($group->getCustomerGroupId(), $use_type_group)):
+                                ?>
+                                    <option value="<?php echo $group->getCustomerGroupId(); ?>"><?php echo $group->getCustomerGroupCode(); ?></option>
+                                    <?php
+                                endif;
+                            endforeach;
+                            ?>
+                            <!-- end groups -->
+                                    </select>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="input-box">
+                                    <input type="text" name="company" id="company"
+                                           value="<?php echo $this->htmlEscape($this->getFormData()->getCompany()) ?>"
+                                           title="<?php echo $this->__('Company') ?>" class="input-text required-entry" placeholder="<?php echo $this->__('Company') ?>" />
+                                </div>
+                                <div class="customer_company">
+                                    <div class="input-box is_checkbox">
+                                        <input type="checkbox" name="is_company"
+                                               title="<?php echo $this->__('Company') ?>"
+                                               class="checkbox"/>
+                                    </div>
+                                    <label for="is_company"><?php echo $this->__('Personal Use') ?></label>
+                                </div>
+                                <div style="padding-top: 20px" class="captcha"> <?php echo $this->getChildHtml('google.recaptcha') ?></div>
+                                <p class="required"><?php echo $this->__('* Required Fields') ?></p>
+                            </li>
+                            <?php if ($this->isNewsletterEnabled()): ?>
+                                <li id="subscribeds">
+                                    <div class="input-box">
+                                        <input type="checkbox" name="is_subscribed"
+                                               title="<?php echo $this->__('Sign Up for Newsletter') ?>" value="1"
+                                               id="is_subscribed"<?php if ($this->getFormData()->getIsSubscribed()): ?> checked="checked"<?php endif; ?>
+                                               class="checkbox"/>
+                                    </div>
+                                    <label for="is_subscribed"><?php echo $this->__('Sign Up for Newsletter') ?></label>
+                                </li>
+                            <?php endif ?>
+                            <?php echo $this->getChildHtml('persistent.remember.me'); ?>
+                        </ul>
+                        <div class="button-create-account">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="button-login-account button_registers">
+                                        <a href="<?php echo Mage::getUrl('customer/account/login'); ?>"><span><?php echo $this->__('Already registered') ?></span></a>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 btn-submit button_login">
+                                    <button type="submit" class="button" title="<?php echo $this->__('Submit') ?>"><span><span><?php echo $this->__('Create an account') ?></span></span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <script type="text/javascript">
+                        //<![CDATA[
+                        var dataForm = new VarienForm('form-validate', true);
+                        <?php if($this->getShowAddressFields()): ?>
+                        new RegionUpdater('country', 'region', 'region_id', <?php echo $this->helper('directory')->getRegionJson() ?>, undefined, 'zip');
+                        <?php endif; ?>
+
+                        Form.getElements('form-validate').each(function (element) {
+                            element.setAttribute('autocomplete', 'off');
+                        });
+                        //]]>
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<div class="custom-select" style="display: block; background: #000 none;">-->
+<!--    <select id="operator_select">-->
+<!--        <option value="1">1</option>-->
+<!--        <option value="2">2</option>-->
+<!--    <select>-->
+<!--</div>-->
+
+<script>
+    /*
+    jQuery(document).ready(function ($) {
+        $('select#customer_type option:first').text("Choose Store");
+        $('select#customer_category option:first').text("User Type");
+        $('select#customer_type option, select#customer_category option')
+            .removeAttr('selected')
+            .filter('[value=""]')
+            .attr('selected', true);
+    });
+    */
+
+    jQuery(document).ready(function() {
+        jQuery(document).on('click', '.amia-select-show', function() {
+            if(jQuery('.amia-slelect-option').is(':hidden')) {
+                jQuery('.amia-slelect-option').slideDown();
+            } else {
+                jQuery('.amia-slelect-option').slideUp();
+            }
+        });
+
+        jQuery(document).on('click', '.amia-select-value', function() {
+            jQuery(this).each(function () {
+                var $ck = jQuery(this).html();
+                if($ck != 'Personal Use'){
+                    jQuery('.customer_company').css('display','');
+                    jQuery('#company').addClass('required-entry');
+                }else{
+                    jQuery('.customer_company').css('display','none');
+                    jQuery('#company').removeClass('required-entry');
+                    jQuery('.customer_company .is_checkbox input').removeAttr('checked');
+                }
+            });
+            jQuery('.amia-select-show').html(jQuery(this).html());
+            jQuery('#customer_user_type_create').val(jQuery(this).attr('data-value'));
+            jQuery('.amia-slelect-option').slideUp();
+        });
+
+        jQuery('.account-create-content form').submit(function() {
+            console.log(jQuery('#customer_user_type_create').val());
+            if(!jQuery('#customer_user_type_create').val()) {
+                jQuery('#advice-validate-select-customer_user_type_create').remove();
+                jQuery('.amia-select-show').after('<div class="validation-advice" id="advice-validate-select-customer_user_type_create" style="">Please select an option.</div>');
+            }
+        });
+
+        jQuery('.customer_company .is_checkbox input').change(function() {
+            if(jQuery(this).prop( "checked" )) {
+                jQuery('#company').removeClass('required-entry');
+            } else {
+                jQuery('#company').addClass('required-entry');
+            }
+        });
+    });
+</script>
+
+<style>
+    .account-create-content .customattribute .field-row:nth-of-type(2) {
+        margin-top: 20px;
+    }
+</style>

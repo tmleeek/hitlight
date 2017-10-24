@@ -1,0 +1,68 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * Magento
+ * Date: 7/25/16
+ * Time: 10:41 AM
+ */
+
+?>
+
+<?php $_helper = Mage::helper('mageworx_downloads'); ?>
+<?php /* @var $this MageWorx_Downloads_Block_Instruction */ ?>
+<?php $files = $this->getInstructionFiles() ?>
+
+
+<section class="instruction_wrapper">
+    <div class="title-pages">
+        <div class="container">
+            <h1><?php echo $this->__('Instructions') ?></h1>
+        </div>
+    </div>
+    <div class="instruction_content_wrapper">
+        <div class="container">
+            <h2 class="title_page_30"><?php echo $this->__('HitLights LED Lighting Instruction Manuals') ?></h2>
+            <div
+                class="note_page_14"><?php echo $this->__('Please download PDF file to know how to use LED Light') ?></div>
+            <div class="content_box_instruction">
+                <div class="row">
+                    <?php foreach ($files as $file): ?>
+                        <?php /* @var $file MageWorx_Downloads_Model_Files */?>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="col_box_instruction">
+                                <div class="content_col_instruction">
+                                    <div class="title_col_instruction"><?php echo $file->getData('name'); ?></div>
+                                    <a href="<?php echo ($file->getData('url') != '') ? $file->getData('url') : $_helper->getDownloadLink($file)?>" class="btn_gradient"><?php echo $this->__('Download') ?></a>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+    $j = jQuery.noConflict();
+
+    $j(document).ready(function () {
+
+        $j(window).load(function () {
+            addHeights('.col_box_instruction', '.content_col_instruction', 20);
+            addHeights('.col_box_home', '.content_col_box_home', 0);
+        });
+
+        $j(window).resize(function () {
+            addHeights('.col_box_instruction', '.content_col_instruction', 20);
+            addHeights('.col_box_home', '.content_col_box_home', 0);
+        });
+    });
+
+    function addHeights(parent, child, pad) {
+        $j(parent).each(function () {
+            $j(child).removeAttr('style');
+            $j(child).css('height', ($j(this).width() - pad) + 'px');
+        });
+    }
+</script>

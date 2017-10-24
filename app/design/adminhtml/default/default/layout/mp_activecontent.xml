@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * MagPleasure Ltd.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magpleasure.com/LICENSE.txt
+ *
+ * @category   Magpleasure
+ * @package    Magpleasure_Activecontent
+ * @copyright  Copyright (c) 2011-2014 MagPleasure Ltd. (http://www.magpleasure.com)
+ * @license    http://www.magpleasure.com/LICENSE.txt
+ */
+ -->
+<layout version="0.1.0">
+
+    <activecontent_admin_admin_slider_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="activecontent/adminhtml_slider_grid" name="activecontent.slider.grid"/>
+        </block>
+    </activecontent_admin_admin_slider_grid>
+
+    <activecontent_admin_admin_slider_index>
+        <reference name="content">
+            <block type="activecontent/adminhtml_slider" name="activecontent.slider" as="activecontent.slider"/>
+        </reference>
+    </activecontent_admin_admin_slider_index>
+
+    <activecontent_admin_admin_slider_edit>
+        <reference name="head">
+            <action method="addJs"><script>magpleasure/common.js</script></action>
+            <action method="addJs"><script>mp_activecontent/backend/slides.js</script></action>
+            <action method="addCss"><script>mp_activecontent/css/styles.css</script></action>
+        </reference>
+        <reference name="content">
+            <block type="activecontent/adminhtml_slider_edit" name="activecontent.slider.edit" as="activecontent.slider.edit"/>
+        </reference>
+        <reference name="left">
+            <block type="activecontent/adminhtml_slider_edit_tabs" name="activecontent.slider.tabs" as="activecontent.slider.tabs"/>
+        </reference>
+    </activecontent_admin_admin_slider_edit>
+
+    <activecontent_admin_admin_slide_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="activecontent/adminhtml_slide_grid" name="activecontent.slide.grid"/>
+        </block>
+    </activecontent_admin_admin_slide_grid>
+
+    <activecontent_admin_admin_slide_edit>
+        <update handle="editor" />
+        <reference name="head">
+            <action method="setCanLoadTinyMce"><value>true</value></action>
+            <action method="addCss"><script>mp_activecontent/css/styles.css</script></action>
+        </reference>
+        <reference name="content">
+            <block type="activecontent/adminhtml_slide_edit" name="activecontent.slide.edir" as="activecontent.slide.edit"/>
+        </reference>
+    </activecontent_admin_admin_slide_edit>
+</layout>

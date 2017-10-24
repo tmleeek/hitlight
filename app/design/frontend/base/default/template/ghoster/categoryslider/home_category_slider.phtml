@@ -1,0 +1,30 @@
+<?php $config = Mage::helper('ghoster_categoryslider')->getStoreConfig(); ?>
+
+<?php if ($config['enable']) : ?>
+    <section id="category_menu_wrapper" class="category_menu_wrapper">
+        <h2><?php echo $this->__('Browse all products') ?></h2>
+        <div class="box_category_menu_wrapper">
+            <div class="container">
+                <div class="amia-category-list">
+                    <?php $count = 1; ?>
+                    <?php $categories = Mage::helper('ghoster_categoryslider')->getSortedCollectionCategory($config['categories'])?>
+                    <?php foreach ($categories as $category): ?>
+                        <div class="box_category_menu box_category_menu-<?php echo $count ?> <?php echo Mage::helper('ghoster_categoryslider')->getClassRenderer($count); ?>">
+                            <div class="image_category_menu">
+                                <a href="<?php echo $category->getUrl(); ?>">
+                                    <?php if ($category->getImageUrl()): ?>
+                                        <img src="<?php echo $category->getImageUrl(); ?>">
+                                    <?php endif; ?>
+                                    <div class="item_category_name">
+                                        <p><span><?php echo $category->getName() ?></span></p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <?php $count++; ?>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+    </section>
+<?php endif; ?>

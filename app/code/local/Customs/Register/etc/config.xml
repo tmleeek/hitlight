@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Customs_Register>
+            <version>1.0.1</version>
+        </Customs_Register>
+    </modules>
+    
+    <frontend>
+        <routers>
+            <customer>
+                <use>standard</use>
+                <args>
+                    <modules>
+                        <Customs_Register before="Mage_Customer">Customs_Register</Customs_Register>
+                    </modules>
+                </args>
+            </customer>
+
+            <!--overriding contact action -->
+            <contacts>
+                <args>
+                    <modules>
+                        <Customs_Register before="Mage_Contacts">Customs_Register</Customs_Register>
+                    </modules>
+                </args>
+            </contacts>
+
+            <!--overriding sales guest action -->
+            <sales>
+                <args>
+                    <modules>
+                        <Customs_Register before="Mage_Sales">Customs_Register</Customs_Register>
+                    </modules>
+                </args>
+            </sales>
+        </routers>
+    </frontend>
+
+    <global>
+        <models>
+            <customer>
+                <rewrite>
+                    <customer>Customs_Register_Model_Customer</customer>
+                </rewrite>
+            </customer>
+
+            <custom_product_savef>
+                <class>Customs_Register_Model</class>
+            </custom_product_savef>
+        </models>
+
+        <!--
+        <events>
+            <catalog_product_save_after>
+                <observers>
+                    <custom_product_savef>
+                        <class>Customs_Register_Model_Observer</class>
+                        <method>catalogProductSaveAfter</method>
+                    </custom_product_savef>
+                </observers>
+            </catalog_product_save_after>
+        </events>
+        -->
+
+        <events>
+            <customer_login>
+                <observers>
+                    <customerredirect>
+                        <class>Customs_Register_Model_Observer</class>
+                        <method>customerLogin</method>
+                    </customerredirect>
+                </observers>
+            </customer_login>
+
+            <controller_action_postdispatch_customer_account_logout> <!-- identifier of the event we want to catch -->
+                <observers>
+                    <customer_logout_handler> <!-- identifier of the event handler -->
+                        <class>Customs_Register_Model_Observer</class> <!-- observers class alias -->
+                        <method>customerLogout</method>  <!-- observer's method to be called -->
+                    </customer_logout_handler>
+                </observers>
+            </controller_action_postdispatch_customer_account_logout>
+
+        </events>
+
+    </global>
+</config>

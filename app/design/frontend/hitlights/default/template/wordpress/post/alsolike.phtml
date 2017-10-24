@@ -1,0 +1,99 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     rwd_default
+ * @copyright   Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+
+<?php
+
+$post = $this->getPost();
+$categories = $post->getParentCategories();
+
+foreach ($categories as $category) {
+    $cate[] = $category->getId();
+}
+
+$postCollections = Mage::getModel('wordpress/post')->getCollection()
+    ->addIsPublishedFilter()
+    ->addCategoryIdFilter($cate[0])
+    ->setOrder('post_date', 'desc');
+    //->setPageSize(-1);
+?>
+
+<section class="also_like">
+    <div class="container">
+        <h2>You may also like</h2>
+        <div id="amia-also-like" class="amia-also-like owl-carousel">
+            <?php foreach($postCollections as $postCollection) { ?>
+                <div class="item">
+                    <div class="col_also_like">
+                        <div class="img_also_like">
+                            <?php if ($postCollection->getFeaturedImage()): ?>
+                                <img src="<?php echo $postCollection->getFeaturedImage()->getMediumImage() ?>" alt="<?php echo $postCollection->getPostTitle() ?>"/>
+                            <?php else: ?>
+                                <img src="<?php echo $this->getSkinUrl('images/bg_instruction.jpg') ?>" alt="<?php echo $post->getPostTitle() ?>" />
+                            <?php endif; ?>
+                        </div>
+                        <div class="info_also_like">
+
+                            <?php
+                                if(strlen($postCollection->getPostTitle()) > 30):
+                                    $titles = mb_substr($postCollection->getPostTitle(), 0, 30, 'UTF-8') . '...';
+                                else:
+                                    $titles = $postCollection->getPostTitle();
+                                endif;
+                            ?>
+
+                            <h3><a href="<?php echo $postCollection->getPermalink() ?>"><?php echo $titles ?></a></h3>
+                            <div class="date_also_like"><?php echo $postCollection->getPostDate() ?></div>
+                            <div class="content_also_like"><?php echo mb_substr(strip_tags($postCollection->getPostContent()), 0, 80, 'UTF-8') ?>...</div>
+                            <div class="read_also_like"><a href="<?php echo $postCollection->getPermalink() ?>"><?php echo $this->__('Continue reading...') ?></a></div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
+    </div>
+</section>
+
+<script>
+    jQuery(document).ready(function() {
+        jQuery('#amia-also-like').owlCarousel({
+            loop: true,
+            margin: 30,
+            nav: true,
+            responsive:{
+                0: {
+                    items: 1
+                },
+                768: {
+                    items: 2
+                },
+                992: {
+                    items: 4
+                }
+            }
+        });
+    });
+</script>

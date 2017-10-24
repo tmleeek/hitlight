@@ -1,0 +1,23 @@
+<?php
+$helper = Mage::helper('marketplace');
+$seller = $this->getSeller();
+$productCollection = $this->getProductCollection();
+?>
+<?php if ($seller->getId()): ?>
+    <div class="affiliate-container">
+        <p class="affiliate-name">
+            <span><?php echo $this->__('Manufacture:') ?></span>
+            <a href="<?php echo $helper->getRewriteUrl('marketplace/seller/profile/' . $this->getProfileUrl()); ?>"><?php echo $seller->getName(); ?></a>
+        </p>
+
+        <?php if ($productCollection->count() > 1): ?>
+            <span class="separator">     |   </span>
+            <p class="affiliate-more">
+                <span><?php echo $this->__('View More') ?></span>
+                <a href="<?php echo $helper->getRewriteUrl('marketplace/seller/collection/' . $this->getProfileUrl()); ?>"><?php echo((int)$productCollection->count() - 1); ?><?php echo ' ' . $this->__('different products'); ?></a>
+                <span><?php echo $this->__('of this manufacture'); ?></span>
+            </p>
+        <?php endif; ?>
+
+    </div>
+<?php endif; ?>

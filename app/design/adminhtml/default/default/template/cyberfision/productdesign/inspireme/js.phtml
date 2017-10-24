@@ -1,0 +1,95 @@
+<script type="text/javascript">
+    var xboxOneFrontGroups = '<?php echo Mage::getStoreConfig('productoptions/xbox-one/front') ?>'.split(',');
+    var xboxOneBackGroups = '<?php echo Mage::getStoreConfig('productoptions/xbox-one/back') ?>'.split(',');
+    var xbox360FrontGroups = '<?php echo Mage::getStoreConfig('productoptions/xbox-360/front') ?>'.split(',');
+    var xbox360BackGroups = '<?php echo Mage::getStoreConfig('productoptions/xbox-360/back') ?>'.split(',');
+    var ps3FrontGroups = '<?php echo Mage::getStoreConfig('productoptions/ps3/front') ?>'.split(',');
+    var ps3BackGroups = '<?php echo Mage::getStoreConfig('productoptions/ps3/back') ?>'.split(',');
+    var ps4FrontGroups = '<?php echo Mage::getStoreConfig('productoptions/ps4/front') ?>'.split(',');
+    var ps4BackGroups = '<?php echo Mage::getStoreConfig('productoptions/ps4/back') ?>'.split(',');
+    var ps4TrackpadGroups = '<?php echo Mage::getStoreConfig('productoptions/ps4/trackpad') ?>'.split(',');
+
+    function checkRelatedGroup(value,groupId){
+        if(value!=''){
+            if(in_array(groupId, xboxOneFrontGroups)){
+                for(var i=0; i<xboxOneFrontGroups.length; i++){
+                    if(groupId!=xboxOneFrontGroups[i]){
+                        document.getElementById(xboxOneFrontGroups[i]).value = '';
+                    }
+                }
+            }
+            if(in_array(groupId, xboxOneBackGroups)){
+                for(i=0; i<xboxOneBackGroups.length; i++){
+                    if(groupId!=xboxOneBackGroups[i]){
+                        document.getElementById(xboxOneBackGroups[i]).value = '';
+                    }
+                }
+            }
+
+            if(in_array(groupId, ps4FrontGroups)){
+                for(i=0; i<ps4FrontGroups.length; i++){
+                    if(groupId!=ps4FrontGroups[i]){
+                        document.getElementById(ps4FrontGroups[i]).value = '';
+                    }
+                }
+            }
+
+            if(in_array(groupId, ps4BackGroups)){
+                for(i=0; i<ps4BackGroups.length; i++){
+                    if(groupId!=ps4BackGroups[i]){
+                        document.getElementById(ps4BackGroups[i]).value = '';
+                    }
+                }
+            }
+
+            if(in_array(groupId, ps4TrackpadGroups)){
+                for(i=0; i<ps4TrackpadGroups.length; i++){
+                    if(groupId!=ps4TrackpadGroups[i]){
+                        document.getElementById(ps4TrackpadGroups[i]).value = '';
+                    }
+                }
+            }
+
+            if(in_array(groupId, ps3BackGroups)){
+                for(i=0; i<ps3BackGroups.length; i++){
+                    if(groupId!=ps3BackGroups[i]){
+                        document.getElementById(ps3BackGroups[i]).value = '';
+                    }
+                }
+            }
+
+            if(in_array(groupId, ps3FrontGroups)){
+                for(i=0; i<ps3FrontGroups.length; i++){
+                    if(groupId!=ps3FrontGroups[i]){
+                        document.getElementById(ps3FrontGroups[i]).value = '';
+                    }
+                }
+            }
+            if(in_array(groupId, xbox360BackGroups)){
+                for(i=0; i<xbox360BackGroups.length; i++){
+                    if(groupId!=xbox360BackGroups[i]){
+                        document.getElementById(xbox360BackGroups[i]).value = '';
+                    }
+                }
+            }
+
+            if(in_array(groupId, xbox360FrontGroups)){
+                for(i=0; i<xbox360FrontGroups.length; i++){
+                    if(groupId!=xbox360FrontGroups[i]){
+                        document.getElementById(xbox360FrontGroups[i]).value = '';
+                    }
+                }
+            }
+        }
+    }
+
+    function in_array(needle, haystack) {
+        for (var key = 0; key < haystack.length; key++) {
+            if (needle == haystack[key]) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+</script>

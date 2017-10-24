@@ -1,0 +1,222 @@
+/**
+ * MagPleasure Ltd.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magpleasure.com/LICENSE.txt
+ *
+ * @category   Magpleasure
+ * @package    Magpleasure_Activecontent
+ * @copyright  Copyright (c) 2011-2014 MagPleasure Ltd. (http://www.magpleasure.com)
+ * @license    http://www.magpleasure.com/LICENSE.txt
+ */
+
+
+/** IMPORT FONTS
+===================================*/
+@import url("https://fonts.googleapis.com/css?family=Istok+Web&subset=latin,latin-ext,cyrillic");
+
+/** THEME
+===================================*/
+
+
+.simple .bx-wrapper {
+    border: 3px solid #FFFFFF;
+    font-size: 10px;
+    margin: 0 auto;
+    position: relative;
+    text-align: left;
+    z-index: 90;
+}
+
+.simple .bx-wrapper .bx-viewport {
+
+
+
+}
+
+.simple .bx-wrapper .bx-viewport ul {
+
+}
+
+.simple .bx-wrapper .bx-viewport ul li {
+
+}
+
+/* PAGER */
+
+.simple .bx-wrapper .bx-pager .bx-pager-item {
+    left: 0;
+}
+
+.simple .bx-wrapper .bx-pager {
+    bottom: 0;
+    left: 50%;
+    padding: 5px;
+
+    float: left;
+    font-size: 0;
+    position: absolute;
+    z-index: 91;
+}
+
+.simple .bx-wrapper .bx-pager div{
+    left: -50%;
+    float: left;
+    position: relative;
+}
+
+.simple .bx-wrapper .bx-pager .bx-pager-item a {
+    background: url("./bullet.png") repeat scroll left top rgba(0, 0, 0, 0);
+    color: #FFFFFF;
+    float: left;
+    font: 12px/20px 'Istok Web',Arial,Helvetica,sans-serif;
+    height: 20px;
+    margin-left: 4px;
+    position: relative;
+    text-align: center;
+    width: 20px;
+}
+
+.simple .bx-wrapper .bx-controls-auto .bx-controls-auto-item {
+
+}
+
+.simple .bx-wrapper .bx-pager a {
+
+}
+
+.simple .bx-wrapper .bx-pager.bx-default-pager a:hover,
+.simple .bx-wrapper .bx-pager.bx-default-pager a.active {
+    background-position: 0 100%;
+    color: #000000;
+}
+
+/* DIRECTION CONTROLS (NEXT / PREV) */
+.simple .bx-wrapper .bx-prev, .simple .bx-wrapper .bx-next {
+    text-indent: -10000px;
+
+    background-size: 200%;
+    position:absolute;
+    display:block;
+    top:50%;
+    margin-top:-1.8em;
+    z-index:60;
+    width: 2.6em;
+    height: 3.6em;
+    background-image: url(./arrows.png);
+    background-size: 200%;
+}
+
+.simple .bx-wrapper .bx-prev {
+    left:5px;
+    background-position: 0 0;
+}
+
+.simple .bx-wrapper .bx-next {
+    background-position: 100% 0;
+    right:5px;
+}
+
+.simple .bx-wrapper .bx-prev:hover {
+    background-position: 0 100%;
+}
+
+.simple .bx-wrapper .bx-next:hover {
+    background-position: 100% 100%;
+}
+
+.simple .bx-wrapper .bx-controls-direction a {
+
+}
+
+.simple .bx-wrapper .bx-controls-direction a.disabled {
+    display: none;
+}
+
+/* AUTO CONTROLS (START / STOP) */
+
+.simple .bx-wrapper .bx-controls-auto {
+
+}
+
+.simple .bx-wrapper .bx-controls-auto .bx-start.active, .simple .bx-wrapper .bx-controls-auto .bx-stop.active {
+
+    display: none;
+}
+
+.simple .bx-wrapper .bx-controls-auto .bx-start, .simple .bx-wrapper .bx-controls-auto .bx-stop {
+    display:block;
+    width: 2.1em;
+    height: 3.6em;
+    position: absolute;
+    top: 50%;
+    margin-top:-1.8em;
+    left: 50%;
+    z-index: 59;
+
+    text-indent: -10000px;
+
+}
+
+.simple .bx-wrapper .bx-controls-auto .bx-start {
+    background-size: 100% 200%;
+    background-image: url(./play.png);
+}
+
+.simple .bx-wrapper .bx-controls-auto .bx-controls-auto-item {
+    position: relative;
+    top: -50%;
+    left: -50%;
+}
+
+.simple .bx-wrapper .bx-controls-auto .bx-start:hover, .simple .bx-wrapper .bx-controls-auto .bx-stop:hover {
+    background-position: 100% 100% !important;
+}
+
+.simple .bx-wrapper .bx-controls-auto .bx-stop {
+    background-size: 100% 200%;
+    background-image: url(./pause.png);
+}
+
+/* PAGER WITH AUTO-CONTROLS HYBRID LAYOUT */
+
+.simple .bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-pager {
+
+}
+
+.simple .bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-controls-auto {
+    left: 50%;
+    position: absolute;
+    top: 50%;
+}
+
+/* IMAGE CAPTIONS */
+
+.simple .bx-wrapper .bx-caption {
+    position: absolute;
+    display:block;
+    bottom:3em;
+    left: 0;
+    margin-right:0.5em;
+    z-index: 50;
+    padding: 0.26em 0.6em;
+    color: #000000;
+    text-transform:none;
+    background:#fff;
+    font-family: 'Istok Web',Arial,Helvetica,sans-serif;
+    border-radius:0 0.2em 0.2em 0;
+    -moz-border-radius:0 0.2em 0.2em 0;
+    -webkit-border-radius:0 0.2em 0.2em 0;
+    opacity:0.6;
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=60);
+
+    font-size: 1.6em;
+}
+
+.simple .bx-wrapper .bx-caption span {
+    font-size: 1.2em;
+}

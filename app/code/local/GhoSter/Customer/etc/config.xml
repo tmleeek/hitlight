@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <GhoSter_Customer>
+            <version>1.0.0</version>
+        </GhoSter_Customer>
+    </modules>
+    <global>
+        <models>
+            <ghoster_customer>
+                <class>GhoSter_Customer_Model</class>
+            </ghoster_customer>
+        </models>
+        <helpers>
+            <use_type_customer>
+                <class>GhoSter_Customer_Helper</class>
+            </use_type_customer>
+        </helpers>
+        <blocks>
+            <ghoster_customer>
+                <class>GhoSter_Customer_Block</class>
+            </ghoster_customer>
+        </blocks>
+    </global>
+</config>

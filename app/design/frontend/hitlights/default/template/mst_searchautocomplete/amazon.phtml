@@ -1,0 +1,27 @@
+<?php
+$_helper           =  Mage::helper('catalogsearch');
+$_value            = $_helper->getEscapedQueryText();
+$_currentCategory  = Mage::getSingleton('core/app')->getRequest()->getParam('cat');
+$_currentAttribute = Mage::getSingleton('core/app')->getRequest()->getParam('attr');
+$_filterType       = $this->getFilterType();
+$_url              = $this->getAjaxUrl();
+?>
+<form id="search_mini_form" class="searchautocomplete UI-SEARCHAUTOCOMPLETE" action="<?php echo $this->helper('catalogsearch')->getResultUrl() ?>" method="get"
+      data-tip="<?php echo $this->__(Mage::getStoreConfig('searchautocomplete/general/tip')) ?>"
+      data-url="<?php echo $_url ?>"
+      data-minchars="<?php echo Mage::getStoreConfig('searchautocomplete/general/min_chars') ?>"
+      data-delay="<?php echo Mage::getStoreConfig('searchautocomplete/general/delay') ?>">
+    <div class="form-search">
+        <div class="row">
+            <div class="col-md-10 nav-input UI-NAV-INPUT">
+                    <input id="search" class="input-text UI-SEARCH" type="text" autocomplete="off" name="<?php echo $_helper->getQueryParamName() ?>" value="<?php echo $_helper->getEscapedQueryText() ?>" maxlength="<?php echo $_helper->getMaxQueryLength() ?>" />
+            </div>
+            <div class="col-md-2">
+                <button type="submit" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Search')) ?>" class="button"><span><?php echo $this->__('Search') ?></span></button>
+            </div>
+        </div>
+        <div class="searchautocomplete-loader UI-LOADER" style="display:none;"></div>
+        <div style="display:none" class="searchautocomplete-placeholder UI-PLACEHOLDER"></div>
+
+    </div>
+</form>

@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Unitech Corp.
+ *
+ * @category   Unitech
+ * @package    Unitech_LandingPage
+ * @version    0.0.1
+ * @copyright  @copyright Copyright (c) 2015 Unitech Corp. (http://www.unitech.vn)
+ */
+-->
+<config>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <zextension translate="title">
+                        <title>GameDay Extensions</title>
+                        <sort_order>200</sort_order>
+                        <children>
+                            <unitech_landingpage translate="title" module="unitech_landingpage">
+                                <title>Landing Pages</title>
+                                <sort_order>300</sort_order>
+                                <children>
+                                    <landingpage_list translate="title" module="unitech_landingpage">
+                                        <title>Manage Landing Pages</title>
+                                        <sort_order>10</sort_order>
+                                    </landingpage_list>
+                                    <landingpage_import_export translate="title" module="unitech_landingpage">
+                                        <title>Import/Export Landing Pages</title>
+                                        <sort_order>20</sort_order>
+                                    </landingpage_import_export>
+                                    <landingpage_settings translate="title" module="unitech_landingpage">
+                                        <title>Manage Landing Page Settings</title>
+                                        <sort_order>30</sort_order>
+                                    </landingpage_settings>
+                                </children>
+                            </unitech_landingpage>
+                        </children>
+                    </zextension>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <zextension translate="title">
+                                        <title>GameDay Extensions</title>
+                                    </zextension>
+                                    <unitech_landingpage>
+                                        <title>GameDay Extensions - Landing Pages Settings Section</title>
+                                    </unitech_landingpage>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+    <menu>
+        <zextension translate="title">
+            <title>GameDay Extensions</title>
+            <sort_order>90</sort_order>
+            <children>
+                <unitech_landingpage translate="title" module="unitech_landingpage">
+                    <title>Landing Pages</title>
+                    <sort_order>300</sort_order>
+                    <children>
+                        <landingpage_list translate="title" module="unitech_landingpage">
+                            <title>Manage Landing Pages</title>
+                            <sort_order>10</sort_order>
+                            <action>adminhtml/landingPage_list</action>
+                            <depends>
+                                <module>Unitech_LandingPage</module>
+                                <config>unitech_landingpage/general/is_enabled</config>
+                            </depends>
+                        </landingpage_list>
+                        <landingpage_import_export translate="title" module="unitech_landingpage">
+                            <title>Import/Export Landing Pages</title>
+                            <sort_order>20</sort_order>
+                            <action>adminhtml/landingPage_list/importExport</action>
+                            <depends>
+                                <module>Unitech_LandingPage</module>
+                                <config>Unitech_LandingPage/general/is_enabled</config>
+                            </depends>
+                        </landingpage_import_export>
+                        <landingpage_settings module="unitech_landingpage">
+                            <title>Manage Landing Page Settings</title>
+                            <sort_order>30</sort_order>
+                            <action>adminhtml/system_config/edit/section/unitech_landingpage</action>
+                        </landingpage_settings>
+                    </children>
+                </unitech_landingpage>
+            </children>
+        </zextension>
+    </menu>
+</config>

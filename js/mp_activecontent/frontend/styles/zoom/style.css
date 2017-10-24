@@ -1,0 +1,204 @@
+/**
+ * MagPleasure Ltd.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magpleasure.com/LICENSE.txt
+ *
+ * @category   Magpleasure
+ * @package    Magpleasure_Activecontent
+ * @copyright  Copyright (c) 2011-2014 MagPleasure Ltd. (http://www.magpleasure.com)
+ * @license    http://www.magpleasure.com/LICENSE.txt
+ */
+
+
+/** IMPORT FONTS
+===================================*/
+@import url(http://fonts.googleapis.com/css?family=Open+Sans&subset=latin,cyrillic,latin-ext);
+
+/** THEME
+===================================*/
+
+.zoom .bx-wrapper {
+    zoom: 1;
+    position: relative;
+    margin:0px auto 0px;
+    z-index:90;
+    border:3px solid #FFFFFF;
+    text-align:left; /* reset align=center */
+    font-size: 10px;
+}
+
+.zoom .bx-wrapper .bx-viewport {
+
+
+
+}
+
+.zoom .bx-wrapper .bx-viewport ul {
+
+}
+
+.zoom .bx-wrapper .bx-viewport ul li {
+
+}
+
+/* PAGER */
+
+.zoom .bx-wrapper .bx-pager .bx-pager-item {
+    left: 0;
+}
+
+.zoom .bx-wrapper .bx-pager {
+    font-size: 0px;
+    float: left;
+    position:absolute;
+    z-index:70;
+    padding: 5px;
+    left: 50%;
+    bottom: 5px;
+}
+
+.zoom .bx-wrapper .bx-pager div{
+    position:relative;
+    float:left;
+    left: -50%;
+}
+
+.zoom .bx-wrapper .bx-pager a {
+    width:35px;
+    height:35px;
+    background: url(./bullet.png) left top;
+    float: left;
+    text-indent: -4000px;
+    position:relative;
+    margin-left:0px;
+    color:transparent;
+}
+
+.zoom .bx-wrapper .bx-pager.bx-default-pager a:hover {
+    background-position: 0 50%;
+}
+.zoom .bx-wrapper .bx-pager.bx-default-pager a.active {
+    background-position: 0 100%;
+}
+
+/* DIRECTION CONTROLS (NEXT / PREV) */
+.zoom .bx-wrapper .bx-prev, .zoom .bx-wrapper .bx-next {
+    text-indent: -10000px;
+
+    background-size: 200%;
+    position:absolute;
+    top:50%;
+    margin-top:-3.2em;
+    z-index:60;
+    width: 6.4em;
+    height: 6.4em;
+    background-image: url(./arrows.png);
+}
+
+.zoom .bx-wrapper .bx-prev {
+    left:0.5em;
+    background-position: 0 0;
+}
+
+.zoom .bx-wrapper .bx-next {
+    background-position: 100% 0;
+    right:0.5em;
+}
+
+.zoom .bx-wrapper .bx-prev:hover {
+    background-position: 0 100%;
+}
+
+.zoom .bx-wrapper .bx-next:hover {
+    background-position: 100% 100%;
+}
+
+.zoom .bx-wrapper .bx-controls-direction a {
+
+}
+
+.zoom .bx-wrapper .bx-controls-direction a.disabled {
+    display: none;
+}
+
+/* AUTO CONTROLS (START / STOP) */
+
+.zoom .bx-wrapper .bx-controls-auto {
+
+}
+
+.zoom .bx-wrapper .bx-controls-auto .bx-start.active, .zoom .bx-wrapper .bx-controls-auto .bx-stop.active {
+
+    display: none;
+}
+
+.zoom .bx-wrapper .bx-controls-auto .bx-start, .zoom .bx-wrapper .bx-controls-auto .bx-stop {
+    display:none;
+    width: 6.4em;
+    height: 6.4em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -3.2em;
+    margin-top: -3.2em;
+    z-index: 59;
+
+    display:block;
+    text-indent: -10000px;
+}
+
+.zoom .bx-wrapper .bx-controls-auto .bx-start {
+    background-size: 100%;
+    background-image: url(./play.png);
+}
+
+.zoom .bx-wrapper .bx-controls-auto .bx-controls-auto-item {
+
+}
+
+.zoom .bx-wrapper .bx-controls-auto .bx-start:hover, .zoom .bx-wrapper .bx-controls-auto .bx-stop:hover {
+    background-position: 100% 100% !important;
+}
+
+.zoom .bx-wrapper .bx-controls-auto .bx-stop {
+    background-size: 100%;
+    background-image: url(./pause.png);
+}
+
+/* PAGER WITH AUTO-CONTROLS HYBRID LAYOUT */
+
+.zoom .bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-pager {
+
+}
+
+.zoom .bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-controls-auto {
+
+}
+
+/* IMAGE CAPTIONS */
+
+.zoom .bx-wrapper .bx-caption {
+    position:absolute;
+    display:block;
+    bottom: 0em;
+    left: 0;
+    margin:3.5em 1.5em;
+    padding:1.2em 1em;
+    color:#3F4044;
+    z-index: 50;
+    font-family:'Open Sans', Tahoma, Geneva, sans-serif;
+    text-transform: none;
+    background-color: #FFFFFF;
+    border-radius: 1em;
+    -moz-border-radius: 1em;
+    -webkit-border-radius: 1em;
+}
+
+.zoom .bx-wrapper .bx-caption span {
+    font-size: 2.5em;
+}

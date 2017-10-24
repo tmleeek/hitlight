@@ -1,0 +1,129 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     rwd_default
+ * @copyright   Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+
+<?php echo $this->getChildHtml('common.products'); ?>
+<?php echo $this->getLayout()->createBlock('newsletter/subscribe')->setTemplate('newsletter/subscribe.phtml')->toHtml(); ?>
+
+<section class="footer">
+    <div class="container">
+        <div class="footer_top">
+            <div class="row">
+                <?php $config = Mage::helper('cyberfision_custom')->getStoreConfig() ?>
+                <div class="mobile-logo hidden-md hidden-lg">
+                    <div class="logo_footer"><img class="mobile-logo-img"
+                            src="<?php echo $config['header']['logo'] ? Mage::helper('cyberfision_custom')->getStoreLogo($config['header']['logo']) : Mage::getStoreConfig('design/header/logo_src', $store_id) ?>" width="164"/>
+                    </div>
+                    <div class="back_top_mobile hidden-sm hidden-lg"><i class="fa fa-arrow-up" aria-hidden="true"></i></div>
+                </div>
+                <div class="col-md-4 col-sm-12 hidden-sm hidden-xs">
+                    <div class="col_footer footer_one">
+                        <div class="logo_footer"><img
+                                src="<?php echo $config['header']['logo'] ? Mage::helper('cyberfision_custom')->getStoreLogo($config['header']['logo']) : Mage::getStoreConfig('design/header/logo_src', $store_id) ?>"/>
+                        </div>
+                        <?php if ($config['header']['site_desc']) : ?>
+                            <div class="desc_logo_footer">
+                                <?php echo $config['header']['site_desc']; ?>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+                <div class="col-md-5 col-sm-12">
+                    <div class="col_footer footer_two">
+                        <h3 class="title_footer"><?php echo $this->__('Info') ?></h3>
+                        <div class="col-footer-content">
+                            <div class="row">
+                                <?php echo $this->getChildHtml('footer_link_add_top');?>
+
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="menu_footer">
+                                        <?php echo $this->getChildHtml('footer_link_add_bottom');?>
+<!--                                        <ul>-->
+<!--                                            <li><a title="Returns and Exchanges" href="http://dev.hitlights.com/sales/guest/form/">Returns and Exchanges</a></li>-->
+<!--                                            <li><a class="top-link-blog" title="Blog" href="http://dev.hitlights.com/blog/">Blog</a></li>-->
+<!--                                            <li><a title="Site Map" href="http://dev.hitlights.com/sitemap/">Site Map</a></li>-->
+<!--                                            <li><a title="Terms of Use" href="http://dev.hitlights.com/termofuse.html/">Terms of Use</a></li>-->
+<!--                                            <li><a title="Policy" href="http://dev.hitlights.com/privacy-policy.html/">Policy</a></li>-->
+<!--                                        </ul>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php if ($config['footer']['enable_contact']): ?>
+                    <div class="col-md-3 col-sm-5">
+                        <div class="col_footer footer_three">
+                            <h3 class="title_footer"><a href="/contacts"><?php echo $this->__('Contact Us') ?></a></h3>
+                            <ul class="list_contact_us">
+                                <li class="address_contact">
+                                    <b><?php echo $config['footer']['contact']['store_name'] ?></b><br/><?php echo $config['footer']['contact']['store_address'] ?>
+                                </li>
+                                <li class="phone_contact"><a href="tel:<?php echo str_replace('-', '', Mage::getStoreConfig('general/store_information/phone')); ?>"><?php echo Mage::getStoreConfig('general/store_information/phone')?></a><br /><?php echo $this->__('8-5 CST Mon-Fri') ?></li>
+                                <li class="email_contact"><a
+                                        href="mailto:<?php echo $config['footer']['contact']['store_email'] ?>"><?php echo $config['footer']['contact']['store_email'] ?></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="copyrights">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 pull-right p-footer-right">
+                <div class="back_top"><i class="fa fa-arrow-up" aria-hidden="true"></i></div>
+                <div class="footer_bottom">
+                    <div class="payment-list">
+                        <div class="payment-logo">
+                            <img src="<?php echo $this->getSkinUrl('images/payment_logo.png', array('_secure' => true)) ?>" height="37"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 pull-left p-footer-left">
+                <?php if ($config['footer']['enable_social']): ?>
+                    <div class="social_footer">
+                        <ul class="list_social">
+                            <?php foreach ($config['footer']['social'] as $key => $social): ?>
+                                <li><a href="<?php echo $social ?>">
+                                        <i class="fa fa-<?php echo $key ?>" aria-hidden="true"></i>
+                                    </a>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                <?php endif; ?>
+                <div class="copyright"><?php echo $this->getCopyright() ?></div>
+            </div>
+        </div>
+    </div>
+</section>

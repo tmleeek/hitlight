@@ -1,0 +1,106 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * Magento
+ * Date: 7/15/16
+ * Time: 2:59 PM
+ */
+?>
+<?php $config = $this->getStoreConfig(); ?>
+<?php if (isset($config['enabled']) && $config['enabled'] == 1) : ?>
+    <?php
+        if($config['banner_background']):
+            $banner_background = Mage::getBaseUrl('media') . 'homepage/' . $config['banner_background'];
+        else:
+            $banner_background = $this->getSkinUrl('images/bg_box_home.jpg');
+        endif;
+    ?>
+
+    <?php if ($config['banner_type'] == Cyberfision_Custom_Model_System_Config_Source_Bannertype::BANNER_COLUMN_TYPE_1): ?>
+        <section class="box_home_wrapper" style="background-image: url('<?php echo $banner_background ?>')">
+            <div class="container-fluid">
+                <div class="content_box_home_wrapper">
+                    <div class="row">
+                        <div class="col-md-12 cols-home-box">
+                            <div class="col_box_home">
+                                <div class="content_col_box_home">
+                                    <?php if (isset($config['banner_heading_1'])): ?>
+                                        <div class="title_box_home"><?php echo $config['banner_heading_1'] ?></div>
+                                    <?php endif; ?>
+                                    <?php if (isset($config['banner_content_1'])): ?>
+                                        <div class="note_box_home"><?php echo $config['banner_content_1'] ?></div>
+                                    <?php endif; ?>
+                                    <?php if (isset($config['banner_link_1'])): ?>
+                                        <div class="btn_box_home"><a
+                                                href="<?php echo $config['banner_link_1'] ?>"><?php echo $this->__('Shop Now') ?></a>
+                                        </div>
+                                    <?php endif; ?>
+<!--                                    --><?php //if (isset($config['banner_link_1'])): ?>
+<!--                                        <div class="btn_box_home"><a-->
+<!--                                                href="--><?php //echo $config['banner_buying_guide_link_1'] ?><!--">--><?php //echo $this->__('Buying Guide') ?><!--</a>-->
+<!--                                        </div>-->
+<!--                                    --><?php //endif; ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    <?php else: ?>
+        <section class="box_home_wrapper" style="background-image: url('<?php echo $banner_background ?>')">
+            <div class="container-fluid">
+                <div class="content_box_home_wrapper">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-9 cols-home-box">
+                                <div class="col_box_home first">
+                                    <div class="content_col_box_home">
+                                        <?php if (isset($config['banner_heading_1'])): ?>
+                                            <div class="title_box_home"><?php echo $config['banner_heading_1'] ?></div>
+                                        <?php endif; ?>
+                                        <?php if (isset($config['banner_content_1'])): ?>
+                                            <div class="note_box_home"><?php echo $config['banner_content_1'] ?></div>
+                                        <?php endif; ?>
+                                        <?php if (isset($config['banner_link_1'])): ?>
+                                            <div class="btn_box_home"><a
+                                                    href="<?php echo $config['banner_link_1'] ?>"><?php echo $this->__('Shop Now') ?></a>
+                                            </div>
+                                        <?php endif; ?>
+<!--                                        --><?php //if (isset($config['banner_link_1'])): ?>
+<!--                                            <div class="btn_box_home"><a-->
+<!--                                                    href="--><?php //echo $config['banner_buying_guide_link_1'] ?><!--">--><?php //echo $this->__('Buying Guide') ?><!--</a>-->
+<!--                                            </div>-->
+<!--                                        --><?php //endif; ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 cols-home-box">
+                                <div class="col_box_home last">
+                                    <div class="content_col_box_home">
+                                        <?php if (isset($config['banner_heading_2'])): ?>
+                                            <div class="title_box_home"><?php echo $config['banner_heading_2'] ?></div>
+                                        <?php endif; ?>
+                                        <?php if (isset($config['banner_content_2'])): ?>
+                                            <div class="note_box_home"><?php echo $config['banner_content_2'] ?></div>
+                                        <?php endif; ?>
+                                        <?php if (isset($config['banner_link_2'])): ?>
+                                            <div class="btn_box_home"><a
+                                                    href="<?php echo $config['banner_link_2'] ?>"><?php echo $this->__('Learn More') ?></a>
+                                            </div>
+                                        <?php endif; ?>
+<!--                                        --><?php //if (isset($config['banner_link_2'])): ?>
+<!--                                            <div class="link_box_home"><a-->
+<!--                                                    href="--><?php //echo $config['banner_buying_guide_link_2'] ?><!--">--><?php //echo $this->__('Buying Guide') ?><!--</a>-->
+<!--                                            </div>-->
+<!--                                        --><?php //endif; ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    <?php endif; ?>
+<?php endif; ?>

@@ -1,0 +1,59 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * Magento
+ * Date: 7/5/16
+ * Time: 6:01 PM
+ */
+?>
+<section class="shop_by_project">
+    <div class="shop_project_title">
+        <div class="container">
+            <h3><a href="<?php echo Mage::getUrl('shopbyproject/project') ?>"><?php echo $this->__('Applications Now!') ?></a></h3>
+        </div>
+    </div>
+    <div class="shop_project_wrapper">
+        <?php foreach ($this->getProjects() as $i => $project) : ?>
+            <div class="item">
+                <?php /* @var $project GhoSter_ShopByProject_Block_Project */ ?>
+                <div class="shop_project_col">
+                    <?php $image_path = (Mage::helper('ghoster_common/image')->getImagePath($project->getData('project_image'))) ?>
+                    <a href="<?php echo $this->getUrl('shopbyproject/project/') . '#project_tab_' . $project->getId(); ?>">
+                        <div class="shop_project_col_image">
+                            <img
+                                src="<?php echo Mage::helper('ghoster_common/resizer')->init($image_path)->adaptiveResize(500, 500); ?>">
+                        </div>
+                        <div class="shop_project_col_title">
+                            <?php echo $project->getData('title'); ?>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        <?php endforeach; ?>
+
+    </div>
+<!--    <div class="see_more_project">-->
+<!--        <a href="--><?php //echo Mage::getUrl('shopbyproject/project') ?><!--"><span>--><?php //echo $this->__('See More') ?><!--</span></a>-->
+<!--    </div>-->
+</section>
+<script type="text/javascript">
+    $j = jQuery.noConflict();
+
+    $j(document).ready(function () {
+
+        $j('.shop_project_wrapper').owlCarousel({
+            navigation: true,
+            items : 5,
+            itemsDesktop : [1199,4],
+            itemsDesktopSmall : [979,4],
+            itemsTablet: [767,3],
+            itemsMobile : [479,1],
+
+            navigationText: [
+                "<span class='icon-arrow-left'></span>",
+                "<span class='icon-arrow-right'></span>"
+            ]
+        });
+
+    });
+</script>

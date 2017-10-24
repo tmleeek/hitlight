@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <ghoster translate="label" module="ghoster_avatar">
+            <label>GhoSter.., Inc</label>
+            <sort_order>150</sort_order>
+        </ghoster>
+    </tabs>
+    <sections>
+        <customer_avatar>
+            <label>Customer Avatar</label>
+            <tab>ghoster</tab>
+            <sort_order>10</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <avatar_group translate="label">
+                    <label>Avatar Thumbnail</label>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <avatar_field_width translate="label tooltip comment">
+                            <label>Avatar Width</label>
+                            <comment>Enter width</comment>
+                            <!--tooltip>Field ToolTip</tooltip-->
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_type>text</frontend_type>
+                        </avatar_field_width>
+                        <avatar_field_height translate="label tooltip comment">
+                            <label>Avatar Height</label>
+                            <comment>Enter height</comment>
+                            <!--tooltip>Field ToolTip</tooltip-->
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_type>text</frontend_type>
+                        </avatar_field_height>
+                    </fields>
+                </avatar_group>
+                <avatar_widget translate="label">
+                    <label>Avatar Upload Widget</label>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enabled translate="label tooltip comment">
+                            <label>Enable Avatar Upload Widget</label>
+                            <comment>Upload Widget will appear for Customer Account Registration Form</comment>
+                            <!--tooltip>Field ToolTip</tooltip-->
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </enabled>
+                    </fields>
+                </avatar_widget>
+            </groups>
+        </customer_avatar>
+    </sections>
+</config>

@@ -1,0 +1,57 @@
+<?php
+/**
+ * Evince_Testimony extension
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the MIT License
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/mit-license.php
+ *
+ * @category    Evince
+ * @package        Evince_Testimony
+ * @copyright    Copyright (c) 2014
+ * @license        http://opensource.org/licenses/mit-license.php MIT License
+ */
+/**
+ * Testimonial list template
+ *
+ * @category    Evince
+ * @package        Evince_Testimony
+ * @author Ultimate Module Creator
+ */
+?>
+<?php //echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<?php /* @var $_testimonials Evince_Testimony_Model_Resource_Testimonial_Collection */ ?>
+<?php $_testimonials = $this->getTestimonials(); ?>
+
+<?php //if ($_testimonials->getSize() > 0) : ?>
+<!--    <section class="testimonial_wrapper">-->
+<!--        <div class="container">-->
+<!--            <h2>Testimonial</h2>-->
+<!--            <div class="row">-->
+<!--                --><?php //foreach ($_testimonials as $_testimonial): ?>
+<!--                    --><?php ///* @var $_testimonial Evince_Testimony_Model_Testimonial */ ?>
+<!--                    <div class="col-sm-3">-->
+<!--                        --><?php //$image_path = Mage::helper('testimony/testimonial_image')->getTestimonialImagePath($_testimonial->getData('client_image'))?>
+<!--                        <div class="col_testimonial">-->
+<!--                            <div class="author_testimonial">-->
+<!--                                --><?php //if(isset($image_path)):?>
+<!--                                <img src="--><?php //echo Mage::helper('testimony/resizer')->init($image_path)->adaptiveResize(520,520)?><!--" alt="--><?php //$this->escapeHtml($this->getData('title'))?><!--" width="270" height="270"/>-->
+<!--                                --><?php //endif;?>
+<!--                            </div>-->
+<!--                            <div class="text_testimonial">-->
+<!--                                <div class="qs_text_testimonial">-->
+<!--                                    <div class="text_author_testimonial">--><?php //echo $_testimonial->getData('client_name'); ?><!--</div>-->
+<!--                                    <div class="desc_testimonial">--><?php //echo mb_substr($_testimonial->getData('content'), 0, 70, 'UTF-8'); ?><!--...</div>-->
+<!--                                    <div class="icon_testimonial"><i class="fa fa-quote-right" aria-hidden="true"></i></div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                --><?php //endforeach; ?>
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
+<?php //endif; ?>

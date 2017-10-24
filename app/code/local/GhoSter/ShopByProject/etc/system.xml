@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <ghoster translate="label" module="ghoster_shopbyproject">
+            <label>GhoSter.., Inc</label>
+            <sort_order>150</sort_order>
+        </ghoster>
+    </tabs>
+    <sections>
+        <shop_by_project>
+            <label>Applications</label>
+            <tab>ghoster</tab>
+            <sort_order>10</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general>
+                    <label>General Settings</label>
+                    <sort_order>50</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label comment">
+                            <label>Enable/Disable</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </active>
+                    </fields>
+                </general>
+            </groups>
+        </shop_by_project>
+    </sections>
+</config>

@@ -1,0 +1,136 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * Magento
+ * Date: 7/5/16
+ * Time: 2:24 PM
+ */
+?>
+
+<div class="block sidebar-nav-left codnitiveSidenavLeft collapse in">
+    <div class="block-title">
+        <strong><span><?php echo $this->__('Projects');?></span></strong>
+    </div>
+    <!-- Tab Project-->
+    <div class="block-content">
+        <?php if ($this->getProjects()->getSize()): ?>
+            <ul id="sidebar-nav-menu" class="list_project_tab_nav">
+                <?php foreach ($this->getProjects() as $project) : ?>
+                    <li>
+                        <span class="arrow-left head-arrow-by" style="width: 8px; height: 16px; background-position: left center;" href="#project_tab_<?php echo $project->getId(); ?>" targetEle="<?php echo $project->getId(); ?>"></span>
+                        <a class="head-parrent" dataId="#project_tab_<?php echo $project->getId(); ?>" targetEle="<?php echo $project->getId(); ?>"><?php echo $project->getData('title'); ?></a>
+                        <?php $sbp_category_ids = Mage::helper('ghoster_shopbyproject')->getSelectedProjectCategories($project->getId()) ?>
+                        <?php if ( count($sbp_category_ids) > 0 ) : ?>
+                        <div id="project_tab_<?php echo $project->getId(); ?>" class="divEle<?php echo $project->getId(); ?> targetEle">
+                            <ul class="project_nav_child">
+                                <?php foreach ($sbp_category_ids as $sbp_category_id): ?>
+                                    <li>
+                                        <?php $sbp_category = Mage::getModel('ghoster_shopbyproject/category')->load($sbp_category_id); ?>
+                                        <a target="<?php echo $sbp_category_id;?>" class="showSingle"><?php echo Mage::helper('ghoster_shopbyproject')->getCategoryName($sbp_category->getData('category_id')) ?></a>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </div>
+                        <?php endif; ?>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        <?php endif; ?>
+    </div>
+</div>
+
+<script>
+    var checkTab = true;
+
+    jQuery(document).ready(function() {
+        jQuery(window).load(function() {
+            if(jQuery('.list_project_tab_nav').length) {
+                jQuery('.content_tabs .tab_wrapper').each(function() {
+                    if(jQuery(this).is(':visible')) {
+                        checkTab = false;
+                    }
+                });
+
+                if(checkTab) {
+                    jQuery('.list_project_tab_nav li:first-child a.head-parrent ').trigger('click');
+                }
+            }
+        });
+    });
+
+    jQuery(function($){
+        $('.showSingle').click(function(){
+            $('.targetDiv').hide();
+            $('.project_nav_child a').removeClass('linkActive');
+            $('#div'+$(this).attr('target')).show();
+            $(this).addClass('linkActive');
+            $('.child-head').html("<span><i class=\"fa fa-angle-right\" aria-hidden=\"true\"></i></span> " + $(this).text());
+
+            HeightTitle('.name_product_project', 0);
+        });
+
+        $('.sub_menu_custom a').click(function() {
+            // fin check it is shopbyproject or / not
+            var baseUrl = $(this).attr('href');
+            if (baseUrl.indexOf("shopbyproject") >= 0) {
+                refreshDiv();
+            }
+        });
+
+        // loaded
+        var baseUrl = window.location.href;
+        if (baseUrl.indexOf("shopbyproject") >= 0) {
+            refreshDiv();
+        }
+
+        // toggle class parent
+        $('.head-parrent, .head-arrow-by').click(function(){
+            jQuery('.targetEle').hide();
+            jQuery('.divEle'+$(this).attr('targetEle')).show();
+            var idTab =  $(this).attr('dataId').replace('#', '');
+            $('.list_project_tab_nav ' + '#' + idTab + ' li:first-child a').click();
+            $('.tab_project_content .tab_wrapper').hide();
+            var id = $(this).attr('dataId') + ' .tab_wrapper:first-child';
+            $(id).show();
+
+            HeightTitle('.name_product_project', 0);
+        });
+
+        $('#nav-2 .col_menu a').click(function(e){
+            e.preventDefault();
+            $('.tab_project_content .tab_wrapper').hide();
+            var url = $(this).attr("href");
+            var id = url.substring(url.lastIndexOf('/') + 1) + ' .tab_wrapper:first-child';
+            $(id).show();
+            var breadcrumb = $(".head-parrent[dataId='" + url.substring(url.lastIndexOf('/') + 1) +"']").nextAll('.targetEle').find('.showSingle').html();
+            $('.list_project_tab_nav .targetEle').hide();
+            $(".head-parrent[dataId='" + url.substring(url.lastIndexOf('/') + 1) +"']").nextAll('.targetEle').show();
+            $(".head-parrent[dataId='" + url.substring(url.lastIndexOf('/') + 1) +"']").nextAll('.targetEle').find('li:first-child .showSingle').addClass('linkActive');
+            $('.child-head').html("<span><i class=\"fa fa-angle-right\" aria-hidden=\"true\"></i></span> " + breadcrumb);
+
+            HeightTitle('.name_product_project', 0);
+        });
+
+        function HeightTitle(child, pah) {
+            var maxHeight = 0;
+            jQuery(child).each(function () {
+                jQuery(this).removeAttr('style');
+                var height = jQuery(this).height();
+                maxHeight = (height > maxHeight) ? height : maxHeight;
+            });
+            jQuery(child).removeAttr('style').css('height', (maxHeight + pah) + 'px');
+        }
+
+        function refreshDiv() {
+            jQuery('.targetEle').hide();
+            var idTab =  baseUrl.split('#');
+            if(idTab[1]) {
+                jQuery('#' + idTab[1] + '.targetEle').show();
+                $('.list_project_tab_nav ' + '#' + idTab[1] + ' li:first-child a').click();
+            } else {
+                jQuery('#project_tab_1.targetEle').show();
+                $('.list_project_tab_nav ' + '#project_tab_1 li:first-child a').click();
+            }
+        }
+    });
+</script>

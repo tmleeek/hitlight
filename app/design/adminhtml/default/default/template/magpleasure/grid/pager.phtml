@@ -1,0 +1,76 @@
+<?php
+/**
+ * MagPleasure Ltd.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE-CE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magpleasure.com/LICENSE-CE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This package designed for Magento COMMUNITY edition
+ * MagPleasure does not guarantee correct work of this extension
+ * on any other Magento edition except Magento COMMUNITY edition.
+ * Magpleasure does not provide extension support in case of
+ * incorrect edition usage.
+ * =================================================================
+ *
+ * @category   MagPleasure
+ * @package    Magpleasure_Common
+ * @version    0.7.8
+ * @copyright  Copyright (c) 2014 MagPleasure Ltd. (http://www.magpleasure.com)
+ * @license    http://www.magpleasure.com/LICENSE-CE.txt
+ */
+?>
+
+<style type="text/css">
+    .mp-actions{
+        border: none;
+    }
+
+    td.pager input.page{
+        width:40px !important;
+    }
+
+</style>
+
+
+<table cellspacing="0" ng-if="options.can_pager" class="actions mp-actions">
+    <tr>
+        <td class="pager">
+            <?php echo $this->__('Page'); ?>
+            <a title="Prior page" ng-disabled="navigator.is_first">
+                    <img ng-src="<?php echo $this->getSkinUrl().'images/{{navigator.src_left[!navigator.is_first]}}'; ?>"
+                         alt="Go to Previous page" class="arrow" ng-click="navigator.prior()"></a>
+
+            <input type="number" ng-model="navigator.page"  name="page" value="{{navigator.page}}"
+                         class="page validate-number" ng-keyup="doKeyUpPage($event.keyCode);">
+            <a title="<?php echo $this->__('Next page'); ?>"
+                ng-disabled="navigator.is_last" ng-click="navigator.next()">
+                <img
+                    ng-src="<?php echo $this->getSkinUrl().'images/{{navigator.src_right[!navigator.is_last]}}'; ?>"
+                    alt="<?php echo $this->__('Go to Next page'); ?>" class="arrow"></a>
+            <?php echo $this->__('of %s pages ', "{{navigator.pages}}"); ?><span
+                class="separator">|</span>
+            View <select type="text" ng-model="navigator.limit"
+                         ng-options="value.id as value.name for value in views"
+                         class="select required-entry" name="limit" ng-change="refreshGrid()"></select>
+            <?php echo $this->__('per page'); ?><span class="separator">|</span>
+            <?php echo $this->__('Total %s records found', "{{navigator.total}}"); ?>
+        </td>
+        <td class="filter-actions a-right"  ng-show="options.canFilter">
+            <button id="id_reset" title="Reset Filter" type="button" class="scalable">
+                <span><span><span>Reset Filter</span></span></span>
+            </button>
+            <button id="id_search" title="Search" type="button" class="scalable task">
+                <span><span><span>Search</span></span></span>
+            </button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+

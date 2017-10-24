@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<wholesale_customer_form translate="label">
+		<label>Returns</label>
+		<remove name="right"/>
+		<remove name="left"/>
+		<reference name="root">
+			<action method="setTemplate"><template>page/1column.phtml</template></action>
+		</reference>
+		<reference name="head">
+			<action method="setTitle"><title>Wholesale Request</title></action>
+		</reference>
+		<reference name="content">
+			<block type="sales/widget_guest_form" name="wholesale_customer_form" template="wholesale/customer/form/wholesale.phtml">
+			</block>
+		</reference>
+	</wholesale_customer_form>
+</layout>

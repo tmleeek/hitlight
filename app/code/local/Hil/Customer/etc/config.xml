@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Hil_Customer>
+            <version>0.1.0</version>
+        </Hil_Customer>
+    </modules>
+
+    <frontend>
+        <routers>
+            <customer>
+                <use>standard</use>
+                <args>
+                    <modules>
+                        <hil_customer before="Mage_Customer">Hil_Customer</hil_customer>
+                    </modules>
+                </args>
+            </customer>
+        </routers>
+    </frontend>
+</config>

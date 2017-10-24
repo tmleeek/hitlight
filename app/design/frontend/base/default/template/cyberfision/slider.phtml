@@ -1,0 +1,52 @@
+<?php if ($this->getSliderEnabled()): ?>
+
+    <ul id="cyberfision_slider">
+        <?php $sliders = $this->getSlider(); ?>
+        <?php foreach ($sliders as $slider): ?>
+
+            <?php if ($slider->getUrl()): ?>
+                <li>
+                    <a href="<?php echo $slider->getUrl(); ?>">
+                        <img src="<?php echo Mage::helper('cyberfision_slider')->getImageMediaPath($slider); ?>"
+                             alt="<?php echo $slider->getTitle() ? $this->escapeHtml($slider->getTitle()) : '' ?>">
+                    </a>
+                </li>
+            <?php else: ?>
+                <li>
+                    <img src="<?php echo Mage::helper('cyberfision_slider')->getImageMediaPath($slider); ?>"
+                         alt="<?php echo $slider->getTitle() ? $this->escapeHtml($slider->getTitle()) : '' ?>">
+                </li>
+            <?php endif; ?>
+
+        <?php endforeach; ?>
+    </ul>
+
+<?php endif; ?>
+
+<script type="text/javascript">
+    $j = jQuery.noConflict();
+
+    $j(function () {
+        $j('#cyberfision_slider').slippry({
+            kenZoom: 150,
+            responsive: <?php echo $this->getSliderEnableResponsive(); ?>,
+            pager: <?php echo $this->getSliderEnablePager(); ?>,
+            controls: <?php echo $this->getSliderEnableControls(); ?>,
+            hideOnEnd: <?php echo $this->getSliderEnableHideOnEnd(); ?>,
+            speed: <?php echo $this->getSliderSpeed(); ?>,
+            transition: '<?php echo $this->getSliderType() ? $this->getSliderType() : 'false'; ?>',
+            easing: '<?php echo $this->getSliderSlideEasing(); ?>',
+            loop: <?php echo $this->getSliderLoop(); ?>,
+            autoHover: <?php echo $this->getSliderPauseOnHover(); ?>,
+            autoHoverDelay:<?php echo $this->getSliderPauseOnHoverDelay(); ?>,
+            pause: <?php echo $this->getSliderSlidePause(); ?>,
+            auto: <?php echo $this->getSliderSlideAuto(); ?>,
+            autoDelay: <?php echo $this->getSliderSlideAutoDelay(); ?>,
+            adaptiveHeight: <?php echo $this->getSliderSlideAptiveHeight(); ?>
+
+        });
+
+    });
+</script>
+	
+

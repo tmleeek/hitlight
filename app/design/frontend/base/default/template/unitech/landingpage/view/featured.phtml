@@ -1,0 +1,427 @@
+<?php
+/**
+* Unitech Corp.
+*
+* @category   Unitech
+* @package    Unitech_LandingPage
+* @version    0.0.1
+* @copyright  @copyright Copyright (c) 2015 Unitech Corp. (http://www.unitech.vn)
+*/
+?>
+<?php
+    $_featuredProductCollection=$this->getLoadedFeaturedProductCollection();
+	$_helper = $this->helper('catalog/output');
+	$_landingPage = $this->getLandingPage();
+	$processor = Mage::helper('unitech_landingpage')->getBlockTemplateProcessor();
+	 // echo "<pre>";
+		// print_r($_featuredProductCollection->getFirstItem());
+		// echo get_class($this);
+	// echo "</pre>";
+?>
+<?php if(!$_featuredProductCollection->count()): ?>
+<p class="note-msg"><?php echo $this->__('There are no featured products matching the selection.') ?></p>
+<?php else: ?>
+<?php $firstProduct = Mage::getModel('catalog/product')->load($_featuredProductCollection->getFirstItem()->getId());?>
+<div class="slider" id="main-content">
+	<form action="<?php echo $this->getSubmitUrl($firstProduct) ?>" method="post" id="product_addtocart_form"<?php if($firstProduct->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+	<?php echo $this->getBlockHtml('formkey') ?>
+		<div class="no-display">
+			<input type="hidden" name="product" value="<?php echo $firstProduct->getId() ?>" />
+			<input type="hidden" name="related_product" id="related-products-field" value="" />
+			<input type="hidden" name="qty" id="qty" maxlength="12" value="1"/>
+		</div>
+		<div class="slider-item">
+			<?php 
+				$product = Mage::getModel('catalog/product')->load($firstProduct->getId());
+				$slider = '';
+				$gallery = '';
+				foreach ($product->getMediaGalleryImages() as $image) {
+					$slider .= '<div><a href="javascript:;"><img class="product-img" src="'.$image->getUrl().'" alt="product images"></a></div>';
+					$gallery .= '<a href="javascript:;"><img class="product-img" src="'.$image->getUrl().'" alt="product images"></a>';
+			} ?>
+			<div class="slider-img" style="display:none">
+				<?php echo $slider ?>
+			</div>
+			<div class="gallery" style="display:none">
+				<?php echo $gallery ?>
+			</div>
+			<div class="link desktop"><a href="javascript:;" id="showReviews" class="showReviews">ADD YOUR REVIEW</a> / <a href="javascript:;" class="emailto">EMAIL TO A FRIEND</a></div>
+			<div class="slider-content">
+				<h2><?php echo $this->htmlEscape($_landingPage->getTitle())?></h2>
+				<p><?php echo $processor->filter($_landingPage->getShortDescription())?></p>
+				<div class="select">
+                                        <?php 
+                                        $numberProduct = $_featuredProductCollection->count();
+                                        if($numberProduct>1){
+                                        ?>
+					<select class="option1" id="product_options">
+						<?php foreach ($_featuredProductCollection as $_product): ?>
+						<option value="<?php echo $_product->getId() ?>"><?php echo $this->stripTags($_product->getName(), null, true) ?></option>
+						<?php endforeach ?>
+					</select>
+                                        <?php 
+                                        }else{
+                                            foreach ($_featuredProductCollection as $_product){ 
+                                        ?>
+                                            <input data-value="<?php echo $_product->getId() ?>" value="<?php echo $this->stripTags($_product->getName(), null, true) ?>" readonly="true" class="option1"/>
+                                            <input type="hidden" value="<?php echo $_product->getId() ?>" id="product_options" />
+					<?php 
+                                            } 
+                                        }
+                                        ?>					
+					<select class="option2" id="qty_options">
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+						<option value="13">13</option>
+						<option value="14">14</option>
+						<option value="15">15</option>
+						<option value="16">16</option>
+						<option value="17">17</option>
+						<option value="18">18</option>
+						<option value="19">19</option>
+						<option value="20">20</option>
+					</select>
+					<div class="btn-add-cart add-to-cart-dt">
+						<div class="add-cart-bg"></div>
+						<div class="add-cart-item"><a  href="javascript:;" onclick="productAddToCartForm.submit(this)">Add To Cart</a></div>
+					</div>
+				</div>
+				<span class="price"><?php echo $this->getPriceHtml($firstProduct, true) ?></span>
+				<div class="add-cart">
+					<h4>DETAILS</h4>
+					<?php echo  $firstProduct->getShortDescription(); ?>
+				</div>
+				<a href="<?php echo Mage::getUrl('landingpage/index/downloadinstruction');?>" class="dowload-instructions desktop">DOWNLOAD INSTRUCTIONS</a>
+				<div class="btn-add-cart hidden">
+					<div class="add-cart-bg"></div>
+					<div class="add-cart-item"><a  href="javascript:;" onclick="productAddToCartForm.submit(this)">Add To Cart</a></div>
+				</div>
+				<div class="mobile">
+					<div class="link"><a href="javascript:;" id="showReviews" class="showReviews">ADD YOUR REVIEW</a> </div>
+					<div class="link"><a href="javascript:;" class="emailto">EMAIL TO A FRIEND</a></div>
+					<div class="link"><a href="<?php echo Mage::getUrl('landingpage/index/downloadinstruction');?>" class="dowload-instructions">DOWNLOAD INSTRUCTIONS</a></div>
+				</div>
+				<?php 
+                                $linkArray=array();
+                                $ortherLinks = explode(',',$_landingPage->getOtherLink());                                
+                                for($i=0;$i<count($ortherLinks);$i++){
+                                    $otherLinkText= $ortherLinks[$i];
+                                    $otherLink="";
+                                    $tempString = "";                                
+                                    if (!is_bool(strpos($ortherLinks[$i],'['))){
+                                        $otherLinkText=substr($ortherLinks[$i], 0, strpos($ortherLinks[$i],'['));
+                                        $tempString = substr($ortherLinks[$i], strpos($ortherLinks[$i],'[')+1,strlen($ortherLinks[$i]));
+                                    }
+                                    if (!is_bool(strpos($ortherLinks[$i],']'))){
+                                        $otherLink = substr($tempString, 0, strpos($tempString,']'));
+                                    }
+                                    $dataLink = array(
+                                        'text'=>$otherLinkText,
+                                        'link'=>$otherLink
+                                    );
+                                    array_push($linkArray, $dataLink);
+                                }
+                                if(count($linkArray) >0){
+                                ?>
+                                <div class="clearfix"></div>
+                                <div class="orther-link-landing">
+                                    <h3><a href="http://www.hitlights.com/gameday-8.html" target="_blank"><?php echo $this->htmlEscape($_landingPage->getOtherLinkText())?></a></h3>
+                                    <div class="clearfix"></div>
+                                    <?php
+                                    foreach ($linkArray as $link){
+                                        echo '<a href="'.$link['link'].'" class="col-6">'.$link['text'].'</a>';
+                                    }
+                                    ?>
+                                </div>
+                                <?php
+                                } 
+                                ?>                               
+			</div>
+		</div>
+	</form>
+</div>
+<div class="product-review" style="display:none;">
+</div>
+<script type="text/javascript">
+		<?php $i=0;$productCollection = array();$reviewCollection = array();$descriptionCollection = array(); $sendMailURL = array();foreach ($_featuredProductCollection as $_product):
+			$html = '';
+			$html  = 	'<form action="'.$this->getSubmitUrl($_product).'" method="post" id="product_addtocart_form" enctype="multipart/form-data">';
+			$html .=	$this->getBlockHtml('formkey');
+			$html .=		'<div class="no-display">';
+			$html .=			'<input type="hidden" name="product" value="'.$_product->getId().'" />';
+			$html .=			'<input type="hidden" name="related_product" id="related-products-field" value="" />';
+			$html .=			'<input type="hidden" name="qty" id="qty" maxlength="12" value="1"/>';
+			$html .=		'</div>';
+			$html .=		'<div class="slider-item">';
+									$product = Mage::getModel("catalog/product")->load($_product->getId());
+									$slider = '';
+									$gallery = '';
+									foreach ($product->getMediaGalleryImages() as $image) {
+										$slider .= '<div><a href="javascript:;"><img class="product-img" src="'.$image->getUrl().'" alt="product images"></a></div>';
+										$gallery .= '<a href="javascript:;"><img class="product-img" src="'.$image->getUrl().'" alt="product images"></a>';
+									}
+			$html .=			'<div class="slider-img" style="display:none">';		
+			$html .=				$slider;
+			$html .=			'</div>';
+			$html .=			'<div class="gallery" style="display:none">';		
+			$html .=				$gallery;
+			$html .=			'</div>';
+			$html .=			'<div class="link desktop"><a href="javascript:;" id="showReviews" class="showReviews">ADD YOUR REVIEW</a> / <a href="javascript:;" class="emailto">EMAIL TO A FRIEND</a></div>';
+			$html .=			'<div class="slider-content">';
+			$html .=				'<h2>'.$this->htmlEscape($_landingPage->getTitle()).'</h2>';
+			$html .=				'<p>'.$processor->filter($_landingPage->getShortDescription()).'</p>';
+			$html .=				'<div class="select">';
+                                                                    $numberProductSelect = count($_featuredProductCollection);
+                                                                    if($numberProductSelect>1){
+			$html .=					'<select class="option1" id="product_options">';
+											foreach ($_featuredProductCollection as $_selectproduct){
+			$html .=							'<option value="'.$_selectproduct->getId().'">'.$this->stripTags($_selectproduct->getName(), null, true).'</option>';
+											}
+			$html .=					'</select>';
+                                                                    }else{
+                                                                        foreach ($_featuredProductCollection as $_product){
+                        $html .=                                            '<input data-value="'.$_product->getId().'" value="'.$this->stripTags($_product->getName(), null, true).'" readonly="true" class="option1"/>';
+                        $html .=                                            '<input type="hidden" value="'.$_product->getId().'" id="product_options" />';
+                                                                        } 
+                                                                    }                                        
+			$html .=					'<select class="option2" id="qty_options">';
+			$html .=						'<option value="1">1</option>';
+			$html .=						'<option value="2">2</option>';
+			$html .=						'<option value="3">3</option>';
+			$html .=						'<option value="4">4</option>';
+			$html .=						'<option value="5">5</option>';
+                        $html .=						'<option value="6">6</option>';
+			$html .=						'<option value="7">7</option>';
+			$html .=						'<option value="8">8</option>';
+			$html .=						'<option value="9">9</option>';
+			$html .=						'<option value="10">10</option>';
+                        $html .=						'<option value="11">11</option>';
+			$html .=						'<option value="12">12</option>';
+			$html .=						'<option value="13">13</option>';
+			$html .=						'<option value="14">14</option>';
+			$html .=						'<option value="15">15</option>';
+                        $html .=						'<option value="16">16</option>';
+			$html .=						'<option value="17">17</option>';
+			$html .=						'<option value="18">18</option>';
+			$html .=						'<option value="19">19</option>';
+			$html .=						'<option value="20">20</option>';
+			$html .=					'</select>';
+			$html .=					'<div class="btn-add-cart add-to-cart-dt">';
+			$html .=						'<div class="add-cart-bg"></div>';
+			$html .=						'<div class="add-cart-item"><a onclick="productAddToCartForm.submit(this)" href="javascript:;">Add to Cart</a></div>';
+			$html .=					'</div>';
+			$html .=				'</div>';
+			$html .=				'<span class="price">'.$this->getPriceHtml($_product, true).'</span>';
+			$html .=				'<div class="add-cart">';
+			$html .=					'<h4>DETAILS</h4>';
+			$html .=					Mage::getModel('catalog/product')->load($_product->getId())->getShortDescription();
+			$html .=				'</div>';
+			$html .=				'<a href="'.Mage::getUrl('landingpage/index/downloadinstruction').'" class="dowload-instructions desktop">DOWNLOAD INSTRUCTIONS</a>';
+			$html .=				'<div class="btn-add-cart hidden">';
+			$html .=					'<div class="add-cart-bg"></div>';
+			$html .=					'<div class="add-cart-item"><a onclick="productAddToCartForm.submit(this)" href="javascript:;">Add to Cart</a></div>';
+			$html .=				'</div>';
+			$html .=				'<div class="mobile">';
+			$html .=					'<div class="link"><a href="javascript:;" id="showReviews" class="showReviews">ADD YOUR REVIEW</a> </div>';
+			$html .=					'<div class="link"><a href="javascript:;" class="emailto">EMAIL TO A FRIEND</a></div>';
+			$html .=					'<div class="link"><a href="'.Mage::getUrl('landingpage/index/downloadinstruction').'" class="dowload-instructions">DOWNLOAD INSTRUCTIONS</a></div>';
+			$html .=				'</div>';
+                                                                if(count($linkArray) >0){
+                        $html .=                                    '<div class="clearfix"></div>';
+                        $html .=                                    '<div class="orther-link-landing">';
+                        $html .=                                        '<h3><a href="http://www.hitlights.com/gameday-8.html" target="_blank">'.$this->htmlEscape($_landingPage->getOtherLinkText()).'</a></h3>';
+                        $html .=                                        '<div class="clearfix"></div>';                                            
+                                                                    foreach ($linkArray as $link){
+                        $html .=                                         '<a href="'.$link['link'].'" >'.$link['text'].'</a>';
+                                                                    }
+                        $html .=                                    '</div>';
+                                                                }
+			$html .=			'</div>';
+			$html .=		'</div>';
+			$html .=	'</form>';
+			
+			$reviews = Mage::getModel('review/review')->getCollection()
+				->addStoreFilter(Mage::app()->getStore()->getId())
+				->addStatusFilter(Mage_Review_Model_Review::STATUS_APPROVED)
+				->addEntityFilter('product', $_product->getId())
+				->setDateOrder()
+				->addRateVotes();
+			$_items	 = $reviews->getItems();
+			
+			$reviewHTML = '';
+			$reviewHTML .=	'<div class="collateral-box dedicated-review-box" id="customer-reviews">';
+				if (count($_items)){
+			$reviewHTML .=		'<ol>';
+					foreach ($_items as $_review){
+			$reviewHTML .=		'<li>';
+			$reviewHTML .=			'<strong>';
+			$reviewHTML .=				$this->escapeHtml($_review->getTitle());
+			$reviewHTML .=			'</strong>  ';
+			$reviewHTML .=			$this->__('Review by <span>%s</span>', $this->escapeHtml($_review->getNickname()));
+			$reviewHTML .=			'  <small class="date">'.$this->__('(Posted on %s)', $this->formatDate($_review->getCreatedAt()), 'long').'</small>';
+									$_votes = $_review->getRatingVotes();
+									if (count($_votes)){
+			$reviewHTML .=			'<table class="ratings-list" cellspacing="0">';
+			$reviewHTML .=				'<tbody>';
+											foreach ($_votes as $_vote){
+			$reviewHTML .=						'<tr>';
+			$reviewHTML .=							'<td class="rating-code">'.$this->escapeHtml($_vote->getRatingCode()).'</td>';
+			$reviewHTML .=							'<td>';
+			$reviewHTML .=								'<div class="rating-box">';
+			$reviewHTML .=									'<div class="rating" style="width:'.$_vote->getPercent().'%;"></div>';
+			$reviewHTML .=								'</div>';
+			$reviewHTML .=							'</td>';
+			$reviewHTML .=						'</tr>';
+											}
+			$reviewHTML .=				'</tbody>';
+			$reviewHTML .=			'</table>';
+									}
+			$reviewHTML .=			nl2br($this->escapeHtml($_review->getDetail()));
+										
+			$reviewHTML .=			'</li>';
+					}
+			$reviewHTML .=		'</ol>';
+				}else{
+			$reviewHTML .=		'<p>Product does not have reviews yet.</p>';
+				}
+				
+			$reviewHTML .=	'</div>';
+			$reviewHTML .=	'<div class="form-add">';
+			$reviewHTML .=		'<h2>'.$this->__('Write Your Own Review').'</h2>';
+			$reviewHTML .=		'<form action="'.Mage::getUrl('landingpage/index/review', array('id' => $_product->getId())).'" method="post" id="review-form">';
+			$reviewHTML .=			$this->getBlockHtml('formkey');
+			$reviewHTML .=			'<fieldset>';
+			$reviewHTML .=				$this->getChildHtml('form_fields_before');
+			$reviewHTML .=				'<h3>'.$this->__("You're reviewing : ").'<span>'.$this->escapeHtml($_product->getName()).'</span></h3>';
+										if( $this->getRatings() && $this->getRatings()->getSize()){
+			$reviewHTML .=					'<h4>'.$this->__('How do you rate this product?').'<em class="required"><font color="#DD4B39">*</font></em></h4>';
+			$reviewHTML .=					'<span id="input-message-box"></span>';
+			$reviewHTML .=					'<table class="data-table" id="product-review-table">';
+			$reviewHTML .=						'<col />';
+			$reviewHTML .=						'<col width="1" />';
+			$reviewHTML .=						'<col width="1" />';
+			$reviewHTML .=						'<col width="1" />';
+			$reviewHTML .=						'<col width="1" />';
+			$reviewHTML .=						'<col width="1" />';
+			$reviewHTML .=						'<thead>';
+			$reviewHTML .=							'<tr>';
+			$reviewHTML .=								'<th>&nbsp;</th>';
+			$reviewHTML .=								'<th><span class="nobr">'.$this->__('1 star').'</span></th>';
+			$reviewHTML .=								'<th><span class="nobr">'.$this->__('2 star').'</span></th>';
+			$reviewHTML .=								'<th><span class="nobr">'.$this->__('3 star').'</span></th>';
+			$reviewHTML .=								'<th><span class="nobr">'.$this->__('4 star').'</span></th>';
+			$reviewHTML .=								'<th><span class="nobr">'.$this->__('5 star').'</span></th>';
+			$reviewHTML .=							'</tr>';
+			$reviewHTML .=						'</thead>';
+			$reviewHTML .=						'<tbody>';
+												foreach ($this->getRatings() as $_rating){
+			$reviewHTML .=							'<tr>';
+			$reviewHTML .=								'<th>'.$this->escapeHtml($_rating->getRatingCode()).'</th>';
+													foreach ($_rating->getOptions() as $_option){
+			$reviewHTML .=								'<td class="value"><input type="radio" name="ratings['.$_rating->getId().']" id="'.$this->escapeHtml($_rating->getRatingCode()).'_'.$_option->getValue().'" value="'.$_option->getId().'" class="radio" /></td>';
+													}
+			$reviewHTML .=							'</tr>';
+												}
+			$reviewHTML .=						'</tbody>';
+			$reviewHTML .=					'</table>';
+			$reviewHTML .=					'<input type="hidden" name="validate_rating" class="validate-rating" value="" />';
+			$reviewHTML .=					'<div class="validation-advice" id="advice-validate-rating-validate_rating" style="display:none">Please select one of each of the ratings above</div>';
+			$reviewHTML .=					'<script type="text/javascript">decorateTable("product-review-table")</script>';
+										}
+			$reviewHTML .=					'<ul class="form-list">';
+			$reviewHTML .=						'<li>';
+			$reviewHTML .=							'<label for="nickname_field" class="required"><em>*</em>'.$this->__('Nickname').'</label>';
+			$reviewHTML .=							'<div class="input-box">';
+			$reviewHTML .=								'<input type="text" name="nickname" id="nickname_field" class="input-text required-entry" value="" />';
+			$reviewHTML .=								'<div class="validation-advice" id="advice-required-entry-nickname_field" style="display:none">This is a required field.</div>';
+			$reviewHTML .=							'</div>';
+			$reviewHTML .=						'</li>';
+			$reviewHTML .=						'<li>';
+			$reviewHTML .=							'<label for="summary_field" class="required"><em>*</em>'.$this->__('Summary of Your Review').'</label>';
+			$reviewHTML .=							'<div class="input-box">';
+			$reviewHTML .=								'<input type="text" name="title" id="summary_field" class="input-text required-entry" value="" />';
+			$reviewHTML .=								'<div class="validation-advice" id="advice-required-entry-summary_field" style="display:none">This is a required field.</div>';
+			$reviewHTML .=							'</div>';
+			$reviewHTML .=						'</li>';
+			$reviewHTML .=						'<li>';
+			$reviewHTML .=							'<label for="review_field" class="required"><em>*</em>'.$this->__('Review').'</label>';
+			$reviewHTML .=							'<div class="input-box">';
+			$reviewHTML .=								'<textarea name="detail" id="review_field" cols="5" rows="3" class="required-entry"></textarea>';
+			$reviewHTML .=								'<div class="validation-advice" id="advice-required-entry-review_field" style="display:none">This is a required field.</div>';
+			$reviewHTML .=							'</div>';
+			$reviewHTML .=						'</li>';
+			$reviewHTML .=					'</ul>';
+			$reviewHTML .=				'</fieldset>';
+			$reviewHTML .=				'<div class="buttons-set">';
+			$reviewHTML .=					'<img class="ajax_loading" style="display:none" src="'.$this->getSkinUrl('unitech_landingpage/images/ajax.GIF').'">';
+			$reviewHTML .=					'<button type="button" title="'.$this->__('Submit Review').'" class="button" id="addYourReview"><span><span>'.$this->__('Submit Review').'</span></span></button>';
+			$reviewHTML .=				'</div>';
+			$reviewHTML .=		'</form>';
+			$reviewHTML .=	'</div>';
+			
+			$descriptionHTML  = '';
+			$descriptionHTML .= '<div class="row"><div class="col-md-12 col-xs-12">';
+									$count=0;
+									foreach ($product->getMediaGalleryImages() as $image) {
+										if($count==0){
+			$descriptionHTML .=				'<div class="img-product">';
+			$descriptionHTML .=					'<img src="'.$image->getUrl().'">';
+			$descriptionHTML .=				'</div>';
+			$descriptionHTML .=				'<div class="slide-thumb">';
+				$descriptionHTML .=				'<div class="img-thumb-product">';
+				$descriptionHTML .=                '<img src="'.$image->getUrl().'" class="img-responsive img-thumbnail">';
+				$descriptionHTML .=             '</div>';
+										}else{
+				$descriptionHTML .=				'<div class="img-thumb-product">';
+				$descriptionHTML .=                '<img src="'.$image->getUrl().'" class="img-responsive img-thumbnail">';
+				$descriptionHTML .=             '</div>';
+										}
+										$count++;
+									}
+			$descriptionHTML .=				'</div>';
+			$descriptionHTML .= '</div><div class="col-md-7 col-xs-12"><div class="product-name"><h1>'.$product->getName().'</h1></div><div class="product-recap">'.Mage::getModel('catalog/product')->load($_product->getId())->getShortDescription().'</div>';
+			$descriptionHTML .= '<div class="product-price"><div class="price-label">Price : </div>'.$this->getPriceHtml($_product, true).'</div>';
+			$descriptionHTML .=	'</div></div>';
+			$descriptionHTML .= '<div class="row"><div class="tab-product-detail"><ul class="nav nav-pills"><li class="active"><a data-toggle="pill" href="#tag1">Product Description</a></li><li><a data-toggle="pill" href="#tag2">Additional Information</a></li></ul><div class="tab-content">';
+			$descriptionHTML .= '<div id="tag1" class="tab-pane fade in active">';
+			$descriptionHTML .=		$_helper->productAttribute($product, $product->getDescription(), 'description');
+			$descriptionHTML .=	'</div>';
+			$descriptionHTML .=	'<div id="tag2" class="tab-pane fade">';
+								if($_additional = $this->getAdditionalData($product)){ 
+			$descriptionHTML .=		'<table class="data-table" id="product-attribute-specs-table">';
+			$descriptionHTML .=			'<col width="25%" />';
+			$descriptionHTML .=			'<col />';
+			$descriptionHTML .=			'<tbody>';
+										foreach ($_additional as $_data){
+			$descriptionHTML .=				'<tr>';
+			$descriptionHTML .=					'<th class="label-attribute">'.$this->escapeHtml($this->__($_data['label'])).'</th>';
+			$descriptionHTML .=					'<td class="data">'.$_helper->productAttribute($_product, $_data['value'], $_data['code']).'</td>';
+			$descriptionHTML .=				'</tr>';
+										}
+			$descriptionHTML .=			'</tbody>';
+			$descriptionHTML .=		'</table>';
+								}
+			$descriptionHTML .=	'</div></div></div></div>';
+			
+			
+			$productCollection[$_product->getId()] =$html;
+			$reviewCollection[$_product->getId()] =$reviewHTML;
+			$descriptionCollection[$_product->getId()] =$descriptionHTML;
+			$sendMailURL[$_product->getId()] = Mage::getUrl('landingpage/SendFriend/sendmail', array('id' => $_product->getId()));
+		endforeach; ?>
+		var products = <?php echo json_encode($productCollection);?>;
+		var reviews  = <?php echo json_encode($reviewCollection);?>;
+		var descriptionCollection = <?php echo json_encode($descriptionCollection);?>;
+		var sendMailURL = <?php echo json_encode($sendMailURL);?>;
+</script>	
+<?php endif; ?>	

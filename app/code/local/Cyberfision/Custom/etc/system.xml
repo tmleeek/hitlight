@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <tabs>
+        <cyberfision translate="label" module="cyberfision_custom">
+            <label>
+                <![CDATA[
+                <div>General Configuration</div> ]]>
+            </label>
+            <sort_order>205</sort_order>
+        </cyberfision>
+    </tabs>
+    <sections>
+        <cyberfision_custom translate="label" module="cyberfision_custom">
+            <label>General Settings</label>
+            <tab>cyberfision</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>300</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <banner_page_custom translate="label">
+                    <label>Banner Page</label>
+                    <sort_order>0</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <banner_blog_page translate="label tooltip comment">
+                            <label>Blog</label>
+                            <frontend_type>image</frontend_type>
+                            <backend_model>adminhtml/system_config_backend_image</backend_model>
+                            <upload_dir config="system/filesystem/media" scope_info="1">banner</upload_dir>
+                            <base_url type="media" scope_info="1">banner</base_url>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Allowed file types: jpeg, gif, png.</comment>
+                        </banner_blog_page>
+                        <banner_checkout_page translate="label tooltip comment">
+                            <label>Checkout</label>
+                            <frontend_type>image</frontend_type>
+                            <backend_model>adminhtml/system_config_backend_image</backend_model>
+                            <upload_dir config="system/filesystem/media" scope_info="1">banner</upload_dir>
+                            <base_url type="media" scope_info="1">banner</base_url>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Allowed file types: jpeg, gif, png.</comment>
+                        </banner_checkout_page>
+                        <banner_contact_page translate="label tooltip comment">
+                            <label>Contact Us</label>
+                            <frontend_type>image</frontend_type>
+                            <backend_model>adminhtml/system_config_backend_image</backend_model>
+                            <upload_dir config="system/filesystem/media" scope_info="1">banner</upload_dir>
+                            <base_url type="media" scope_info="1">banner</base_url>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Allowed file types: jpeg, gif, png.</comment>
+                        </banner_contact_page>
+                        <banner_login_page translate="label tooltip comment">
+                            <label>Login</label>
+                            <frontend_type>image</frontend_type>
+                            <backend_model>adminhtml/system_config_backend_image</backend_model>
+                            <upload_dir config="system/filesystem/media" scope_info="1">banner</upload_dir>
+                            <base_url type="media" scope_info="1">banner</base_url>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Allowed file types: jpeg, gif, png.</comment>
+                        </banner_login_page>
+                        <banner_register_page translate="label tooltip comment">
+                            <label>Register</label>
+                            <frontend_type>image</frontend_type>
+                            <backend_model>adminhtml/system_config_backend_image</backend_model>
+                            <upload_dir config="system/filesystem/media" scope_info="1">banner</upload_dir>
+                            <base_url type="media" scope_info="1">banner</base_url>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Allowed file types: jpeg, gif, png.</comment>
+                        </banner_register_page>
+                        <banner_sitemap_page translate="label tooltip comment">
+                            <label>Sitemap</label>
+                            <frontend_type>image</frontend_type>
+                            <backend_model>adminhtml/system_config_backend_image</backend_model>
+                            <upload_dir config="system/filesystem/media" scope_info="1">banner</upload_dir>
+                            <base_url type="media" scope_info="1">banner</base_url>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Allowed file types: jpeg, gif, png.</comment>
+                        </banner_sitemap_page>
+                    </fields>
+                </banner_page_custom>
+                <notification translate="label">
+                    <label>Notification</label>
+                    <sort_order>0</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enable translate="label">
+                            <label>Enable Notification</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable>
+                        <content translate="label comment">
+                            <label>Notification Content</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <enable>1</enable>
+                            </depends>
+                        </content>
+                    </fields>
+                </notification>
+                <homepage translate="label">
+                    <label>Home Settings</label>
+                    <sort_order>0</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enable_banner translate="label">
+                            <label>Enable Banner on HomePage</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_banner>
+                        <banner_background translate="label tooltip comment">
+                            <label>Background</label>
+                            <frontend_type>image</frontend_type>
+                            <backend_model>adminhtml/system_config_backend_image</backend_model>
+                            <upload_dir config="system/filesystem/media" scope_info="1">homepage</upload_dir>
+                            <base_url type="media" scope_info="1">homepage</base_url>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Allowed file types: jpeg, gif, png.</comment>
+                        </banner_background>
+                        <banner_type translate="label">
+                            <label>Banner Type</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>cyberfision_custom/system_config_source_bannertype</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <enable_banner>1</enable_banner>
+                            </depends>
+                        </banner_type>
+                        <banner_heading_1 translate="label">
+                            <label>Banner Heading 1</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enable_banner>1</enable_banner></depends>
+                        </banner_heading_1>
+                        <banner_content_1 translate="label">
+                            <label>Banner Content 1</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enable_banner>1</enable_banner></depends>
+                        </banner_content_1>
+                        <banner_link_1 translate="label">
+                            <label>Banner Link 1</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enable_banner>1</enable_banner></depends>
+                        </banner_link_1>
+                        <banner_buying_guide_link_1 translate="label">
+                            <label>Banner Buying Guide Link 1</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enable_banner>1</enable_banner></depends>
+                        </banner_buying_guide_link_1>
+                        <banner_heading_2 translate="label">
+                            <label>Banner Heading 2</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><banner_type>2</banner_type></depends>
+                        </banner_heading_2>
+                        <banner_content_2 translate="label">
+                            <label>Banner Content 2</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><banner_type>2</banner_type></depends>
+                        </banner_content_2>
+                        <banner_link_2 translate="label">
+                            <label>Banner Link 2</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><banner_type>2</banner_type></depends>
+                        </banner_link_2>
+                        <banner_buying_guide_link_2 translate="label">
+                            <label>Banner Buying Guide Link 2</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><banner_type>2</banner_type></depends>
+                        </banner_buying_guide_link_2>
+                    </fields>
+                </homepage>
+                <header>
+                    <label>Header Settings</label>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <logo translate="label">
+                            <label>Site Logo</label>
+                            <comment>Allowed file types: jpg, jpeg, gif, png.</comment>
+                            <frontend_type>image</frontend_type>
+                            <backend_model>adminhtml/system_config_backend_image</backend_model>
+                            <upload_dir config="system/filesystem/media" scope_info="1">hitlights</upload_dir>
+                            <base_url type="media" scope_info="1">hitlights</base_url>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </logo>
+                        <site_desc translate="label comment">
+                            <label>Site Description</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </site_desc>
+                    </fields>
+                </header>
+                <footer>
+                    <label>Footer Settings</label>
+                    <sort_order>30</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enable_links translate="label">
+                            <label>Enable Custom Links on Footer</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_links>
+                        <footer_heading_1 translate="label">
+                            <label>Heading 1</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enable_links>1</enable_links></depends>
+                        </footer_heading_1>
+                        <footer_link_1 translate="label">
+                            <label>Link 1</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enable_links>1</enable_links></depends>
+                        </footer_link_1>
+                        <footer_heading_2 translate="label">
+                            <label>Heading 2</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enable_links>1</enable_links></depends>
+                        </footer_heading_2>
+                        <footer_link_2 translate="label">
+                            <label>Link 2</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enable_links>1</enable_links></depends>
+                        </footer_link_2>
+                        <footer_heading_3 translate="label">
+                            <label>Heading 3</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enable_links>1</enable_links></depends>
+                        </footer_heading_3>
+                        <footer_link_3 translate="label">
+                            <label>Link 3</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enable_links>1</enable_links></depends>
+                        </footer_link_3>
+                        <footer_heading_4 translate="label">
+                            <label>Heading 4</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enable_links>1</enable_links></depends>
+                        </footer_heading_4>
+                        <footer_link_4 translate="label">
+                            <label>Link 4</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enable_links>1</enable_links></depends>
+                        </footer_link_4>
+
+                        <footer_heading_5 translate="label">
+                            <label>Heading 5</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enable_links>1</enable_links></depends>
+                        </footer_heading_5>
+                        <footer_link_5 translate="label">
+                            <label>Link 5</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enable_links>1</enable_links></depends>
+                        </footer_link_5>
+                        <footer_heading_6 translate="label">
+                            <label>Heading 6</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>120</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enable_links>1</enable_links></depends>
+                        </footer_heading_6>
+                        <footer_link_6 translate="label">
+                            <label>Link 6</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>130</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enable_links>1</enable_links></depends>
+                        </footer_link_6>
+                        <footer_heading_7 translate="label">
+                            <label>Heading 7</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>130</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enable_links>1</enable_links></depends>
+                        </footer_heading_7>
+                        <footer_link_7 translate="label">
+                            <label>Link 7</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>140</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enable_links>1</enable_links></depends>
+                        </footer_link_7>
+                        <footer_heading_8 translate="label">
+                            <label>Heading 8</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>150</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enable_links>1</enable_links></depends>
+                        </footer_heading_8>
+                        <footer_link_8 translate="label">
+                            <label>Link 8</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>160</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enable_links>1</enable_links></depends>
+                        </footer_link_8>
+                        <enable_contact translate="label">
+                            <label>Enable Contact Links on Footer</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>200</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_contact>
+                        <enable_social translate="label">
+                            <label>Enable Social Links on Footer</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>300</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_social>
+                        <facebook translate="label">
+                            <label>Facebook Link</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>310</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enable_social>1</enable_social></depends>
+                        </facebook>
+                        <twitter translate="label">
+                            <label>Twitter Link</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>320</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enable_social>1</enable_social></depends>
+                        </twitter>
+                        <youtube translate="label">
+                            <label>Youtube Link</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>330</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enable_social>1</enable_social></depends>
+                        </youtube>
+                        <pinterest translate="label">
+                            <label>Pinterest Link</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>340</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enable_social>1</enable_social></depends>
+                        </pinterest>
+                        <linkedin translate="label">
+                            <label>Linkedin Link</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>350</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enable_social>1</enable_social></depends>
+                        </linkedin>
+                        <wordpress translate="label">
+                            <label>Wordpress Link</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>360</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enable_social>1</enable_social></depends>
+                        </wordpress>
+                        <instagram translate="label">
+                            <label>Instagram Link</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>370</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enable_social>1</enable_social></depends>
+                        </instagram>
+                    </fields>
+                </footer>
+                <product_detail>
+                    <label>Product Detail Settings</label>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enable_related translate="label">
+                            <label>Enable Related Block on Product Detail</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_related>
+                    </fields>
+                </product_detail>
+                <reorder>
+                    <label>Email Reorder</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>50</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <recipient_email translate="label">
+                            <label>Send Emails To</label>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-email required-entry</validate>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </recipient_email>
+                        <sender_email_identity translate="label">
+                            <label>Email Sender</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_identity</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </sender_email_identity>
+                        <email_template translate="label">
+                            <label>Email Template</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_email_template</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </email_template>
+                    </fields>
+                </reorder>
+            </groups>
+        </cyberfision_custom>
+    </sections>
+</config>
+
+
+

@@ -1,0 +1,226 @@
+/**
+ * MagPleasure Ltd.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magpleasure.com/LICENSE.txt
+ *
+ * @category Magpleasure
+ * @package Magpleasure_Activecontent
+ * @copyright Copyright (c) 2011-2014 MagPleasure Ltd. (http://www.magpleasure.com)
+ * @license http://www.magpleasure.com/LICENSE.txt
+ */
+
+
+/** IMPORT FONTS
+===================================*/
+@import url("https://fonts.googleapis.com/css?family=Roboto+Condensed&subset=latin,cyrillic,latin-ext");
+
+/** THEME
+===================================*/
+
+.emerald .bx-wrapper .bx-viewport {
+
+    zoom: 1;
+    position: relative;
+    margin:0px auto 0px;
+    z-index:90;
+    border:4px solid #0cad00;
+    border-left: 0px;
+    border-right: 0px;
+    border-top: 0px;
+    text-align:left; /* reset align=center */
+    font-size: 10px;
+
+}
+
+.emerald .bx-wrapper .bx-viewport ul {
+    position:relative;
+    width: 10000%;
+    height:auto;
+    left:0;
+    list-style:none;
+    margin:0;
+    padding:0;
+    border-spacing:0;
+    overflow: visible;
+    /*table-layout:fixed;*/
+}
+
+.emerald .bx-wrapper .bx-viewport ul li {
+
+}
+
+.emerald .bx-wrapper .bx-pager .bx-pager-item {
+    float: left;
+}
+
+.emerald .bx-wrapper .bx-pager {
+    bottom: 5px;
+    right: 0;
+    padding: 5px 0;
+    float: left;
+    font-size: 0;
+    position: absolute;
+    z-index: 100;
+
+    white-space: nowrap;
+}
+
+/* PAGER */
+
+.emerald .bx-wrapper .bx-pager {
+    padding: 5px 0;
+    height: 6px;
+}
+
+.emerald .bx-wrapper .bx-pager .bx-pager-item a {
+    width:20px;
+    height:6px;
+    background: url(./bullet.png) left top;
+    float: left;
+    text-indent: -4000px;
+    position:relative;
+    margin-left:0px;
+    color:transparent;
+}
+
+.emerald .bx-wrapper .bx-controls-auto .bx-controls-auto-item {
+
+}
+
+.emerald .bx-wrapper .bx-pager.bx-default-pager a {
+
+}
+
+.emerald .bx-wrapper .bx-pager.bx-default-pager a:hover,
+.emerald .bx-wrapper .bx-pager.bx-default-pager a.active {
+    background-position: 0 100%;
+}
+
+/* DIRECTION CONTROLS (NEXT / PREV) */
+.emerald .bx-wrapper .bx-prev, .emerald .bx-wrapper .bx-next {
+    position:absolute;
+    top:50%;
+    margin-top:-1.9em;
+    z-index:100;
+    width: 3.9em;
+    height: 3.9em;
+    background-image: url(./arrows.png);
+    background-size: 200%;
+    text-indent: -10000px;
+}
+
+.emerald .bx-wrapper .bx-prev {
+    left:0px;
+    background-position: 0 0;
+}
+
+.emerald .bx-wrapper .bx-next {
+    background-position: 100% 0;
+    right:0px;
+}
+
+.emerald .bx-wrapper .bx-prev:hover, .emerald .bx-wrapper .bx-next:hover {
+    background-position: 0 100%;
+}
+
+.emerald .bx-wrapper .bx-prev:hover {
+    background-position: 0 100%;
+}
+
+.emerald .bx-wrapper .bx-next:hover {
+    background-position: 100% 100%;
+}
+
+.emerald .bx-wrapper .bx-controls-direction a {
+    
+}
+
+.emerald .bx-wrapper .bx-controls-direction a.disabled {
+    display: none;
+}
+
+/* AUTO CONTROLS (START / STOP) */
+
+.emerald .bx-wrapper .bx-controls-auto {
+
+}
+
+.emerald .bx-wrapper .bx-controls-auto .bx-start.active, .emerald .bx-wrapper .bx-controls-auto .bx-stop.active {
+
+    display: none;
+}
+
+.emerald .bx-wrapper .bx-controls-auto .bx-start, .emerald .bx-wrapper .bx-controls-auto .bx-stop {
+    display: block;
+    width: 1.8em;
+    height: 2.8em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -0.9em;
+    margin-top: -1.4em;
+    z-index: 100;
+    background-size: 100%;
+    text-indent: -10000px;
+}
+
+.emerald .bx-wrapper .bx-controls-auto .bx-start {
+    background-image: url(./play.png);
+}
+
+.emerald .bx-wrapper .bx-controls-auto .bx-start:hover {
+
+}
+
+.emerald .bx-wrapper .bx-controls-auto .bx-start.active {
+
+}
+
+.emerald .bx-wrapper .bx-controls-auto .bx-stop {
+    background-image: url(./pause.png);
+}
+
+.emerald .bx-wrapper .bx-controls-auto .bx-stop:hover {
+
+}
+
+.emerald .bx-wrapper .bx-controls-auto .bx-stop.active {
+
+}
+
+/* PAGER WITH AUTO-CONTROLS HYBRID LAYOUT */
+
+.emerald .bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-pager {
+
+}
+
+.emerald .bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-controls-auto {
+
+}
+
+/* IMAGE CAPTIONS */
+
+.emerald .bx-wrapper .bx-caption {
+    position:absolute;
+    display:block;
+    bottom: 2em;
+    left: 0px;
+    margin-right:1em;
+    padding:1em;
+    background:#0cad00;
+    color:#FFFFFF;
+    z-index: 50;
+    font-family:'Roboto Condensed',"MS Sans Serif",Geneva,sans-serif;
+    line-height: 2.7em;
+    text-transform: none;
+    opacity:1;
+}
+
+.emerald .bx-wrapper .bx-caption span {
+    font-size: 2.6em;
+}

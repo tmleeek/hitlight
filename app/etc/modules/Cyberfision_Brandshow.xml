@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Cyberfision_Brandshow>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>Cyberfision_Brand</depends>
+        </Cyberfision_Brandshow>
+    </modules>
+</config>
+

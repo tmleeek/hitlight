@@ -1,0 +1,46 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * Magento
+ * Date: 7/21/16
+ * Time: 1:56 PM
+ */
+?>
+
+<?php /* @var $_category Mage_Catalog_Model_Category */ ?>
+<?php $_category = $this->getCurrentCategory() ?>
+<?php $slides = Mage::helper('ghoster_categoryslider')->getCategorySlider($_category); ?>
+
+<?php if (count($slides)): ?>
+    <div class="category-sliders">
+        <ul id="category-slider" class="category-slider">
+            <!-- Slide has data slider_url-->
+            <?php foreach ($slides as $slide): ?>
+                <?php $image_path = (Mage::helper('ghoster_common/image')->getImagePath($slide['uri'])) ?>
+                <?php if (isset($slide['slider_url'])): ?>
+                    <li>
+                        <a href="<?php echo $slide['slider_url']?>">
+                            <img src="<?php echo Mage::helper('ghoster_common/resizer')->init($image_path)->adaptiveResize(870, 280); ?>"/>
+                        </a>
+                    </li>
+                <?php else:?>
+                    <li>
+                        <img src="<?php echo Mage::helper('ghoster_common/resizer')->init($image_path)->adaptiveResize(870, 280); ?>"/>
+                    </li>
+                <?php endif;?>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        $j = jQuery.noConflict();
+
+        $j(document).ready(function () {
+            $j('#category-slider').bxSlider({
+                pager: false,
+                auto: true
+            });
+        });
+    </script>
+
+<?php endif; ?>
+

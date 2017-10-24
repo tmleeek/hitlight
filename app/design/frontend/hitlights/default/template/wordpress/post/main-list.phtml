@@ -1,0 +1,106 @@
+<?php
+/**
+ * @category    Fishpig
+ * @package     Fishpig_Wordpress
+ * @license     http://fishpig.co.uk/license.txt
+ * @author      Ben Tideswell <help@fishpig.co.uk>
+ */
+?>
+<div class="post-list">
+    <div class="post-list-title col-lg-12 col-sm-12">Recent Blog Posts</div>
+<?php
+$arrayPosts = array();
+
+$sql = "SELECT `table_meta`.`post_id` FROM ". Mage::helper('wordpress/app')->getTableName('postmeta') ." AS `table_meta` INNER JOIN ". Mage::helper('wordpress/app')->getTableName('posts') ." AS `table_post` ON `table_meta`.`post_id` = `table_post`.`ID` WHERE `table_meta`.`meta_key` = '_hil588_position' AND `table_post`.`post_status` = 'publish' ORDER BY `table_meta`.`meta_value` * 1 DESC";
+$postIds = Mage::helper('wordpress/app')->getDbConnection()->fetchAll($sql);
+
+if(count($postIds) >= 5) {
+    foreach($postIds as $postId) {
+        array_push($arrayPosts, $postId['post_id']);
+
+        if(count($arrayPosts) == 5) break;
+    }
+} else {
+    if(count($postIds) > 0) {
+        foreach($postIds as $postId) {
+            array_push($arrayPosts, $postId['post_id']);
+        }
+    }
+
+    $collectionPosts = Mage::getResourceModel('wordpress/post_collection')
+        ->addIsViewableFilter()
+        ->addIsPublishedFilter()
+        ->load();
+
+    foreach($collectionPosts as $collectionPost) {
+        if(!in_array($collectionPost->getId(), $arrayPosts) && count($arrayPosts) < 5) {
+            array_push($arrayPosts, $collectionPost->getId());
+        }
+
+        if(count($arrayPosts) == 5) break;
+    }
+}
+
+if (count($arrayPosts) > 0) {
+?>
+    <ul id="recent-blog-posts-list">
+        <?php
+        foreach($arrayPosts as $postId):
+            $post = Mage::getModel('wordpress/post')->load($postId);
+        ?>
+        <li class="item post-blog-<?php echo $i?>">
+            <div class="post-list-item">
+                <?php echo $this->getBeforePostContentHtml() ?>
+                <div class="post-entry entry<?php if ($post->getFeaturedImage()): ?> post-entry-with-image<?php endif; ?> col-lg-3 col-sm-3">
+                    <div class="content">
+                        <div class="content-post-entry">
+
+                            <?php if ($post->isViewableForVisitor()): ?>
+                                <?php if ($featuredImage = $post->getFeaturedImage()): ?>
+                                    <div class="featured-image left">
+                                        <a href="<?php echo $post->getPermalink() ?>"
+                                           title="<?php echo $this->escapeHtml($post->getPostTitle()) ?>"><img
+                                                    src="<?php if ($featuredImage->getLargeImage()): echo $featuredImage->getLargeImage();
+                                                    else: echo $featuredImage->getFullSizeImage(); endif; ?>"
+                                                    alt="<?php echo $this->escapeHtml($post->getPostTitle()) ?>"/></a>
+                                    </div>
+                                <?php else: ?>
+                                    <?php
+                                    $outputImg = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post->getPostContent(), $matchesImg);
+                                    $firstImg = $matchesImg[1][0];
+
+                                    if (!empty($firstImg)):
+                                        ?>
+                                        <div class="featured-image left">
+                                            <a href="<?php echo $post->getPermalink() ?>"
+                                               title="<?php echo $this->escapeHtml($post->getPostTitle()) ?>"><img
+                                                        src="<?php echo $firstImg ?>"
+                                                        alt="<?php echo $this->escapeHtml($post->getPostTitle()) ?>"/></a>
+                                        </div>
+                                        <?php
+                                    endif;
+                                    ?>
+                                <?php endif; ?>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="blog-title-home-content col-lg-9 col-sm-9">
+                    <a href="<?php echo $post->getPermalink() ?>"
+                       title="<?php echo $this->escapeHtml($post->getPostTitle()) ?>"> <?php echo $this->escapeHtml(substr($post->getPostTitle(), 0, 25) . '...') ?></a>
+                    <div class="post-meta details">
+                        <?php echo stripslashes($this->__('<span class=\"by-author\"> by %s</span> | %s.', $post->getAuthor()->getDisplayName(),$post->getPostDate())) ?>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <?php
+        endforeach;
+        ?>
+    </ul>
+    <script type="text/javascript">decorateList($('post-list'));</script>
+<?php
+}
+?>
+    <div class="post-list-read-more col-lg-12 col-sm-12"><a href="/blog">See more</a></div>
+</div>

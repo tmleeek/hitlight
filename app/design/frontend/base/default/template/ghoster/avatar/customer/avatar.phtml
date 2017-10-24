@@ -1,0 +1,46 @@
+<?php
+/**
+ * GhoSter Avatar Customer Template
+ *
+ * @category    GhoSter
+ * @package     GhoSter_Avatar
+ * @author      opensource
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+?>
+
+<?php if (Mage::getSingleton('customer/session')->isLoggedIn()) {
+    $customerData = Mage::getSingleton('customer/session')->getCustomer();
+} ?>
+
+<div class="avatar-wrapper">
+    <div class="preview-avatar">
+        <img id="preview"
+             src="<?php echo $this->getAvatar() ? Mage::helper('ghoster_avatar')->getAvatarPath($customerData->getId()) : $this->getSkinUrl('images/avatar.png') ?>"/>
+    </div>
+
+    <div class="input-box">
+        <input type="file" name="avatar-file" id="file" onChange="readURL(this);">
+    </div>
+
+    <script type="text/javascript">
+        /*
+         * to preview image before actual upload
+         */
+
+        $j = jQuery.noConflict();
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $j('#preview').attr('src', e.target.result);
+                    $j('#top-preview').attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+</div>

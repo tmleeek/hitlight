@@ -1,0 +1,211 @@
+/**
+ * MagPleasure Ltd.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magpleasure.com/LICENSE.txt
+ *
+ * @category   Magpleasure
+ * @package    Magpleasure_Activecontent
+ * @copyright  Copyright (c) 2011-2014 MagPleasure Ltd. (http://www.magpleasure.com)
+ * @license    http://www.magpleasure.com/LICENSE.txt
+ */
+
+@import url(https://fonts.googleapis.com/css?family=Oranienbaum&subset=latin,latin-ext,cyrillic);
+
+/** IMPORT FONTS
+===================================*/
+
+
+/** THEME
+===================================*/
+
+
+
+.glass .bx-wrapper {
+    border: medium none;
+    font-size: 10px;
+    margin: 0 auto;
+    position: relative;
+    text-align: left;
+    z-index: 90;
+}
+
+.glass .bx-wrapper .bx-viewport {
+
+
+
+}
+
+.glass .bx-wrapper .bx-viewport ul {
+
+}
+
+.glass .bx-wrapper .bx-viewport ul li {
+
+}
+
+/* PAGER */
+
+.glass .bx-wrapper .bx-pager .bx-pager-item {
+    position:relative;
+    float:left;
+}
+
+.glass .bx-wrapper .bx-pager {
+    font-size: 0px;
+    float: left;
+    position:absolute;
+    z-index:100;
+    padding: 10px;
+    bottom: 0;
+    left: 50%;
+}
+
+.glass .bx-wrapper .bx-pager div{
+    left:-50%;
+}
+
+.glass .bx-wrapper .bx-pager .bx-pager-item a {
+    margin-left:5px;
+    width:14px;
+    height:13px;
+    background: url(./bullet.png) left top;
+    float: left;
+    text-indent: -4000px;
+    position:relative;
+    color:transparent;
+}
+
+.glass .bx-wrapper .bx-controls-auto .bx-controls-auto-item {
+
+}
+
+.glass .bx-wrapper .bx-pager a {
+
+}
+
+.glass .bx-wrapper .bx-pager.bx-default-pager a:hover {
+    background-position: 0 50%;
+}
+.glass .bx-wrapper .bx-pager.bx-default-pager a.active {
+    background-position: 0 100%;
+}
+
+/* DIRECTION CONTROLS (NEXT / PREV) */
+.glass .bx-wrapper .bx-prev, .glass .bx-wrapper .bx-next {
+    text-indent: -10000px;
+
+    position:absolute;
+    top:50%;
+    margin-top:-2.6em;
+    z-index:90;
+    width: 5.3em;
+    height: 5.3em;
+    background-image: url(./arrows.png);
+    background-size: 200%;
+}
+
+.glass .bx-wrapper .bx-prev {
+    left:15px;
+    background-position: 0 0;
+}
+
+.glass .bx-wrapper .bx-next {
+    background-position: 100% 0;
+    right:15px;
+}
+
+.glass .bx-wrapper .bx-prev:hover, .glass .bx-wrapper .bx-next:hover {
+
+}
+
+.glass .bx-wrapper .bx-prev:hover {
+    background-position: 0 100%;
+}
+
+.glass .bx-wrapper .bx-next:hover {
+    background-position: 100% 100%;
+}
+
+.glass .bx-wrapper .bx-controls-direction a {
+
+}
+
+.glass .bx-wrapper .bx-controls-direction a.disabled {
+    display: none;
+}
+
+/* AUTO CONTROLS (START / STOP) */
+
+.glass .bx-wrapper .bx-controls-auto {
+
+}
+
+.glass .bx-wrapper .bx-controls-auto .bx-start.active, .glass .bx-wrapper .bx-controls-auto .bx-stop.active {
+
+    display: none;
+}
+
+.glass .bx-wrapper .bx-controls-auto .bx-start, .glass .bx-wrapper .bx-controls-auto .bx-stop {
+
+    background-size: 100% auto;
+    text-indent: -10000px;
+    height: 5.3em;
+    left: 50%;
+    margin-left: -1.6em;
+    margin-top: -2.6em;
+    position: absolute;
+    top: 50%;
+    width: 5.3em;
+    z-index: 90;
+}
+
+.glass .bx-wrapper .bx-controls-auto .bx-start {
+    background-image: url(./play.png);
+}
+
+.glass .bx-wrapper .bx-controls-auto .bx-start:hover, .glass .bx-wrapper .bx-controls-auto .bx-stop:hover {
+    background-position: 100% 100% !important;
+}
+
+.glass .bx-wrapper .bx-controls-auto .bx-stop {
+    background-image: url(./pause.png);
+}
+
+/* PAGER WITH AUTO-CONTROLS HYBRID LAYOUT */
+
+.glass .bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-pager {
+
+}
+
+.glass .bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-controls-auto {
+
+}
+
+/* IMAGE CAPTIONS */
+
+.glass .bx-wrapper .bx-caption {
+    background: none repeat scroll 0 0 rgba(255, 255, 255, 0.4);
+    border: 1px solid #FFFFFF;
+    border-radius: 0.5em;
+    bottom: 1.5em;
+    color: #FFFFFF;
+    font-family: 'Oranienbaum',Georgia,serif;
+    font-weight: bold;
+    left: 0;
+    line-height: 2.8em;
+    margin: 1.5em;
+    padding: 0.5em;
+    position: absolute;
+    z-index: 99;
+}
+
+.glass .bx-wrapper .bx-caption span {
+
+
+    font-size: 2.8em;
+}

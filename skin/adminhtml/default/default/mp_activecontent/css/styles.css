@@ -1,0 +1,54 @@
+span.mp-ac-status span.label {
+
+    margin-right: 5px;
+    margin-top: 5px;
+    padding: 1px 6px;
+
+    background-color: #EFF5EA;
+    border: 1px solid #95A486;
+    color: #3D6611;
+
+    white-space: nowrap;
+    display: inline-block;
+
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+span.mp-ac-status span.label.disabled,
+span.mp-ac-status span.label.hidden {
+    background-color: #FAEBE7;
+    border: 1px solid #F16048;
+    color: #DF280A;
+}
+
+span.mp-ac-status span.label.notice {
+    background-color: #FFFBF0;
+    border: 1px solid #FFD967;
+    color: #3D6611;
+}
+
+button.scalable.save.duplicate span {
+    background-image: url("../images/duplicate_btn_icon.gif");
+}
+
+#width, #height {
+    width: 60px;
+}
+
+.form-list td.value select.size-field {
+    width: 60px;
+}
+
+.mp-ac-style-preview {
+    margin-top: 10px;
+}
+
+.mp-ac-style-preview-image {
+
+    border-color: #AAAAAA #C8C8C8 #C8C8C8 #AAAAAA;
+    border-style: solid;
+    border-width: 1px;
+}
+

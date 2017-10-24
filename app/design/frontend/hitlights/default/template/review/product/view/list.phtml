@@ -1,0 +1,80 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2006-2016 X.commerce, Inc. and affiliates (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+
+<?php $_items = $this->getReviewsCollection()->getItems();?>
+<div class="box-collateral box-reviews" id="customer-reviews">
+    <div class="row">
+        <div class="col-md-6">
+            <?php echo $this->getChildHtml('review_form') ?>
+        </div>
+        <div class="col-md-6">
+            <div class="review-customer-wrapper">
+                <?php if (count($_items)):?>
+                    <h2><?php echo $this->__('Product Review') ?></h2>
+                <?php endif;?>
+                <?php foreach ($_items as $_review):?>
+                    <div class="row-review-customer">
+                        <div class="label-review-customer"><i class="fa fa-angle-right" aria-hidden="true"></i><span class="title-review-customer"><?php echo $this->escapeHtml($_review->getTitle()) ?></span><?php echo $this->__('Review by <span>%s</span>', $this->escapeHtml($_review->getNickname())) ?></div>
+                        <div class="content-review-customer">
+                            <?php $_votes = $_review->getRatingVotes(); ?>
+                            <?php if (count($_votes)): ?>
+                            <div class="vote-review-customer">
+                                <?php foreach ($_votes as $_vote): ?>
+                                    <div class="row-vote-review">
+                                        <label><?php echo $this->escapeHtml($_vote->getRatingCode()) ?></label>
+                                        <div class="star-ratings-css">
+                                            <div class="star-ratings-css-top" style="width: <?php echo $_vote->percent . '%'?>">
+                                                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                                            <div class="star-ratings-css-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                            <?php endif; ?>
+                            <div class="text-review-customer">
+                                <?php echo nl2br($this->escapeHtml($_review->getDetail())) ?> <?php echo $this->__('(Posted on %s)', $this->formatDate($_review->getCreatedAt()), 'long') ?>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    jQuery(document).ready(function($){
+        $('.rating-links a').click(function(){
+            $('.show-content-review').click();
+        });
+
+        $('.show-content-review').click(function(){
+           $('.frm-product-review').show();
+           $('.show-content-review').hide();
+        });
+    });
+</script>

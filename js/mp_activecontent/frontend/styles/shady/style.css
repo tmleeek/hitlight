@@ -1,0 +1,198 @@
+/**
+ * MagPleasure Ltd.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magpleasure.com/LICENSE.txt
+ *
+ * @category   Magpleasure
+ * @package    Magpleasure_Activecontent
+ * @copyright  Copyright (c) 2011-2014 MagPleasure Ltd. (http://www.magpleasure.com)
+ * @license    http://www.magpleasure.com/LICENSE.txt
+ */
+
+
+/** IMPORT FONTS
+===================================*/
+
+
+/** THEME
+===================================*/
+
+.shady .bx-wrapper {
+    zoom: 1;
+    position: relative;
+    margin:0px auto 0px;
+    z-index:90;
+    border:none;
+    text-align:left; /* reset align=center */
+    font-size: 10px;
+}
+
+.shady .bx-wrapper .bx-viewport {
+
+    -webkit-box-shadow: 0 0 6px 0 #333333;
+    box-shadow: 0 0 6px 0 #333333;
+    border: 3px solid #ffffff;
+}
+
+.shady .bx-wrapper .bx-viewport ul {
+
+}
+
+.shady .bx-wrapper .bx-viewport ul li {
+
+}
+
+/* PAGER */
+
+.shady .bx-wrapper .bx-pager .bx-pager-item {
+    left: 0;
+}
+
+.shady .bx-wrapper .bx-pager {
+    font-size: 0px;
+    float: left;
+    position:absolute;
+    z-index:170;
+    padding-left: 10px;
+    padding-right: 10px;
+    bottom: -25px;
+    left: 50%;
+
+
+}
+
+.shady .bx-wrapper .bx-pager div{
+    position:relative;
+    float:left;
+    left: -50%;
+}
+
+.shady .bx-wrapper .bx-pager a {
+    width:22px;
+    height:20px;
+    background: url(./bullet.png) left top;
+    float: left;
+    text-indent: -4000px;
+    position:relative;
+    color:transparent;
+}
+
+.shady .bx-wrapper .bx-pager.bx-default-pager a:hover,
+.shady .bx-wrapper .bx-pager.bx-default-pager a.active {
+    background-position: 0 100%;
+}
+
+/* DIRECTION CONTROLS (NEXT / PREV) */
+.shady .bx-wrapper .bx-prev, .shady .bx-wrapper .bx-next {
+    text-indent: -10000px;
+    background-size: 200%;
+
+    position:absolute;
+    display:block;
+    top:50%;
+    margin-top:-2.8em;
+    z-index:60;
+    height: 5em;
+    width: 5.1em;
+    background-image: url(./arrows.png);
+
+}
+
+.shady .bx-wrapper .bx-prev {
+    left:1em;
+    background-position: 0 0;
+}
+
+.shady .bx-wrapper .bx-next {
+    background-position: 100% 0;
+    right:0.4em;
+}
+
+.shady .bx-wrapper .bx-prev:hover {
+    background-position: 0 100%;
+}
+
+.shady .bx-wrapper .bx-next:hover {
+    background-position: 100% 100%;
+
+}
+
+.shady .bx-wrapper .bx-controls-direction a {
+
+}
+
+.shady .bx-wrapper .bx-controls-direction a.disabled {
+    display: none;
+}
+
+/* AUTO CONTROLS (START / STOP) */
+
+.shady .bx-wrapper .bx-controls-auto {
+
+}
+
+.shady .bx-wrapper .bx-controls-auto .bx-start.active, .shady .bx-wrapper .bx-controls-auto .bx-stop.active {
+
+    display:none;
+
+
+}
+
+.shady .bx-wrapper .bx-controls-auto .bx-start, .shady .bx-wrapper .bx-controls-auto .bx-stop {
+    display:block;
+    width: 5.1em;
+    height: 5em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -1.5em;
+    margin-top: -2.8em;
+    z-index: 59;
+    text-indent: -10000px;
+}
+
+.shady .bx-wrapper .bx-controls-auto .bx-start {
+    background-size: 100%;
+    background-image: url(./play.png);
+}
+
+.shady .bx-wrapper .bx-controls-auto .bx-stop {
+    background-size: 100%;
+    background-image: url(./pause.png);
+}
+
+.shady .bx-wrapper .bx-controls-auto .bx-start:hover, .shady .bx-wrapper .bx-controls-auto .bx-stop:hover {
+    background-position: 100% 100% !important;
+}
+
+.shady .bx-wrapper .bx-controls-auto .bx-controls-auto-item {
+
+}
+
+/* IMAGE CAPTIONS */
+
+.shady .bx-wrapper .bx-caption {
+    position: absolute;
+    bottom:10%;
+    left: 0;
+    margin-right:1em;
+    z-index: 50;
+    padding:1.2em;
+    color: #F9FBFB;
+    text-transform:uppercase;
+    background:#2a2a2a;
+    font-family: Franklin Gothic Medium,sans-serif;
+    line-height: 1.8em;
+    opacity:0.8;
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=90);
+}
+
+.shady .bx-wrapper .bx-caption span {
+    font-size: 1.8em;
+}
+

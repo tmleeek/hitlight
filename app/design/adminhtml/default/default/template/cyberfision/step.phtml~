@@ -1,0 +1,100 @@
+
+<tr>
+    <td class="label"><?php echo $this->getElement()->getLabel() ?></td>
+    <td class="grid" style="">
+        <table cellspacing="0" class="data border" id="<?php echo $this->getElement()->getHtmlId() ?>">
+            <colgroup>
+                <col width="600"/>
+                <col width="1"/>
+            </colgroup>
+            <thead>
+            <tr class="headings">
+                <th><?php echo Mage::helper('ghoster_shopbyproject')->__('Content') ?></th>
+                <th><?php echo Mage::helper('ghoster_shopbyproject')->__('Delete') ?></th>
+            </tr>
+            </thead>
+            <tbody id="<?php echo $this->getElement()->getHtmlId() ?>_container"></tbody>
+            <tfoot>
+            <tr>
+                <td colspan="5" class="a-right"><?php echo $this->getAddButtonHtml() ?></td>
+            </tr>
+            </tfoot>
+        </table>
+    </td>
+</tr>
+
+<script type="text/javascript">
+    //<![CDATA[
+    var openEditorPopup = function(url, name, specs, parent) {
+        if ((typeof popups == "undefined") || popups[name] == undefined || popups[name].closed) {
+            if (typeof popups == "undefined") {
+                var popups = new Array();
+            }
+            var opener = (parent != undefined ? parent : window);
+            popups[name] = opener.open(url, name, specs);
+        } else {
+            popups[name].focus();
+        }
+        return popups[name];
+    };
+
+    var closeEditorPopup = function(name) {
+        if ((typeof popups != "undefined") && popups[name] != undefined && !popups[name].closed) {
+            popups[name].close();
+        }
+    };
+    //]]>
+    var imageRowTemplate = '<tr id="sliderImage_{{id}}">' +
+        '<td>'+
+        '<button id="toggle_instruction_step_{{id}}" style="" class="scalable show-hide" type="button"><span><span><span>Show / Hide Editor</span></span></span></button>'+
+        '<textarea class="input-text" name="image[]" style="width:98%;" id="instruction_step_{{id}}" rows="3" cols="20">{{instruction_step}}</textarea></td>' +
+        '<td class="a-center"><?php echo $this->getDeleteButtonHtml()?></td>' +
+        '</tr>';
+
+    window.catalogSlider = {
+        baseUrl: '<?php echo Mage::getBaseUrl('media')?>',
+        template: new Template(imageRowTemplate, new RegExp('(^|.|\\r|\\n)({{\\s*(\\w+)\\s*}})', "")),
+        itemsCount: 0,
+        container: $('<?php echo $this->getElement()->getHtmlId() ?>_container'),
+        add: function (content) {
+            var data = {
+                instruction_step: content || '',
+                id: ++this.itemsCount
+            };
+            this.container.insert({bottom: this.template.evaluate(data)});
+
+            setTimeout(function () {
+                <?php
+                $wysiwygConfig = Mage::getModel('cms/wysiwyg_config')->getConfig(array(
+                    'add_widgets' => false,
+                    'add_variables' => false,
+                    'add_images' => true,
+                    'files_browser_window_url'=> $this->getBaseUrl().'admin/cms_wysiwyg_images/index/',
+                ));
+                ?>
+
+                var editorTxt = 'var jsSetupObject' + data.id + ' = new tinyMceWysiwygSetup("instruction_step_' + data.id + '", ' +
+                    '<?php  echo str_replace("'", "\'", Zend_Json::encode($wysiwygConfig)) ?>);' +
+                    'Event.observe(window, "load", jsSetupObject' + data.id + '.setup.bind(jsSetupObject' + data.id + ', "exact"));'+
+                    'editorFormValidationHandler = jsSetupObject' + data.id + '.onFormValidation.bind(jsSetupObject' + data.id + ');' +
+                    'Event.observe("toggle_instruction_step_' + data.id + '", "click", jsSetupObject' + data.id + '.toggle.bind(jsSetupObject' + data.id + '));'+
+                    'varienGlobalEvents.attachEventHandler("formSubmit", editorFormValidationHandler);'+
+                    'varienGlobalEvents.attachEventHandler("tinymceBeforeSetContent", jsSetupObject' + data.id + '.beforeSetContent.bind(jsSetupObject' + data.id + '));' +
+                    'varienGlobalEvents.attachEventHandler("tinymceSaveContent", jsSetupObject' + data.id + '.saveContent.bind(jsSetupObject' + data.id + '));'+
+                    'varienGlobalEvents.clearEventHandlers("open_browser_callback");' +
+                    'varienGlobalEvents.attachEventHandler("open_browser_callback", jsSetupObject' + data.id + '.openFileBrowser.bind(jsSetupObject' + data.id + '));';
+
+                eval(editorTxt);
+            }, 1000);
+
+        },
+        remove: function (id) {
+            var tr = this.container.down('tr#sliderImage_' + id);
+            if (tr) tr.remove();
+        }
+    };
+
+    <?php foreach ($this->getItems() as $step):?>
+    window.catalogSlider.add('<?php echo str_replace(array("\n", "\r"), '',$step);?>');
+    <?php endforeach ?>
+</script>

@@ -1,0 +1,86 @@
+<style>
+	.popUp-slider .flex-control-paging { display: none;}
+	.popUp-slider .flex-nav-prev { position: absolute; top: 40%; left: -30px; width: 38px; height: 38px;}
+	.popUp-slider .flex-nav-next { position: absolute; top: 40%; right:-30px; width: 38px; height: 38px;}
+	.popUp-slider .buy-image .flexslider { padding: 0 25px;}
+	.popUp-slider .buy-name {padding-left: 25px;}
+</style>
+<div class="buy_page_custom">
+    <div class="title-pages">
+        <div class="container">
+            <h1><?php echo $this->__('Buying Guide') ?></h1>
+        </div>
+    </div>
+
+    <div class="contact_wrappers">
+        <div class="container">
+			<?php 
+				$mainTitle = Mage::getStoreConfig('tbuys/general/main_title');
+			?>
+			<h3><?php echo $mainTitle;?></h3>
+			<?php $brandCollection = $this->getBrandCollection(); ?>
+			<?php if ($brandCollection->count() > 0): ?>
+		    	<ul>
+			        <?php $i=0; foreach ($brandCollection as $_brand): ?>    
+			        <?php if ($i++ ==1) break;?>
+			            <li>
+							<div style="position: relative; width: 100%">
+								<p class="buy-name"><?php echo $_brand->getName();?></p>
+								<img  class="img-banner-bg" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . $_brand->getBanner();?>" alt="<?php echo $_brand->getName();?>" title="<?php  echo $_brand->getName();?>"/>
+								<?php $imageArr = json_decode($_brand->getImage());  if (count($imageArr) > 0) :?>
+									<span eleId="<?php echo $_brand->getId();?>" class="showSlider slider_start"></span>
+								<?php endif; ?>
+							</div>
+
+							<div id="popUp-slider<?php echo $_brand->getId();?>" class="popUp-slider modal" role="dialog">
+								<div class="amia-modal-wrapper">
+									<div class="amia-modal-content">
+										<div class="modal-dialog">
+											<div class="modal-content modal-content-click">
+												<div class="buy-image">
+													<p class="buy-name"><?php echo $_brand->getName();?></p>
+													<div class="amia-owl-carousel owl-carousel owl-theme">
+														<?php
+														$images = $_brand->getImage();
+														if (strlen($images)> 0) {
+															$imageArr = json_decode($images);
+															foreach ($imageArr as $img) {
+																?>
+																<div class="item">
+																	<p><?php echo $img;?></p>
+																</div>
+																<?php
+															}
+														}
+														?>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+					        </div>
+							<div class="desc-buy-content desc-buy-content-i1">
+								<?php echo substr($_brand->getDescription(),0,500).'...';?>
+							</div>
+							<div class="desc-buy-content-full desc-buy-content-full-i1" style="display: none;">
+								<?php echo $_brand->getDescription();?>
+							</div>
+							<span class="more-content more-content-i1">Show more...</span>
+							<span class="less-content less-content-i1" style="display: none">Show less</span>
+			        	</li>
+			        <?php endforeach; ?>
+			    </ul>
+			<?php else: ?>
+			    <?php echo $this->__('There are no items to display at this time.'); ?>
+			<?php endif; ?>
+		</div>
+	</div>
+
+	<div class="container">
+		<?php 
+			$canTitle = Mage::getStoreConfig('tbuys/general/can_light_title');
+		?>
+		<h3 class="can-light"><?php echo $canTitle;?></h3>
+	</div>
+</div>

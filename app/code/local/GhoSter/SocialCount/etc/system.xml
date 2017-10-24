@@ -1,0 +1,181 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <ghoster translate="label" module="ghoster_socialcount">
+            <label>GhoSter.., Inc</label>
+            <sort_order>150</sort_order>
+        </ghoster>
+    </tabs>
+    <sections>
+        <social_share_count>
+            <label>Social ShareCount</label>
+            <tab>ghoster</tab>
+            <sort_order>200</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label" module="ghoster_socialcount">
+                    <label>General Settings</label>
+                    <sort_order>50</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label comment">
+                            <label>Enable/Disable</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </active>
+                        <enable_button translate="label">
+                            <label>Enable Share Buttton</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_button>
+                    </fields>
+                </general>
+
+                <facebook translate="label" module="ghoster_socialcount">
+                    <label>Facebook Options</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enabled translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+                    </fields>
+                </facebook>
+
+                <linkedin translate="label" module="ghoster_socialcount">
+                    <label>LinkedIn Options</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>200</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enabled translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+                    </fields>
+                </linkedin>
+
+                <pinterest translate="label" module="ghoster_socialcount">
+                    <label>Pinterest Options</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>200</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enabled translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+                    </fields>
+                </pinterest>
+
+                <google translate="label" module="ghoster_socialcount">
+                    <label>Google Options</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>500</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enabled translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+                        <api_key translate="label" module="ghoster_socialcount">
+                            <label>Google API Key</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enabled>1</enabled></depends>
+                            <validate>required-entry</validate>
+                        </api_key>
+                        <links translate="label" module="ghoster_socialcount">
+                            <label>Links</label>
+                            <frontend_type>label</frontend_type>
+                            <frontend_model>ghoster_socialcount/adminhtml_google_system_config_form_field_links</frontend_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </links>
+
+                    </fields>
+                </google>
+
+                <twitter translate="label" module="ghoster_socialcount">
+                    <label>Twitter Options</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>500</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enabled translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+
+                        <links translate="label" module="ghoster_socialcount">
+                            <label>Status/Register Link</label>
+                            <frontend_type>label</frontend_type>
+                            <frontend_model>ghoster_socialcount/adminhtml_twitter_system_config_form_field_status</frontend_model>
+                            <comment>One Twitter Account could only register with 1 domain name.</comment>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </links>
+
+                    </fields>
+                </twitter>
+
+            </groups>
+        </social_share_count>
+    </sections>
+</config>

@@ -1,0 +1,48 @@
+<?php
+/**
+ * MagPleasure Ltd.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE-CE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magpleasure.com/LICENSE-CE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This package designed for Magento COMMUNITY edition
+ * MagPleasure does not guarantee correct work of this extension
+ * on any other Magento edition except Magento COMMUNITY edition.
+ * Magpleasure does not provide extension support in case of
+ * incorrect edition usage.
+ * =================================================================
+ *
+ * @category   MagPleasure
+ * @package    Magpleasure_Activecontent
+ * @version    1.1.3
+ * @copyright  Copyright (c) 2011-2014 MagPleasure Ltd. (http://www.magpleasure.com)
+ * @license    http://www.magpleasure.com/LICENSE-CE.txt
+ */
+?>
+<?php /** @var Magpleasure_Activecontent_Block_Adminhtml_Widget_Grid_Column_Renderer_Size_Renderer $this */ ?>
+
+<span class="mp-ac-size">
+<?php if ($this->getIsResponsive()): ?>
+    <?php echo $this->__("Responsive"); ?>
+<?php else: ?>
+
+    <?php if ($this->hasWidth()): ?>
+        <?php echo $this->__("Width:"); ?>
+        <?php echo $this->getWidth().$this->getWidthType(); ?>
+    <?php endif; ?>
+    <?php if ($this->hasHeight() && $this->hasWidth()): ?>
+        <br />
+    <?php endif; ?>
+    <?php if ($this->hasHeight()): ?>
+        <?php echo $this->__("Height:"); ?>
+        <?php echo $this->getHeight().$this->getHeightType(); ?>
+    <?php endif; ?>
+<?php endif; ?>
+</span>

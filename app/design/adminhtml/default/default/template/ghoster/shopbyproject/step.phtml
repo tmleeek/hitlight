@@ -1,0 +1,127 @@
+<?php
+/**
+ * @category    GhoSter
+ * @package     GhoSter_ShopByProject
+ * @copyright   Copyright (C) 2010-2016 thinghost.info. All Rights Reserved.
+ * @license     GNU General Public License version 2 or later
+ */
+?>
+<tr>
+    <td class="label"><?php echo $this->getElement()->getLabel() ?></td>
+    <td class="grid" style="">
+        <table cellspacing="0" class="data border" id="<?php echo $this->getElement()->getHtmlId() ?>">
+            <colgroup>
+                <col width="600"/>
+                <col width="1"/>
+            </colgroup>
+            <thead>
+            <tr class="headings">
+                <th><?php echo Mage::helper('ghoster_shopbyproject')->__('Content') ?></th>
+                <th><?php echo Mage::helper('ghoster_shopbyproject')->__('Delete') ?></th>
+            </tr>
+            </thead>
+            <tbody id="<?php echo $this->getElement()->getHtmlId() ?>_container"></tbody>
+            <tfoot>
+            <tr>
+                <td colspan="5" class="a-right"><?php echo $this->getAddButtonHtml() ?></td>
+            </tr>
+            </tfoot>
+        </table>
+    </td>
+</tr>
+<script type="text/javascript">
+    //<![CDATA[
+    var openEditorPopup = function(url, name, specs, parent) {
+        if ((typeof popups == "undefined") || popups[name] == undefined || popups[name].closed) {
+            if (typeof popups == "undefined") {
+                var popups = new Array();
+            }
+            var opener = (parent != undefined ? parent : window);
+            popups[name] = opener.open(url, name, specs);
+        } else {
+            popups[name].focus();
+        }
+        return popups[name];
+    };
+
+    var closeEditorPopup = function(name) {
+        if ((typeof popups != "undefined") && popups[name] != undefined && !popups[name].closed) {
+            popups[name].close();
+        }
+    };
+    //]]>
+    var imageRowTemplate = '<tr id="instructionStep_{{id}}">' +
+        '<td>'+
+        '<button id="toggle_instruction_step_{{id}}" style="" class="scalable show-hide" type="button"><span><span><span>Show / Hide Editor</span></span></span></button>'+
+        '<textarea class="input-text" name="instruction_step[]" style="width:98%;" id="instruction_step_{{id}}" rows="3" cols="20">{{instruction_step}}</textarea></td>' +
+        '<td class="a-center"><?php echo $this->getDeleteButtonHtml()?></td>' +
+        '</tr>';
+
+    window.instructionStep = {
+        baseUrl: '<?php echo Mage::getBaseUrl('media')?>',
+        template: new Template(imageRowTemplate, new RegExp('(^|.|\\r|\\n)({{\\s*(\\w+)\\s*}})', "")),
+        itemsCount: 0,
+        container: $('<?php echo $this->getElement()->getHtmlId() ?>_container'),
+        add: function (content) {
+            var data = {
+                instruction_step: content || '',
+                id: ++this.itemsCount
+            };
+            this.container.insert({bottom: this.template.evaluate(data)});
+
+            setTimeout(function () {
+//                tinyMCE.init({
+//                    mode: "exact",
+//                    elements: "instruction_step_" + data.id,
+//                    theme: "advanced",
+//                    plugins: "inlinepopups,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras",
+//                    theme_advanced_buttons1: "newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect,fontselect,fontsizeselect",
+//                    theme_advanced_buttons2: "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor",
+//                    theme_advanced_buttons3: "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen",
+//                    theme_advanced_buttons4: "insertlayer,moveforward,movebackward,absolute,|,styleprops,|,cite,abbr,acronym,del,ins,|,visualchars,nonbreaking",
+//                    theme_advanced_toolbar_location: "top",
+//                    theme_advanced_toolbar_align: "left",
+//                    theme_advanced_path_location: "bottom",
+//                    extended_valid_elements: "a[name|href|target|title|onclick],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name],hr[class|width|size|noshade],font[face|size|color|style],span[class|align|style]",
+//                    theme_advanced_resize_horizontal: 'true',
+//                    theme_advanced_resizing: 'true',
+//                    apply_source_formatting: 'true',
+//                    convert_urls: 'false',
+//                    force_br_newlines: 'true',
+//                    doctype: '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">'
+//
+//                });
+                <?php
+                $wysiwygConfig = Mage::getModel('cms/wysiwyg_config')->getConfig(array(
+                    'add_widgets' => false,
+                    'add_variables' => false,
+                    'add_images' => true,
+                    'files_browser_window_url'=> $this->getBaseUrl().'admin/cms_wysiwyg_images/index/',
+                ));
+                ?>
+
+                var editorTxt = 'var jsSetupObject' + data.id + ' = new tinyMceWysiwygSetup("instruction_step_' + data.id + '", ' +
+                    '<?php  echo str_replace("'", "\'", Zend_Json::encode($wysiwygConfig)) ?>);' +
+                    'Event.observe(window, "load", jsSetupObject' + data.id + '.setup.bind(jsSetupObject' + data.id + ', "exact"));'+
+                    'editorFormValidationHandler = jsSetupObject' + data.id + '.onFormValidation.bind(jsSetupObject' + data.id + ');' +
+                    'Event.observe("toggle_instruction_step_' + data.id + '", "click", jsSetupObject' + data.id + '.toggle.bind(jsSetupObject' + data.id + '));'+
+                    'varienGlobalEvents.attachEventHandler("formSubmit", editorFormValidationHandler);'+
+                    'varienGlobalEvents.attachEventHandler("tinymceBeforeSetContent", jsSetupObject' + data.id + '.beforeSetContent.bind(jsSetupObject' + data.id + '));' +
+                    'varienGlobalEvents.attachEventHandler("tinymceSaveContent", jsSetupObject' + data.id + '.saveContent.bind(jsSetupObject' + data.id + '));'+
+                    'varienGlobalEvents.clearEventHandlers("open_browser_callback");' +
+                    'varienGlobalEvents.attachEventHandler("open_browser_callback", jsSetupObject' + data.id + '.openFileBrowser.bind(jsSetupObject' + data.id + '));';
+
+                eval(editorTxt);
+            }, 1000);
+
+        },
+        remove: function (id) {
+            var tr = this.container.down('tr#instructionStep_' + id);
+            if (tr) tr.remove();
+        }
+    };
+
+    <?php foreach ($this->getSteps() as $step):?>
+    window.instructionStep.add('<?php echo $step?>');
+    <?php endforeach ?>
+</script>

@@ -1,0 +1,311 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Product view template
+ *
+ * @see Mage_Catalog_Block_Product_View
+ * @see Mage_Review_Block_Product_View
+ */
+?>
+
+<?php
+//$oHidePriceHelper = Mage::helper('cyberhideprice');
+?>
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php $_product = $this->getProduct(); ?>
+<?php $config = Mage::helper('cyberfision_custom')->getStoreConfig(); ?>
+<div class="product-view-wrapper commercials">
+    <div class="container">
+        <script type="text/javascript">
+            var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
+        </script>
+        <div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+        <div class="product-view">
+            <div class="product-essential">
+                <form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post"
+                      id="product_addtocart_form"<?php if ($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+                    <div class="row">
+                        <div class="product-img-box col-md-5 col-sm-5 col-sms-12">
+                            <?php echo $this->getChildHtml('media') ?>
+                        </div>
+                        <div class="col-detail-view col-md-7 col-sm-7 col-sms-12">
+                            <div class="product-shop-inner">
+                                <div class="product-name">
+                                    <h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+                                </div>
+                                <?php echo $this->getReviewsSummaryHtml($_product, false, true) ?>
+                                <?php echo $this->getChildHtml('seller_information'); ?>
+
+                                <div class="product-options">
+                                    <?php if ($_product->getMadeIn()): ?>
+
+                                        <label><?php echo $this->__('Made In:') ?></label>
+                                        <div class="product-options-content">
+                                            <span><?php echo $_product->getMadeIn(); ?></span>
+                                        </div>
+                                    <?php endif; ?>
+
+                                    <?php if ($_product->getMaterial()): ?>
+                                        <label><?php echo $this->__('Material:'); ?></label>
+                                        <div class="product-options-content">
+                                            <span><?php echo $_product->getMaterial(); ?></span>
+                                        </div>
+                                    <?php endif; ?>
+
+                                    <div class="availability-stock">
+                                        <?php if ($_product->isAvailable()): ?>
+                                            <label
+                                                class="availability in-stock"><?php echo $this->__('Availability:') ?></label>
+                                            <div class="product-options-content">
+                                                <span><?php echo $this->__('In stock') ?></span>
+                                            </div>
+                                        <?php else: ?>
+                                            <label
+                                                class="availability out-of-stock"><?php echo $this->__('Availability:') ?></label>
+                                            <div class="product-options-content">
+                                                <span><?php echo $this->__('Out of stock') ?></span>
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
+
+                                    <?php if ($_product->getShortDescription()):?>
+                                        <div class="short-description">
+                                            <?php echo $_helper->productAttribute($_product, $_product->getShortDescription(), 'short_description') ?>
+                                        </div>
+                                    <?php endif;?>
+
+
+
+                                    <?php if ($_product->getShipping()): ?>
+                                        <label><?php echo $this->__('Shipping:') ?></label>
+                                        <div class="product-options-content">
+                                            <span><?php echo $_product->getShipping(); ?></span>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                                <?php //if ($oHidePriceHelper->isAllow() === true): ?>
+                                <div class="product-price-box product-price-box-grouped">
+                                    <div class="product-options-content">
+                                        <?php echo $this->getChildHtml('product_type_data') ?>
+                                        <?php echo $this->getChildHtml('alert_urls') ?>
+                                        <?php echo $this->getTierPriceHtml() ?>
+                                        <?php echo $this->getChildHtml('extrahint') ?>
+
+                                        <?php if ($_product->getSaleRule()): ?>
+                                            <div class="sale-off-box">
+											<span class="price-sale-off">
+											<?php echo $_product->getSaleRule(); ?>
+										</span>
+                                                <span class="price-sale-show"><i class="fa fa-angle-down"></i></span>
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+
+                                <div class="product-quantity product-quantity-grouped">
+                                    <div class="add-to-box add-to-box1 product-options-content">
+                                        <?php if (!$this->hasOptions()): ?>
+                                            <div class="add-to-box add-to-box2">
+                                                <?php if ($_product->isSaleable()): ?>
+                                                    <?php echo $this->getChildHtml('addtocart') ?>
+                                                <?php endif; ?>
+                                            </div>
+                                            <?php echo $this->getChildHtml('extra_buttons') ?>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                                <?php //endif; ?>
+                                 <div class="add-share-product">
+                                        <div class="share-sociall-product">
+                                            <span>Share:</span>
+                                            <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo Mage::helper('core/url')->getCurrentUrl(); ?>"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                            <a target="_blank" href="https://twitter.com/intent/tweet?url=<?php echo Mage::helper('core/url')->getCurrentUrl(); ?>"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                            <a target="_blank" href="https://www.linkedin.com/shareArticle?url=<?php echo Mage::helper('core/url')->getCurrentUrl(); ?>&title=<?php echo $_product->getName(); ?>"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                                            <a target="_blank" href="https://pinterest.com/pin/create/bookmarklet/?url=<?php echo Mage::helper('core/url')->getCurrentUrl(); ?>&description=<?php echo $_product->getName(); ?>"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a>
+
+                                            <!-- add email to friend function -->
+                                            <?php if ($this->canEmailToFriend()): ?>
+                                            <a href="<?php echo $this->helper('catalog/product')->getEmailToFriendUrl($_product) ?>" title="<?php echo $this->__('Email to a Friend') ?>">
+                                                <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                                            </a>
+                                            <?php endif; ?>
+                                            <!-- end add email to friend function -->
+                                        </div>
+                                    </div>
+
+                                <?php echo $this->getChildHtml('other'); ?>
+
+                                <?php if ($_product->isSaleable() && $this->hasOptions()): ?>
+                                    <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
+                                <?php endif; ?>
+
+                                <?php if ($_product->isSaleable() && $this->hasOptions()): ?>
+                                    <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearer"></div>
+                    <div class="no-display">
+                        <input type="hidden" name="product" value="<?php echo $_product->getId() ?>"/>
+                        <input type="hidden" name="related_product" id="related-products-field" value=""/>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="block-product-contact">
+            <div
+                class="desc-product-contact"><?php echo $this->__('Interested in quantity discounts or custom orders?') ?></div>
+            <div class="call-product-contact">
+                <label><?php echo $this->__('Call us on'); ?></label>
+                <?php if (isset($config['footer']['contact']['store_phone'])): ?>
+                    <div class="phone-product-contact"><?php echo $config['footer']['contact']['store_phone'] ?></div>
+                <?php endif; ?>
+            </div>
+        </div>
+
+        <div class="desc-attr-wrapper">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-line">
+                    <div class="desc-product-wrapper">
+                        <div class="desc-product-content">
+                            <?php echo $this->getChildHtml('product.info.descriptions') ?>
+                        </div>
+                        <div class="show-more">
+                            <span class="show-content"><?php echo $this->__('Show more...') ?></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-sm-6 col-line">
+                    <div class="attr-product-wrapper">
+                        <div class="attr-product-content">
+                            <?php echo $this->getChildHtml('product.info.attributes') ?>
+                        </div>
+                        <div class="show-more">
+                            <span class="show-content"><?php echo $this->__('Show more...') ?></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <?php if ($_product->getTattrSpecifications()): ?>
+                    <div class="col-md-6 col-sm-6 col-line">
+                        <div class="static-block-1-wrapper">
+                            <div class="static-block-1-content">
+                                <h2>Specifications</h2>
+                                <div class="std">
+                                    <?php echo $_product->getTattrSpecifications();?>
+                                </div>
+                            </div>
+                            <div class="show-more">
+                                <span class="show-content"><?php echo $this->__('Show more...') ?></span>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif; ?>
+
+                <?php if ($_product->getTattrRelatedDocuments()):?>
+                    <div class="col-md-6 col-sm-6 col-line">
+                        <div class="static-block-2-wrapper">
+                            <div class="static-block-2-content">
+                                <h2>Related documents</h2>
+                                <div class="std">
+                                    <?php echo $_product->getTattrRelatedDocuments();?>
+                                </div>
+                            </div>
+                            <div class="show-more">
+                                <span class="show-content"><?php echo $this->__('Show more...') ?></span>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
+
+        <div class="related-blogs-box">
+            <?php echo $this->getChildHtml('product_additional_data') ?>
+        </div>
+
+        <div class="review_post_wrapper">
+            <?php echo $this->getChildHtml('product.info.reviews') ?>
+        </div>
+
+        <script type="text/javascript">
+            //<![CDATA[
+            var productAddToCartForm = new VarienForm('product_addtocart_form');
+            productAddToCartForm.submit = function (button, url) {
+                if (this.validator.validate()) {
+                    var form = this.form;
+                    var oldUrl = form.action;
+
+                    if (url) {
+                        form.action = url;
+                    }
+                    var e = null;
+                    try {
+                        this.form.submit();
+                    } catch (e) {
+                    }
+                    this.form.action = oldUrl;
+                    if (e) {
+                        throw e;
+                    }
+
+                    if (button && button != 'undefined') {
+                        button.disabled = true;
+                    }
+                }
+            }.bind(productAddToCartForm);
+
+            productAddToCartForm.submitLight = function (button, url) {
+                if (this.validator) {
+                    var nv = Validation.methods;
+                    delete Validation.methods['required-entry'];
+                    delete Validation.methods['validate-one-required'];
+                    delete Validation.methods['validate-one-required-by-name'];
+                    // Remove custom datetime validators
+                    for (var methodName in Validation.methods) {
+                        if (methodName.match(/^validate-datetime-.*/i)) {
+                            delete Validation.methods[methodName];
+                        }
+                    }
+
+                    if (this.validator.validate()) {
+                        if (url) {
+                            this.form.action = url;
+                        }
+                        this.form.submit();
+                    }
+                    Object.extend(Validation.methods, nv);
+                }
+            }.bind(productAddToCartForm);
+            //]]>
+        </script>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * Magento
+ * Date: 8/18/16
+ * Time: 11:18 AM
+ */
+?>
+
+<?php $currentUrl = Mage::helper('core/url')->getCurrentUrl();?>
+
+<?php echo Mage::helper('ghoster_socialcount/pinterest')->getPinterestShareCount($currentUrl);?>

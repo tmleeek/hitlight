@@ -1,0 +1,48 @@
+<?php
+/**
+ * @category    Fishpig
+ * @package     Fishpig_Wordpress
+ * @license     http://fishpig.co.uk/license.txt
+ * @author      Ben Tideswell <help@fishpig.co.uk>
+ */
+?>
+<?php $items = $this->getDateItems() ?>
+<?php if ($items): ?>
+	<div class="block block-blog block-blog-archives blog-calendar">
+		<?php if ($title = $this->getTitle()): ?>
+			<div class="block-title">
+			<?php if ($this->hasPreviousUrl()): ?><a class="previous-date" href="<?php echo $this->getPreviousUrl() ?>"><i class="fa fa-angle-left" aria-hidden="true"></i></a><?php endif; ?><strong><span><?php echo $this->__($title) ?></span></strong><?php if ($this->hasNextUrl()): ?><a class="next-date" href="<?php echo $this->getNextUrl() ?>"><i class="fa fa-angle-right" aria-hidden="true"></i></a><?php endif; ?>
+			</div>
+		<?php endif; ?>
+		<div class="block-content">
+			<div id="calendar_wrap" class="table-responsive">
+				<table id="wp-calendar" class="table">
+					<thead>
+						<tr>
+							<th scope="col"><?php echo $this->__('M') ?></th>
+							<th scope="col"><?php echo $this->__('T') ?></th>
+							<th scope="col"><?php echo $this->__('W') ?></th>
+							<th scope="col"><?php echo $this->__('T') ?></th>
+							<th scope="col"><?php echo $this->__('F') ?></th>
+							<th scope="col"><?php echo $this->__('S') ?></th>
+							<th scope="col"><?php echo $this->__('S') ?></th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php foreach($items as $it => $row): ?>
+							<tr>
+								<?php foreach($row as $html): ?>
+									<?php if (is_null($html)): ?>
+										<td class="pad">&nbsp;</td>
+									<?php else: ?>
+										<td><?php echo $html ?></td>
+									<?php endif; ?>
+								<?php endforeach; ?>
+							</tr>
+						<?php endforeach; ?>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+<?php endif; ?>

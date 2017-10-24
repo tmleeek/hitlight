@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+    <default>
+        <!-- <reference name="footer_links">
+            <action method="addLink" translate="label title">
+                <label>Terms of Use</label>
+                <url>termofuse.html</url>
+                <title>Terms of Use</title>
+                <prepare>true</prepare>
+            </action>
+            <action method="addLink" translate="label title">
+                <label>Policy</label>
+                <url>privacy-policy.html</url>
+                <title>Policy</title>
+                <prepare>true</prepare>
+            </action>
+        -->
+        <reference name="footer">
+            <block type="cms/block" name="footer_link_add_top" as="footer_link_add_top">
+                <action method="setBlockId">
+                    <block_id>footer_link_add_top</block_id>
+                </action>
+            </block>
+
+            <block type="cms/block" name="footer_link_add_bottom" as="footer_link_add_bottom">
+                <action method="setBlockId">
+                    <block_id>footer_link_add_bottom</block_id>
+                </action>
+            </block>
+        </reference>
+    </default>
+
+    <paypal_express_review translate="label">
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/paypal/review.css</name>
+                <params/>
+            </action>
+        </reference>
+    </paypal_express_review>
+
+    <cms_index_index>
+        <reference name="head">
+            <action method="removeItem"><type>skin_css</type><name>ghoster/shop_by_project/css/owl.carousel.css</name></action>
+            <action method="removeItem"><type>skin_js</type><name>ghoster/shop_by_project/js/owl.carousel.min.js</name></action>
+
+            <action method="addItem">
+                <type>skin_js</type>
+                <script>slider/owl.carousel.min.js</script>
+            </action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <stylesheet>slider/assets/owl.carousel.min.css</stylesheet>
+            </action>
+        </reference>
+        <reference name="content" before="-">
+            <block type="slider/slider" name="hil_slider_block" as="hil_slider_block" template="hil/slider/index.phtml"/>
+        </reference>
+    </cms_index_index>
+</layout>

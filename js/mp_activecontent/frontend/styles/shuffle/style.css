@@ -1,0 +1,211 @@
+/**
+ * MagPleasure Ltd.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magpleasure.com/LICENSE.txt
+ *
+ * @category   Magpleasure
+ * @package    Magpleasure_Activecontent
+ * @copyright  Copyright (c) 2011-2014 MagPleasure Ltd. (http://www.magpleasure.com)
+ * @license    http://www.magpleasure.com/LICENSE.txt
+ */
+
+
+/** IMPORT FONTS
+===================================*/
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans&subset=latin,latin-ext,cyrillic");
+
+/** THEME
+===================================*/
+
+.shuffle .bx-wrapper {
+    zoom: 1;
+    position: relative;
+
+    margin:0px auto 0px;
+    z-index:90;
+    text-align:left; /* reset align=center */
+    font-size: 10px;
+    border:2px solid #26B1AA;
+    border-left: none;
+    border-right: none;
+}
+
+.shuffle .bx-wrapper .bx-viewport {
+
+}
+
+.shuffle .bx-wrapper .bx-viewport ul {
+
+}
+
+.shuffle .bx-wrapper .bx-viewport ul li {
+
+}
+
+/* PAGER */
+
+.shuffle .bx-wrapper .bx-pager .bx-pager-item {
+
+}
+
+.shuffle .bx-wrapper .bx-pager {
+    font-size: 0px;
+    float: left;
+    position:absolute;
+    z-index:70;
+    right: 5px;
+    bottom: 5px;
+    padding: 5px;
+}
+
+.shuffle .bx-wrapper .bx-pager div{
+    position:relative;
+    float:left;
+}
+
+.shuffle .bx-wrapper .bx-pager .bx-pager-item a {
+    width:12px;
+    height:12px;
+    background: url(./bullet.png) left top;
+    float: left;
+    text-indent: -4000px;
+    position:relative;
+    margin-left:6px;
+    color:transparent;
+}
+
+.shuffle .bx-wrapper .bx-controls-auto .bx-controls-auto-item {
+
+}
+
+.shuffle .bx-wrapper .bx-pager.bx-default-pager a:hover,
+.shuffle .bx-wrapper .bx-pager.bx-default-pager a.active {
+    background-position: 0 100%;
+}
+
+/* DIRECTION CONTROLS (NEXT / PREV) */
+.shuffle .bx-wrapper .bx-prev, .shuffle .bx-wrapper .bx-next {
+    position:absolute;
+    top:50%;
+    margin-top:-3.2em;
+    z-index:90;
+    height: 6.5em;
+    width: 6.5em;
+    background-image: url(./arrows.png);
+    background-size: 200%;
+    text-indent: -10000px;
+}
+
+.shuffle .bx-wrapper .bx-prev {
+    left:0;
+    background-position: 0 0;
+}
+
+.shuffle .bx-wrapper .bx-next {
+    background-position: 100% 0;
+    right:0;
+}
+
+.shuffle .bx-wrapper .bx-prev:hover {
+    background-position: 0 100%;
+}
+
+.shuffle .bx-wrapper .bx-next:hover {
+    background-position: 100% 100%;
+}
+
+.shuffle .bx-wrapper .bx-controls-direction a {
+
+}
+
+.shuffle .bx-wrapper .bx-controls-direction a.disabled {
+    display: none;
+}
+
+/* AUTO CONTROLS (START / STOP) */
+
+.shuffle .bx-wrapper .bx-controls-auto {
+
+}
+
+.shuffle .bx-wrapper .bx-controls-auto .bx-start.active, .shuffle .bx-wrapper .bx-controls-auto .bx-stop.active {
+
+    display: none;
+}
+
+.shuffle .bx-wrapper .bx-controls-auto .bx-start, .shuffle .bx-wrapper .bx-controls-auto .bx-stop {
+
+
+    text-indent: -10000px;
+
+    width: 6.5em;
+    height: 6.5em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -3.2em;
+    margin-top: -3.2em;
+    z-index: 59;
+}
+
+.shuffle .bx-wrapper .bx-controls-auto .bx-start {
+    background-image: url(./play.png);
+    background-size: 100%;
+}
+
+.shuffle .bx-wrapper .bx-controls-auto .bx-controls-auto-item {
+
+}
+
+.shuffle .bx-wrapper .bx-controls-auto .bx-start:hover, .shuffle .bx-wrapper .bx-controls-auto .bx-stop:hover {
+    background-position: 100% 100% !important;
+}
+
+.shuffle .bx-wrapper .bx-controls-auto .bx-stop {
+    background-image: url(./pause.png);
+    background-size: 100%;
+}
+
+/* PAGER WITH AUTO-CONTROLS HYBRID LAYOUT */
+
+.shuffle .bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-pager {
+
+}
+
+.shuffle .bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-controls-auto {
+
+}
+
+/* IMAGE CAPTIONS */
+
+.shuffle .bx-wrapper .bx-caption {
+    position:absolute;
+    display:block;
+    bottom: 2em;
+    left: 0;
+    margin-right:2em;
+
+    padding-bottom: 0.6em;
+    padding-left: 0.6em;
+    padding-right: 0.6em;
+
+    background:#5d5d5d;
+    color:#FFFFFF;
+    z-index: 50;
+    font-family:'Noto Sans',Helvetica,Arial,sans-serif;
+    text-transform: none;
+    -webkit-border-radius:0 5px 5px 0;
+    -moz-border-radius:0 5px 5px 0;
+    -ms-border-radius:0 5px 5px 0;
+    -o-border-radius:0 5px 5px 0;
+    border-radius:0 5px 5px 0;
+}
+
+.shuffle .bx-wrapper .bx-caption span {
+    font-size: 3em;
+}
